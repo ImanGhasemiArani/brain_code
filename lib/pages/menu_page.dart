@@ -30,13 +30,12 @@ class MenuPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CupertinoButton(
-                  onPressed: () {},
-                  child: Text(
-                    Strs.menu,
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
+                Text(
+                  ':${Strs.menu}',
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
+                const SizedBox(height: 20),
+                _buildIconsItem(context),
                 _buildMenuItem(context, Strs.shop, () {}),
                 _buildMenuItem(context, Strs.dailyPrize, () {}),
                 _buildThemeItem(context),
@@ -51,6 +50,38 @@ class MenuPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildIconsItem(BuildContext context) => Row(
+        children: [
+          const SizedBox(width: 8),
+          StatefulBuilder(
+            builder: (context, setSate) => IconButton(
+              onPressed: () => setSate(
+                () => AppOptions().isVibrate = !AppOptions().isVibrate,
+              ),
+              icon: Icon(
+                AppOptions().isVibrate
+                    ? Icons.vibration_rounded
+                    : Icons.mobile_off_rounded,
+                size: 30,
+              ),
+            ),
+          ),
+          StatefulBuilder(
+            builder: (context, setSate) => IconButton(
+              onPressed: () => setSate(
+                () => AppOptions().isMute = !AppOptions().isMute,
+              ),
+              icon: Icon(
+                AppOptions().isMute
+                    ? CupertinoIcons.speaker_slash_fill
+                    : CupertinoIcons.speaker_3_fill,
+                size: 30,
+              ),
+            ),
+          ),
+        ],
+      );
 
   Widget _buildMenuItem(
           BuildContext context, String title, Function()? onPressed) =>

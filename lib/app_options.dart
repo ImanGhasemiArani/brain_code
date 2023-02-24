@@ -8,17 +8,39 @@ class AppOptions {
   factory AppOptions() => _instance;
 
   AppOptions._internal()
-      : _isDarkMode = sp.getBool('isDarkMode') ?? false,
+      : _isVibrate = sp.getBool('isVibrate') ?? true,
+        _isMute = sp.getBool('isMute') ?? false,
+        _isDarkMode = sp.getBool('isDarkMode') ?? false,
         _isRecentCommandsOn = sp.getBool('isRecentCommandsOn') ?? true,
         _level = sp.getInt('level') ?? 1;
 
+  bool _isVibrate;
+  bool _isMute;
   bool _isDarkMode;
   bool _isRecentCommandsOn;
   int _level;
 
+  bool get isVibrate => _isVibrate;
+  bool get isMute => _isMute;
   bool get isDarkMode => _isDarkMode;
   bool get isRecentCommandsOn => _isRecentCommandsOn;
   int get level => _level;
+
+  set isVibrate(bool value) {
+    if (_isVibrate == value) return;
+    _isVibrate = value;
+    sp.setBool('isVibrate', _isVibrate);
+
+    // print('save isVibrate = $_isVibrate');
+  }
+
+  set isMute(bool value) {
+    if (_isMute == value) return;
+    _isMute = value;
+    sp.setBool('isMute', _isMute);
+
+    // print('save isMute = $_isMute');
+  }
 
   set isDarkMode(bool value) {
     if (_isDarkMode == value) return;

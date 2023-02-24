@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 
+import '../app_options.dart';
 import '../strs.dart';
+import 'menu_page.dart';
 
 class CommandPalette extends StatefulWidget {
   const CommandPalette({super.key});
@@ -81,6 +83,8 @@ class Keyboard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
+      animationDuration: Duration.zero,
+      //   splashFactory: NoSplash.splashFactory,
     );
     final tStyle = Theme.of(context).textTheme.bodyMedium;
     final rows = <Widget>[];
@@ -95,29 +99,29 @@ class Keyboard extends StatelessWidget {
           case 'clear':
             flex = 3;
             child = const Icon(Icons.backspace_rounded);
-            onPressed = () => onPressedKey('clear');
+            onPressed = () => onPressedKey(context, 'clear');
             onLongPress = () => controller.clear();
             break;
           case 'space':
             flex = 8;
             child = Text('', style: tStyle);
-            onPressed = () => onPressedKey(' ');
+            onPressed = () => onPressedKey(context, ' ');
             break;
           case 'run!':
             flex = 4;
             child = Text('run!', style: tStyle);
-            onPressed = () {};
+            onPressed = () => onPressedKey(context, 'run!');
             break;
           case '-':
           case '/':
             flex = 3;
             child = Text(keyText, style: tStyle);
-            onPressed = () => onPressedKey(keyText);
+            onPressed = () => onPressedKey(context, keyText);
             break;
           default:
             flex = 2;
             child = Text(keyText, style: tStyle);
-            onPressed = () => onPressedKey(keyText);
+            onPressed = () => onPressedKey(context, keyText);
             break;
         }
         rowKeys.add(
@@ -127,7 +131,6 @@ class Keyboard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 3),
               child: TextButton(
                   style: style.copyWith(
-                    animationDuration: Duration.zero,
                     side: MaterialStateProperty.resolveWith<BorderSide?>(
                       (states) {
                         if (states.contains(MaterialState.pressed)) {
@@ -167,18 +170,44 @@ class Keyboard extends StatelessWidget {
     );
   }
 
-  void onPressedKey(String text) {
-    Vibration.vibrate(duration: 25);
+  void onPressedKey(BuildContext context, String text) {
+    if (AppOptions().isVibrate) {
+      Vibration.vibrate(duration: 15);
+    }
     if (text == 'clear') {
       if (controller.text.isNotEmpty) {
         controller.text =
             controller.text.substring(0, controller.text.length - 1);
       }
+    } else if (text == 'run!') {
+      final command = controller.text.trim();
+      if (command == '/menu') {
+        Future.delayed(const Duration(milliseconds: 200), () {
+          openMenu(context);
+        });
+      }
+      controller.clear();
     } else {
       controller.text += text;
     }
     controller.selection =
         TextSelection.collapsed(offset: controller.text.length);
+  }
+
+  void openMenu(BuildContext context) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 500),
+        transitionsBuilder: (context, anim1, anim2, child) => SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, 1),
+            end: Offset.zero,
+          ).animate(anim1),
+          child: child,
+        ),
+        pageBuilder: (context, anim1, anim2) => const MenuPage(),
+      ),
+    );
   }
 }
 
