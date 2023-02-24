@@ -122,11 +122,11 @@ class AppThemeData {
     headlineSmall:
         TextStyle(fontFamily: 'SFA', fontWeight: _medium, fontSize: 16.0),
     bodyLarge:
-        TextStyle(fontFamily: 'SFA', fontWeight: _regular, fontSize: 14.0),
+        TextStyle(fontFamily: 'SFA', fontWeight: _semiBold, fontSize: 16.0),
     bodyMedium:
         TextStyle(fontFamily: 'SFA', fontWeight: _regular, fontSize: 16.0),
     bodySmall:
-        TextStyle(fontFamily: 'SFA', fontWeight: _semiBold, fontSize: 16.0),
+        TextStyle(fontFamily: 'SFA', fontWeight: _regular, fontSize: 14.0),
     titleLarge: TextStyle(fontFamily: 'SFA', fontWeight: _bold, fontSize: 16.0),
     titleMedium:
         TextStyle(fontFamily: 'SFA', fontWeight: _medium, fontSize: 16.0),

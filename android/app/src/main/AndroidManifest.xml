@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.brain_code">
+
+     <uses-permission android:name="android.permission.VIBRATE" />
+
    <application
         android:label="brain_code"
         android:name="${applicationName}"
