@@ -20,6 +20,7 @@ class AppThemeData {
       textTheme: textTheme,
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.background,
+        scrolledUnderElevation: 0,
         elevation: 0,
         iconTheme: IconThemeData(color: colorScheme.primary),
       ),
@@ -127,7 +128,7 @@ class AppThemeData {
         TextStyle(fontFamily: 'SFA', fontWeight: _regular, fontSize: 16.0),
     bodySmall:
         TextStyle(fontFamily: 'SFA', fontWeight: _regular, fontSize: 14.0),
-    titleLarge: TextStyle(fontFamily: 'SFA', fontWeight: _bold, fontSize: 16.0),
+    titleLarge: TextStyle(fontFamily: 'SFA', fontWeight: _bold, fontSize: 18.0),
     titleMedium:
         TextStyle(fontFamily: 'SFA', fontWeight: _medium, fontSize: 16.0),
     titleSmall:

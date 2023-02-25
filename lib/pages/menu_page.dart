@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../routeing.dart';
 import '../utils.dart';
 import '../app_options.dart';
 import '../app_theme_data.dart';
 import '../strs.dart';
+import 'help_page.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -41,7 +43,8 @@ class MenuPage extends StatelessWidget {
                 _buildThemeItem(context),
                 _buildRecentCommandsItem(context),
                 _buildLevelItem(context),
-                _buildMenuItem(context, Strs.help, () {}),
+                _buildMenuItem(context, Strs.help,
+                    () => openPage(context, const HelpPage())),
                 _buildMenuItem(context, Strs.about, () {}),
               ],
             ),

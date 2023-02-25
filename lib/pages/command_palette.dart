@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 
 import '../app_options.dart';
+import '../routeing.dart';
 import '../strs.dart';
+import 'help_page.dart';
 import 'menu_page.dart';
 
 class CommandPalette extends StatefulWidget {
@@ -183,7 +185,11 @@ class Keyboard extends StatelessWidget {
       final command = controller.text.trim();
       if (command == '/menu') {
         Future.delayed(const Duration(milliseconds: 200), () {
-          openMenu(context);
+          openPage(context, const MenuPage());
+        });
+      } else if(command == '/help') {
+        Future.delayed(const Duration(milliseconds: 200), () {
+          openPage(context, const HelpPage());
         });
       }
       controller.clear();
@@ -194,21 +200,7 @@ class Keyboard extends StatelessWidget {
         TextSelection.collapsed(offset: controller.text.length);
   }
 
-  void openMenu(BuildContext context) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 500),
-        transitionsBuilder: (context, anim1, anim2, child) => SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0, 1),
-            end: Offset.zero,
-          ).animate(anim1),
-          child: child,
-        ),
-        pageBuilder: (context, anim1, anim2) => const MenuPage(),
-      ),
-    );
-  }
+  
 }
 
 const List<dynamic> buttons = [

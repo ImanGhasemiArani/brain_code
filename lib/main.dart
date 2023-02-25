@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_options.dart';
 import 'app_theme_data.dart';
+import 'commands_controller.dart';
 import 'pages/home_page.dart';
 import 'strs.dart';
 
@@ -11,6 +12,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   sp = await SharedPreferences.getInstance();
+  CommandsController();
 
   runApp(
     ChangeNotifierProvider<ThemeChangeNotifier>(
