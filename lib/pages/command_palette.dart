@@ -104,10 +104,10 @@ class Keyboard extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       animationDuration: Duration.zero,
-      //   splashFactory: NoSplash.splashFactory,
     );
     final tStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontFamily: 'Inconsolata',
+          fontWeight: FontWeight.w500,
         );
     final rows = <Widget>[];
     for (final row in buttons) {

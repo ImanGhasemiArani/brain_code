@@ -17,7 +17,7 @@ class TextCommand extends StatelessWidget {
           TextSpan(
             text: tp1,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: Colors.blue.shade800,
                   fontFamily: 'Inconsolata',
                 ),
           ),
@@ -29,7 +29,7 @@ class TextCommand extends StatelessWidget {
             TextSpan(
               text: tp2,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Colors.tealAccent.shade700,
                     fontFamily: 'Inconsolata',
                   ),
             ),

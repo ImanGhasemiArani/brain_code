@@ -37,7 +37,7 @@ class HelpPage extends StatelessWidget {
                       title: Text(
                         command.name,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.tertiary,
+                              color: Colors.blue.shade800,
                               fontFamily: 'Inconsolata',
                             ),
                       ),
