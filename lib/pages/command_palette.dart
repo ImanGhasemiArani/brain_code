@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rich_text_controller/rich_text_controller.dart';
 import 'package:vibration/vibration.dart';
 
 import '../app_options.dart';
-import '../routeing.dart';
+import '../commands_controller.dart';
 import '../strs.dart';
-import 'help_page.dart';
-import 'menu_page.dart';
 
 class CommandPalette extends StatefulWidget {
   const CommandPalette({super.key});
@@ -15,7 +14,23 @@ class CommandPalette extends StatefulWidget {
 }
 
 class _CommandPaletteState extends State<CommandPalette> {
-  final _controller = TextEditingController();
+  final _controller = RichTextController(
+    onMatch: (strs) {},
+    patternMatchMap: {
+      RegExp(r'^/(text|rotate|move|anim|select|menu|theme|level|info|restart|scan|generate|music|shop|help|about|)'):
+          Theme.of(AppOptions().context).textTheme.headlineSmall!.copyWith(
+                fontSize: 20,
+                fontFamily: 'Inconsolata',
+                color: Colors.blue.shade800,
+              ),
+      RegExp(r'[a-z-,0-9]+'):
+          Theme.of(AppOptions().context).textTheme.headlineSmall!.copyWith(
+                fontSize: 20,
+                fontFamily: 'Inconsolata',
+                color: Colors.tealAccent.shade700,
+              ),
+    },
+  );
 
   @override
   void dispose() {
@@ -47,7 +62,7 @@ class _CommandPaletteState extends State<CommandPalette> {
 class CommandField extends StatelessWidget {
   const CommandField(this.controller, {super.key});
 
-  final TextEditingController controller;
+  final RichTextController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +75,10 @@ class CommandField extends StatelessWidget {
       enableIMEPersonalizedLearning: false,
       enableInteractiveSelection: false,
       enableSuggestions: false,
-      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
+      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontSize: 20,
+            fontFamily: 'Inconsolata',
+          ),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(20),
         border: InputBorder.none,
@@ -75,7 +93,7 @@ class CommandField extends StatelessWidget {
 class Keyboard extends StatelessWidget {
   const Keyboard(this.controller, {super.key});
 
-  final TextEditingController controller;
+  final RichTextController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +106,9 @@ class Keyboard extends StatelessWidget {
       animationDuration: Duration.zero,
       //   splashFactory: NoSplash.splashFactory,
     );
-    final tStyle = Theme.of(context).textTheme.bodyMedium;
+    final tStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
+          fontFamily: 'Inconsolata',
+        );
     final rows = <Widget>[];
     for (final row in buttons) {
       final rowKeys = <Widget>[];
@@ -183,15 +203,7 @@ class Keyboard extends StatelessWidget {
       }
     } else if (text == 'run!') {
       final command = controller.text.trim();
-      if (command == '/menu') {
-        Future.delayed(const Duration(milliseconds: 200), () {
-          openPage(context, const MenuPage());
-        });
-      } else if(command == '/help') {
-        Future.delayed(const Duration(milliseconds: 200), () {
-          openPage(context, const HelpPage());
-        });
-      }
+      CommandsController().runCommand(context, command);
       controller.clear();
     } else {
       controller.text += text;
@@ -199,8 +211,6 @@ class Keyboard extends StatelessWidget {
     controller.selection =
         TextSelection.collapsed(offset: controller.text.length);
   }
-
-  
 }
 
 const List<dynamic> buttons = [

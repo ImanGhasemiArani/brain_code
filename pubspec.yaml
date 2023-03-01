@@ -39,6 +39,8 @@ dependencies:
   shared_preferences: ^2.0.18
   vibration: ^1.7.6
   flutter_staggered_animations: ^1.1.1
+  align_positioned: ^3.0.0
+  rich_text_controller: ^1.4.0
 
 dev_dependencies:
   flutter_test:
@@ -49,7 +51,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -82,6 +84,9 @@ flutter:
     - family: SFA
       fonts:
         - asset: fonts/SFA.ttf
+    - family: Inconsolata
+      fonts:
+        - asset: fonts/Inconsolata_v.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

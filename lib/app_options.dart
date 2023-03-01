@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late final SharedPreferences sp;
@@ -14,6 +15,7 @@ class AppOptions {
         _isRecentCommandsOn = sp.getBool('isRecentCommandsOn') ?? true,
         _level = sp.getInt('level') ?? 1;
 
+  late BuildContext context;
   bool _isVibrate;
   bool _isMute;
   bool _isDarkMode;

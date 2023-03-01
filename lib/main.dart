@@ -33,10 +33,13 @@ class MyApp extends StatelessWidget {
       theme: AppThemeData.lightThemeData,
       darkTheme: AppThemeData.darkThemeData,
       title: Strs.appName,
-      builder: (context, child) => Directionality(
-        textDirection: TextDirection.rtl,
-        child: child!,
-      ),
+      builder: (context, child) {
+        AppOptions().context = context;
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: child!,
+        );
+      },
       home: const HomePage(),
     );
   }
