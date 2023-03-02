@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import 'pages/in_dev_page.dart';
+import 'utils.dart';
 import 'app_options.dart';
 import 'app_theme_data.dart';
 import 'models/command.dart';
+import 'pages/about_page.dart';
 import 'pages/help_page.dart';
 import 'pages/levels/level_controller.dart';
 import 'pages/menu_page.dart';
@@ -87,6 +91,24 @@ class CommandsController {
         RegExp(r'^/info$'),
         Strs.commandInfoDesc,
         Strs.commandInfoEx,
+        run: (context, commandStr) => showTopSnackBar(
+          Overlay.of(context),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              '${Strs.level} ${LevelController().currentLevel}'.toPersianNum(),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.background,
+                  ),
+            ),
+          ),
+          padding: const EdgeInsets.all(20),
+        ),
       ),
       Command(
         'restart',
@@ -123,6 +145,8 @@ class CommandsController {
         RegExp(r'^/shop$'),
         Strs.commandShopDesc,
         Strs.commandShopEx,
+        run: (BuildContext context, String str) =>
+            openPage(context, const InDevPage()),
       ),
       Command(
         'help',
@@ -137,6 +161,8 @@ class CommandsController {
         RegExp(r'^/about$'),
         Strs.commandAboutDesc,
         Strs.commandAboutEx,
+        run: (BuildContext context, String str) =>
+            openPage(context, const AboutPage()),
       ),
     ];
   }

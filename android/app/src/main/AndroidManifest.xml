@@ -2,6 +2,26 @@
     package="com.example.brain_code">
 
      <uses-permission android:name="android.permission.VIBRATE" />
+       <uses-permission android:name="android.permission.INTERNET"/>
+
+  <queries>
+  <!-- If your app opens https URLs -->
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="https" />
+  </intent>
+  <!-- If your app makes calls -->
+  <!-- If your app emails -->
+  <intent>
+    <action android:name="android.intent.action.SEND" />
+    <data android:mimeType="*/*" />
+  </intent>
+  <intent>
+      <action android:name="android.intent.action.SENDTO" />
+      <data android:scheme="mailto" />
+    </intent>
+</queries>
+  <!--#enddocregion android-queries-->
 
    <application
         android:label="brain_code"

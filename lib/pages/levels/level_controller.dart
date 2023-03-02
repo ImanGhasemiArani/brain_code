@@ -9,6 +9,7 @@ class LevelController {
 
   LevelController._internal();
 
+  int? currentLevel = 1;
   Widget? currentLevelWidget;
   LevelObjController? currentLevelObjController;
 }

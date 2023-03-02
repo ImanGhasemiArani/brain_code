@@ -7,7 +7,9 @@ import '../utils.dart';
 import '../app_options.dart';
 import '../app_theme_data.dart';
 import '../strs.dart';
+import 'about_page.dart';
 import 'help_page.dart';
+import 'in_dev_page.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -38,14 +40,17 @@ class MenuPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 _buildIconsItem(context),
-                _buildMenuItem(context, Strs.shop, () {}),
-                _buildMenuItem(context, Strs.dailyPrize, () {}),
+                _buildMenuItem(context, Strs.shop,
+                    () => openPage(context, const InDevPage())),
+                _buildMenuItem(context, Strs.dailyPrize,
+                    () => openPage(context, const InDevPage())),
                 _buildThemeItem(context),
                 _buildRecentCommandsItem(context),
                 _buildLevelItem(context),
                 _buildMenuItem(context, Strs.help,
                     () => openPage(context, const HelpPage())),
-                _buildMenuItem(context, Strs.about, () {}),
+                _buildMenuItem(context, Strs.about,
+                    () => openPage(context, const AboutPage())),
               ],
             ),
           ),

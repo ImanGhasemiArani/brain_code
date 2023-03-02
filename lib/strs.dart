@@ -1,7 +1,9 @@
 class Strs {
   Strs._();
 
-  static const String appName = 'مغز: کد';
+  static const String appName = 'مغز : کد';
+  static const String appNameP1 = 'مغز ';
+  static const String appNameP2 = ': کد';
   static const String menu = 'منو';
   static const String shop = 'فروشگاه';
   static const String dailyPrize = 'جایزه روزانه';
@@ -15,8 +17,16 @@ class Strs {
   static const String language = 'زبان';
   static const String help = 'راهنما';
   static const String about = 'درباره ما';
+  static const String by = 'توسط';
+  static const String version = 'نسخه';
+  static const String site = 'imangha.ir';
+  static const String name = 'ایمان قاسمی آرانی';
+  static const String nameP1 = 'ایمان';
+  static const String nameP2 = 'قاسمی آرانی';
 
   static const String enterCommand = 'دستور را تایپ کنید';
+
+  static const String inDev = 'در حال توسعه';
 
   static const String commandTextDesc =
       'با دستور text می توانید متنی را به برنامه ارسال کنید';
