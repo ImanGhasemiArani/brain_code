@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import 'app_options.dart';
 import 'pages/in_dev_page.dart';
 import 'utils.dart';
-import 'app_options.dart';
 import 'app_theme_data.dart';
 import 'models/command.dart';
 import 'pages/about_page.dart';
@@ -55,7 +55,7 @@ class CommandsController {
       ),
       Command(
         'select',
-        RegExp(r'^/select.+$'),
+        RegExp(r'^/select:.+$'),
         Strs.commandSelectDesc,
         Strs.commandSelectEx,
       ),
@@ -165,6 +165,53 @@ class CommandsController {
             openPage(context, const AboutPage()),
       ),
     ];
+  }
+
+  List<String> suggestCommands(String str) {
+    final result = <String>[];
+    if (str.startsWith('/') && str.contains(':')) {
+      final command = str.split(':').first.replaceAll('/', '');
+      final commandArgs = str.split(':').last;
+      final commandsPredict = {
+        'theme': ['black', 'white'],
+        'music': ['on', 'off'],
+        'anim': ['start', 'stop'],
+        'level': ['next', 'previous'] +
+            List.generate(AppOptions().level, (index) => '${index + 1}'),
+        'select': LevelController()
+                .currentLevelObjController
+                ?.objects
+                .keys
+                .toList() ??
+            [],
+      };
+      if (commandsPredict.containsKey(command)) {
+        for (final arg in commandsPredict[command]!) {
+          if (arg.startsWith(commandArgs) && arg != commandArgs) {
+            result.add('/$command:$arg');
+          }
+        }
+      }
+    }
+    for (final command in _commands) {
+      if ('/${command.name}'.startsWith(str) && '/${command.name}' != str) {
+        if ([
+          'text',
+          'rotate',
+          'move',
+          'anim',
+          'select',
+          'music',
+          'level',
+          'theme'
+        ].contains(command.name)) {
+          result.add('/${command.name}:');
+          continue;
+        }
+        result.add('/${command.name}');
+      }
+    }
+    return result;
   }
 
   bool isCommandFormat(String str) {

@@ -8,18 +8,15 @@ import 'level_obj_controller.dart';
 import 'obj_state.dart';
 
 class TestLObjController extends LevelObjController {
+  @override
   final Map<String, ValueNotifier<ObjState>> objects = {
     'title': ValueNotifier(ObjState('title', text: Strs.help)),
     'close-icon': ValueNotifier(ObjState('close-icon')),
   };
 
-  late ValueNotifier<ObjState> currentObj;
-
   TestLObjController() {
     currentObj = objects['title']!;
   }
-
-  ValueNotifier<ObjState> getObj(String label) => objects[label]!;
 
   bool objTitleMove = false;
   bool objCloseIconMove = false;

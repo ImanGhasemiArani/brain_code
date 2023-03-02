@@ -11,14 +11,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Expanded(
-            child: Center(
-              child: Text(Strs.appName,
-                  style: Theme.of(context).textTheme.headlineLarge),
+            child: Scaffold(
+              key: scaffoldKey,
+              body: Center(
+                child: Text(Strs.appName,
+                    style: Theme.of(context).textTheme.headlineLarge),
+              ),
             ),
           ),
           const CommandPalette(),

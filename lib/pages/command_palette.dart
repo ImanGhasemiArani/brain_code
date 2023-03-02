@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rich_text_controller/rich_text_controller.dart';
 import 'package:vibration/vibration.dart';
@@ -5,6 +6,7 @@ import 'package:vibration/vibration.dart';
 import '../app_options.dart';
 import '../commands_controller.dart';
 import '../strs.dart';
+import 'home_page.dart';
 
 class CommandPalette extends StatefulWidget {
   const CommandPalette({super.key});
@@ -33,6 +35,55 @@ class _CommandPaletteState extends State<CommandPalette> {
   );
 
   @override
+  void initState() {
+    _controller.addListener(() {
+      if (_controller.text.trim().isEmpty) return;
+      final list = CommandsController().suggestCommands(_controller.text);
+      scaffoldKey.currentState?.showBottomSheet(
+        (context) {
+          return Directionality(
+            textDirection: TextDirection.ltr,
+            child: SingleChildScrollView(
+              child: Column(
+                children: List.generate(
+                  list.length,
+                  (index) => CupertinoButton(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    onPressed: () {
+                      _controller.text = list[index];
+                      _controller.selection = TextSelection.collapsed(
+                          offset: _controller.text.length);
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          list[index],
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(fontFamily: 'Inconsolata'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        enableDrag: false,
+        backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.6),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+        ),
+        constraints: const BoxConstraints(maxHeight: 150),
+      );
+    });
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -43,7 +94,6 @@ class _CommandPaletteState extends State<CommandPalette> {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).hoverColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Directionality(
         textDirection: TextDirection.ltr,

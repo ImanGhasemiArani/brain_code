@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'obj_state.dart';
+
 abstract class LevelObjController {
+  abstract final Map<String, ValueNotifier<ObjState>> objects;
+
+  late ValueNotifier<ObjState> currentObj;
+
+  ValueNotifier<ObjState> getObj(String label) => objects[label]!;
+
   void runCommandText(BuildContext context, String str);
 
   void runCommandRotate(BuildContext context, String str);

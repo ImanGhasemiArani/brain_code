@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url;
 
@@ -107,7 +108,7 @@ class AboutPage extends StatelessWidget {
                                 mode: url.LaunchMode.externalApplication);
                           },
                           icon: const Icon(
-                            Icons.telegram_rounded,
+                            CupertinoIcons.paperplane_fill,
                             size: 40,
                           ),
                         ),
@@ -117,7 +118,7 @@ class AboutPage extends StatelessWidget {
                                 'mailto:ghassemiimaniman2002@gmail.com?subject=Brain Code&body='));
                           },
                           icon: const Icon(
-                            Icons.email_rounded,
+                            CupertinoIcons.envelope_fill,
                             size: 40,
                           ),
                         ),
