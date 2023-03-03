@@ -34,36 +34,42 @@ class CommandsController {
         RegExp(r'^/text:.+$'),
         Strs.commandTextDesc,
         Strs.commandTextEx,
+        Strs.commandTextTip,
       ),
       Command(
         'rotate',
         RegExp(r'^/rotate:-?\d+$'),
         Strs.commandRotateDesc,
         Strs.commandRotateEx,
+        Strs.commandRotateTip,
       ),
       Command(
         'move',
         RegExp(r'^/move:-?\d+,-?\d+$'),
         Strs.commandMoveDesc,
         Strs.commandMoveEx,
+        Strs.commandMoveTip,
       ),
       Command(
         'anim',
         RegExp(r'^/anim:(start|stop)$'),
         Strs.commandAnimDesc,
         Strs.commandAnimEx,
+        Strs.commandAnimTip,
       ),
       Command(
         'select',
         RegExp(r'^/select:.+$'),
         Strs.commandSelectDesc,
         Strs.commandSelectEx,
+        Strs.commandSelectTip,
       ),
       Command(
         'menu',
         RegExp(r'^/menu$'),
         Strs.commandMenuDesc,
         Strs.commandMenuEx,
+        Strs.commandMenuTip,
         run: (BuildContext context, String str) =>
             openPage(context, const MenuPage()),
       ),
@@ -72,6 +78,7 @@ class CommandsController {
         RegExp(r'^/theme:(black|white)$'),
         Strs.commandThemeDesc,
         Strs.commandThemeEx,
+        Strs.commandThemeTip,
         run: (BuildContext context, String str) {
           final theme = str.split(':').last ==
               (AppOptions().isDarkMode ? 'black' : 'white');
@@ -85,12 +92,14 @@ class CommandsController {
         RegExp(r'^/level:(\d+|next|previous)$'),
         Strs.commandLevelDesc,
         Strs.commandLevelEx,
+        Strs.commandLevelTip,
       ),
       Command(
         'info',
         RegExp(r'^/info$'),
         Strs.commandInfoDesc,
         Strs.commandInfoEx,
+        Strs.commandInfoTip,
         run: (context, commandStr) => showTopSnackBar(
           Overlay.of(context),
           Container(
@@ -115,24 +124,28 @@ class CommandsController {
         RegExp(r'^/restart$'),
         Strs.commandRestartDesc,
         Strs.commandRestartEx,
+        Strs.commandRestartTip,
       ),
       Command(
         'scan',
         RegExp(r'^/scan$'),
         Strs.commandScanDesc,
         Strs.commandScanEx,
+        Strs.commandScanTip,
       ),
       Command(
         'generate',
         RegExp(r'^/generate$'),
         Strs.commandGenerateDesc,
         Strs.commandGenerateEx,
+        Strs.commandGenerateTip,
       ),
       Command(
         'music',
         RegExp(r'^/music:(on|off)$'),
         Strs.commandMusicDesc,
         Strs.commandMusicEx,
+        Strs.commandMusicTip,
         run: (BuildContext context, String str) {
           final isMute =
               str.split(':').last == (AppOptions().isMute ? 'off' : 'on');
@@ -145,6 +158,7 @@ class CommandsController {
         RegExp(r'^/shop$'),
         Strs.commandShopDesc,
         Strs.commandShopEx,
+        Strs.commandShopTip,
         run: (BuildContext context, String str) =>
             openPage(context, const InDevPage()),
       ),
@@ -153,6 +167,7 @@ class CommandsController {
         RegExp(r'^/help$'),
         Strs.commandHelpDesc,
         Strs.commandHelpEx,
+        Strs.commandHelpTip,
         run: (BuildContext context, String str) =>
             openPage(context, const HelpPage()),
       ),
@@ -161,14 +176,15 @@ class CommandsController {
         RegExp(r'^/about$'),
         Strs.commandAboutDesc,
         Strs.commandAboutEx,
+        Strs.commandAboutTip,
         run: (BuildContext context, String str) =>
             openPage(context, const AboutPage()),
       ),
     ];
   }
 
-  List<String> suggestCommands(String str) {
-    final result = <String>[];
+  List<dynamic> suggestCommands(String str) {
+    final result = [];
     if (str.startsWith('/') && str.contains(':')) {
       final command = str.split(':').first.replaceAll('/', '');
       final commandArgs = str.split(':').last;
@@ -188,27 +204,14 @@ class CommandsController {
       if (commandsPredict.containsKey(command)) {
         for (final arg in commandsPredict[command]!) {
           if (arg.startsWith(commandArgs) && arg != commandArgs) {
-            result.add('/$command:$arg');
+            result.add(arg);
           }
         }
       }
     }
     for (final command in _commands) {
       if ('/${command.name}'.startsWith(str) && '/${command.name}' != str) {
-        if ([
-          'text',
-          'rotate',
-          'move',
-          'anim',
-          'select',
-          'music',
-          'level',
-          'theme'
-        ].contains(command.name)) {
-          result.add('/${command.name}:');
-          continue;
-        }
-        result.add('/${command.name}');
+        result.add(command);
       }
     }
     return result;

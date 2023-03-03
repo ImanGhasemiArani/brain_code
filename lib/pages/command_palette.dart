@@ -5,6 +5,7 @@ import 'package:vibration/vibration.dart';
 
 import '../app_options.dart';
 import '../commands_controller.dart';
+import '../models/command.dart';
 import '../strs.dart';
 import 'home_page.dart';
 
@@ -51,19 +52,40 @@ class _CommandPaletteState extends State<CommandPalette> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     onPressed: () {
-                      _controller.text = list[index];
+                      String temp = list[index] is Command
+                          ? '/${list[index].name}'
+                          : list[index];
+                      temp =
+                          temp.replaceFirst(_controller.text.split(':').last, '');
+                      _controller.text = _controller.text + temp;
                       _controller.selection = TextSelection.collapsed(
                           offset: _controller.text.length);
                     },
                     child: Row(
                       children: [
-                        Text(
-                          list[index],
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall
-                              ?.copyWith(fontFamily: 'Inconsolata'),
-                        ),
+                        Expanded(
+                            flex: 1,
+                            child: Text(
+                                (list[index] is Command)
+                                    ? '/${list[index].name}'
+                                    : list[index],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(fontFamily: 'Inconsolata'))),
+                        if (list[index] is Command)
+                          Expanded(
+                              flex: 3,
+                              child: Row(children: [
+                                Directionality(
+                                    textDirection: TextDirection.rtl,
+                                    child: Text('${list[index].tip}#',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelSmall
+                                            ?.copyWith(
+                                                color: Colors.blue.shade900)))
+                              ])),
                       ],
                     ),
                   ),
