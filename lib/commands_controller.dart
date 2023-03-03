@@ -229,6 +229,8 @@ class CommandsController {
       if (command.regExp.hasMatch(commandStr)) {
         command.run?.call(context, commandStr);
         invokeMethod[command.name]?.call(context, commandStr);
+        
+        AppOptions().addRecentCommand = '/${command.name}';
         return;
       }
     }

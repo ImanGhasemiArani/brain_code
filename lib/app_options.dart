@@ -13,7 +13,11 @@ class AppOptions {
         _isMute = sp.getBool('isMute') ?? false,
         _isDarkMode = sp.getBool('isDarkMode') ?? false,
         _isRecentCommandsOn = sp.getBool('isRecentCommandsOn') ?? true,
-        _level = sp.getInt('level') ?? 1;
+        _level = sp.getInt('level') ?? 1,
+        _recentCommands = sp.getStringList('recentCommands') ?? [],
+        recentCommandNotifier = ValueNotifier<bool>(false),
+        isRecentCommandOnNotifier =
+            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true);
 
   late BuildContext context;
   bool _isVibrate;
@@ -21,12 +25,16 @@ class AppOptions {
   bool _isDarkMode;
   bool _isRecentCommandsOn;
   int _level;
+  final List<String> _recentCommands;
+  final ValueNotifier<bool> recentCommandNotifier;
+  final ValueNotifier<bool> isRecentCommandOnNotifier;
 
   bool get isVibrate => _isVibrate;
   bool get isMute => _isMute;
   bool get isDarkMode => _isDarkMode;
   bool get isRecentCommandsOn => _isRecentCommandsOn;
   int get level => _level;
+  List<String> get recentCommands => _recentCommands;
 
   set isVibrate(bool value) {
     if (_isVibrate == value) return;
@@ -55,6 +63,7 @@ class AppOptions {
   set isRecentCommandsOn(bool value) {
     if (_isRecentCommandsOn == value) return;
     _isRecentCommandsOn = value;
+    isRecentCommandOnNotifier.value = _isRecentCommandsOn;
     sp.setBool('isRecentCommandsOn', _isRecentCommandsOn);
 
     // print('save isRecentCommandsOn = $_isRecentCommandsOn');
@@ -66,5 +75,16 @@ class AppOptions {
     sp.setInt('level', _level);
 
     // print('save level = $_level');
+  }
+
+  set addRecentCommand(String value) {
+    if (_recentCommands.contains(value)) {
+      _recentCommands.remove(value);
+    }
+    _recentCommands.insert(0, value);
+    recentCommandNotifier.notifyListeners();
+    sp.setStringList('recentCommands', _recentCommands);
+
+    // print('save recentCommands = $_recentCommands');
   }
 }

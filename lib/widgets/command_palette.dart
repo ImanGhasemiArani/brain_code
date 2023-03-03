@@ -6,8 +6,9 @@ import 'package:vibration/vibration.dart';
 import '../app_options.dart';
 import '../commands_controller.dart';
 import '../models/command.dart';
+import '../routeing.dart';
 import '../strs.dart';
-import 'home_page.dart';
+import '../pages/home_page.dart';
 
 class CommandPalette extends StatefulWidget {
   const CommandPalette({super.key});
@@ -35,12 +36,18 @@ class _CommandPaletteState extends State<CommandPalette> {
     },
   );
 
+  PersistentBottomSheetController? _bottomSheetController;
+
   @override
   void initState() {
+    paletteController = _controller;
     _controller.addListener(() {
-      if (_controller.text.trim().isEmpty) return;
+      if (_controller.text.trim().isEmpty) {
+        _bottomSheetController?.close();
+        return;
+      }
       final list = CommandsController().suggestCommands(_controller.text);
-      scaffoldKey.currentState?.showBottomSheet(
+      _bottomSheetController = scaffoldKey.currentState?.showBottomSheet(
         (context) {
           return Directionality(
             textDirection: TextDirection.ltr,
@@ -53,10 +60,10 @@ class _CommandPaletteState extends State<CommandPalette> {
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     onPressed: () {
                       String temp = list[index] is Command
-                          ? '/${list[index].name}'
+                          ? '/${list[index].name}${'text rotate move anim select music level theme'.contains(list[index].name) ? ':' : ''}'
                           : list[index];
-                      temp =
-                          temp.replaceFirst(_controller.text.split(':').last, '');
+                      temp = temp.replaceFirst(
+                          _controller.text.split(':').last, '');
                       _controller.text = _controller.text + temp;
                       _controller.selection = TextSelection.collapsed(
                           offset: _controller.text.length);
@@ -107,6 +114,7 @@ class _CommandPaletteState extends State<CommandPalette> {
 
   @override
   void dispose() {
+    paletteController = null;
     _controller.dispose();
     super.dispose();
   }

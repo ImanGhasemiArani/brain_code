@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+TextEditingController? paletteController;
+
 void openPage(BuildContext context, Widget page) {
   Navigator.of(context).push(
     PageRouteBuilder(
