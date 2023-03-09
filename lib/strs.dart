@@ -83,4 +83,7 @@ class Strs {
   static const String commandAboutDesc = 'نمایش اطلاعات برنامه';
   static const String commandAboutEx = '/about';
   static const String commandAboutTip = 'نمایش اطلاعات برنامه';
+
+  // level 1 strings
+  static const String l1S1 = 'از نه شیش بساز';
 }
