@@ -10,13 +10,13 @@ class HelpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lTestObjController = TestLObjController();
+    final lTestObjController = LTestObjController();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight:
             kToolbarHeight + MediaQuery.of(context).size.height * 0.25,
-        flexibleSpace: TestL(lTestObjController),
+        flexibleSpace: LTest(lTestObjController),
       ),
       body: AnimationLimiter(
         child: ListView.builder(

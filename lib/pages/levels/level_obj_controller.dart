@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'obj_state.dart';
-
 abstract class LevelObjController {
   abstract final Map<String, ValueNotifier<ObjState>> objects;
 
@@ -61,5 +59,42 @@ abstract class LevelObjController {
 
   void runCommandAbout(BuildContext context, String str) {
     print('runCommandAbout');
+  }
+}
+
+class ObjState {
+  final String objLabel;
+  Offset position;
+  double rotation;
+  bool? isAnim;
+  String? text;
+
+  ObjState(
+    this.objLabel, {
+    this.position = Offset.zero,
+    this.rotation = 0,
+    this.isAnim = false,
+    this.text,
+  });
+
+  ObjState edit({Offset? np, double? nr, bool? nia, String? nt}) {
+    clear();
+    np == null ? null : position = np;
+    nr == null ? null : rotation = nr;
+    nia == null ? null : isAnim = nia;
+    nt == null ? null : text = nt;
+    return this;
+  }
+
+  void clear() {
+    position = Offset.zero;
+    rotation = 0;
+    isAnim = null;
+    // text = null;
+  }
+
+  @override
+  String toString() {
+    return 'l=$objLabel p=$position r=$rotation a=$isAnim t=$text';
   }
 }

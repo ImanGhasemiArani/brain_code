@@ -1,5 +1,9 @@
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'pages/levels/level_controller.dart';
 
 late final SharedPreferences sp;
 
@@ -17,7 +21,9 @@ class AppOptions {
         _recentCommands = sp.getStringList('recentCommands') ?? [],
         recentCommandNotifier = ValueNotifier<bool>(false),
         isRecentCommandOnNotifier =
-            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true);
+            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true) {
+    LevelController().setCurrentLevel(_level);
+  }
 
   late BuildContext context;
   bool _isVibrate;

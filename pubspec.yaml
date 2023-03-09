@@ -43,6 +43,7 @@ dependencies:
   rich_text_controller: ^1.4.0
   url_launcher: ^6.1.10
   top_snackbar_flutter: ^3.0.0+1
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:

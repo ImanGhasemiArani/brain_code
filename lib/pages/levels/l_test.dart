@@ -5,16 +5,15 @@ import 'package:flutter/material.dart';
 import '../../strs.dart';
 import '../../widgets/movable.dart';
 import 'level_obj_controller.dart';
-import 'obj_state.dart';
 
-class TestLObjController extends LevelObjController {
+class LTestObjController extends LevelObjController {
   @override
   final Map<String, ValueNotifier<ObjState>> objects = {
     'title': ValueNotifier(ObjState('title', text: Strs.help)),
     'close-icon': ValueNotifier(ObjState('close-icon')),
   };
 
-  TestLObjController() {
+  LTestObjController() {
     currentObj = objects['title']!;
   }
 
@@ -102,10 +101,10 @@ class TestLObjController extends LevelObjController {
   }
 }
 
-class TestL extends StatelessWidget {
-  const TestL(this.controller, {super.key});
+class LTest extends StatelessWidget {
+  const LTest(this.controller, {super.key});
 
-  final TestLObjController controller;
+  final LTestObjController controller;
 
   @override
   Widget build(BuildContext context) {

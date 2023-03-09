@@ -1,8 +1,7 @@
 import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/levels/obj_state.dart';
-
+import '../pages/levels/level_obj_controller.dart';
 
 class MovableObject extends StatefulWidget {
   const MovableObject({
@@ -42,7 +41,9 @@ class _MovableObjectState extends State<MovableObject> {
               nia: value.isAnim,
               nt: value.text,
             );
-            scaleAnim = value.isAnim ? !scaleAnim : scaleAnim;
+            scaleAnim = value.isAnim ?? false ? !scaleAnim : scaleAnim;
+
+            widget.state.value.clear();
 
             return AnimatedAlignPositioned(
               duration: const Duration(milliseconds: 300),
@@ -56,7 +57,7 @@ class _MovableObjectState extends State<MovableObject> {
                   builder: (context, setState2) {
                     return AnimatedScale(
                       scale: scaleAnim ? 1.5 : 1,
-                      onEnd: currentState.isAnim
+                      onEnd: currentState.isAnim == null || currentState.isAnim!
                           ? () => setState2(() => scaleAnim = !scaleAnim)
                           : null,
                       duration: const Duration(milliseconds: 400),

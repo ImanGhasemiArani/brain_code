@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../app_options.dart';
-import '../strs.dart';
 import '../widgets/command_palette.dart';
 import '../widgets/recent_command.dart';
+import 'levels/level_controller.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -21,9 +21,12 @@ class HomePage extends StatelessWidget {
               key: scaffoldKey,
               body: Stack(
                 children: [
-                  Center(
-                    child: Text(Strs.appName,
-                        style: Theme.of(context).textTheme.headlineLarge),
+                  ValueListenableBuilder(
+                    valueListenable: LevelController().currentLevelNotifier,
+                    builder: (context, value, child) {
+                      return LevelController().currentLevelWidget ??
+                          const SizedBox.expand();
+                    },
                   ),
                   ValueListenableBuilder(
                     valueListenable: AppOptions().isRecentCommandOnNotifier,

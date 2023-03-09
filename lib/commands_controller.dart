@@ -14,6 +14,8 @@ import 'pages/menu_page.dart';
 import 'routeing.dart';
 import 'strs.dart';
 
+typedef CommandRunner = void Function(BuildContext context, String str);
+
 class CommandsController {
   static final CommandsController _instance = CommandsController._internal();
 
@@ -125,6 +127,7 @@ class CommandsController {
         Strs.commandRestartDesc,
         Strs.commandRestartEx,
         Strs.commandRestartTip,
+        run: (context, commandStr) => LevelController().restartCurrentLevel(),
       ),
       Command(
         'scan',
@@ -229,29 +232,61 @@ class CommandsController {
       if (command.regExp.hasMatch(commandStr)) {
         command.run?.call(context, commandStr);
         invokeMethod[command.name]?.call(context, commandStr);
-        
+
         AppOptions().addRecentCommand = '/${command.name}';
         return;
       }
     }
   }
 
-  Map<String, dynamic> invokeMethod = {
-    'text': LevelController().currentLevelObjController?.runCommandText,
-    'rotate': LevelController().currentLevelObjController?.runCommandRotate,
-    'move': LevelController().currentLevelObjController?.runCommandMove,
-    'anim': LevelController().currentLevelObjController?.runCommandAnim,
-    'select': LevelController().currentLevelObjController?.runCommandSelect,
-    'menu': LevelController().currentLevelObjController?.runCommandMenu,
-    'theme': LevelController().currentLevelObjController?.runCommandTheme,
-    'level': LevelController().currentLevelObjController?.runCommandLevel,
-    'info': LevelController().currentLevelObjController?.runCommandInfo,
-    'restart': LevelController().currentLevelObjController?.runCommandRestart,
-    'scan': LevelController().currentLevelObjController?.runCommandScan,
-    'generate': LevelController().currentLevelObjController?.runCommandGenerate,
-    'music': LevelController().currentLevelObjController?.runCommandMusic,
-    'shop': LevelController().currentLevelObjController?.runCommandShop,
-    'help': LevelController().currentLevelObjController?.runCommandHelp,
-    'about': LevelController().currentLevelObjController?.runCommandAbout,
+  Map<String, CommandRunner> invokeMethod = {
+    'text': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandText(context, str),
+    'rotate': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandRotate(context, str),
+    'move': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandMove(context, str),
+    'anim': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandAnim(context, str),
+    'select': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandSelect(context, str),
+    'menu': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandMenu(context, str),
+    'theme': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandTheme(context, str),
+    'level': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandLevel(context, str),
+    'info': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandInfo(context, str),
+    'restart': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandRestart(context, str),
+    'scan': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandScan(context, str),
+    'generate': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandGenerate(context, str),
+    'music': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandMusic(context, str),
+    'shop': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandShop(context, str),
+    'help': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandHelp(context, str),
+    'about': (context, str) => LevelController()
+        .currentLevelObjController
+        ?.runCommandAbout(context, str),
   };
 }
