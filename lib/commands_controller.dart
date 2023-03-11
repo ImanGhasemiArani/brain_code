@@ -99,6 +99,16 @@ class CommandsController {
         Strs.commandLevelDesc,
         Strs.commandLevelEx,
         Strs.commandLevelTip,
+        run: (BuildContext context, String str) {
+          final level = str.split(':').last;
+          if (level == 'next') {
+            LevelController().nextLevel();
+          } else if (level == 'previous') {
+            LevelController().previousLevel();
+          } else {
+            LevelController().setCurrentLevel(int.parse(level));
+          }
+        },
       ),
       Command(
         'info',

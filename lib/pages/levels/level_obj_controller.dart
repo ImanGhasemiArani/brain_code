@@ -1,7 +1,10 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
+import '../../app_options.dart';
 import 'level_controller.dart';
 
 abstract class LevelObjController {
@@ -110,6 +113,8 @@ abstract class LevelObjController {
 
   void passedLevel() {
     print('level Passed');
+
+    AppOptions().level = min(LevelController().currentLevel + 1, levels.length);
     LevelController().nextLevel();
   }
 }

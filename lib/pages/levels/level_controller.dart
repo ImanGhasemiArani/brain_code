@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../app_options.dart';
 import 'l_1.dart';
 import 'l_2.dart';
 import 'level_obj_controller.dart';
@@ -21,22 +22,33 @@ class LevelController {
   Widget? currentLevelWidget;
   LevelObjController? currentLevelObjController;
 
-  void setCurrentLevel(int newLevel) {
-    if (newLevel < 1 || newLevel > levels.length) return;
+  void setCurrentLevel(int newLevel, {bool isDelay = false}) {
+    if (newLevel < 1 ||
+        newLevel > levels.length ||
+        newLevel > AppOptions().level) return;
+
+    AppOptions().level = newLevel;
+
     final l = levels[newLevel]?.call();
     if (l == null) return;
+
     currentLevelObjController = l.key;
     currentLevelWidget = l.value;
     currentLevel = newLevel;
-    currentLevelNotifier.value = currentLevel;
+
+    isDelay
+        ? Future.delayed(const Duration(milliseconds: 1000), () {
+            currentLevelNotifier.value = currentLevel;
+          })
+        : currentLevelNotifier.value = currentLevel;
   }
 
   void nextLevel() {
-    setCurrentLevel(currentLevel + 1);
+    setCurrentLevel(currentLevel + 1, isDelay: true);
   }
 
   void previousLevel() {
-    setCurrentLevel(currentLevel - 1);
+    setCurrentLevel(currentLevel - 1, isDelay: true);
   }
 
   void restartCurrentLevel() {
@@ -68,7 +80,11 @@ class LevelPlaceHolder extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: LevelController().currentLevelNotifier,
       builder: (context, value, child) {
-        return LevelController().currentLevelWidget ?? const SizedBox.expand();
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 600),
+          child:
+              LevelController().currentLevelWidget ?? const SizedBox.expand(),
+        );
       },
     );
   }

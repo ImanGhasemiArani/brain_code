@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'pages/levels/level_controller.dart';
-
 late final SharedPreferences sp;
 
 class AppOptions {
@@ -22,9 +20,7 @@ class AppOptions {
         _recentCommands = sp.getStringList('recentCommands') ?? [],
         recentCommandNotifier = ValueNotifier<bool>(false),
         isRecentCommandOnNotifier =
-            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true) {
-    LevelController().setCurrentLevel(_level);
-  }
+            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true);
 
   late BuildContext context;
   bool _isVibrate;

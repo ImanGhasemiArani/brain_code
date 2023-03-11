@@ -6,13 +6,13 @@ import 'app_options.dart';
 import 'app_theme_data.dart';
 import 'commands_controller.dart';
 import 'pages/home_page.dart';
+import 'pages/levels/level_controller.dart';
 import 'strs.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  sp = await SharedPreferences.getInstance();
-  CommandsController();
+  await initControllers();
 
   runApp(
     ChangeNotifierProvider<ThemeChangeNotifier>(
@@ -43,4 +43,11 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
     );
   }
+}
+
+Future<void> initControllers() async {
+  sp = await SharedPreferences.getInstance();
+  AppOptions();
+  LevelController().setCurrentLevel(AppOptions().level);
+  CommandsController();
 }
