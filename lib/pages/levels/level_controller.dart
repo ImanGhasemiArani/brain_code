@@ -42,3 +42,20 @@ final Map<int, LevelBuilder> levels = {
     return MapEntry(controller, level);
   },
 };
+
+
+class LevelPlaceHolder extends StatelessWidget {
+  const LevelPlaceHolder({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: LevelController().currentLevelNotifier,
+      builder: (context, value, child) {
+        return LevelController().currentLevelWidget ?? const SizedBox.expand();
+      },
+    );
+  }
+}

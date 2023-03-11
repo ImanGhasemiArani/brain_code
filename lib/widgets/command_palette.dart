@@ -283,6 +283,7 @@ class Keyboard extends StatelessWidget {
       }
     } else if (text == 'run!') {
       final command = controller.text.trim();
+      if (command.isEmpty) return;
       CommandsController().runCommand(context, command);
       controller.clear();
     } else {

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -24,6 +26,8 @@ class CommandsController {
   CommandsController._internal() {
     _commands = _loadCommands();
   }
+
+  final ValueNotifier<bool?> reactiveAnimController = ValueNotifier(null);
 
   List<Command> _commands = [];
 
@@ -227,9 +231,11 @@ class CommandsController {
     return false;
   }
 
-  void runCommand(BuildContext context, String commandStr) {
+  Future<void> runCommand(BuildContext context, String commandStr) async {
     for (final command in _commands) {
       if (command.regExp.hasMatch(commandStr)) {
+        showReactiveAnim(true);
+        await Future.delayed(const Duration(milliseconds: 200));
         command.run?.call(context, commandStr);
         invokeMethod[command.name]?.call(context, commandStr);
 
@@ -237,6 +243,11 @@ class CommandsController {
         return;
       }
     }
+    showReactiveAnim(false);
+  }
+
+  void showReactiveAnim(bool? value) {
+    reactiveAnimController.value = value;
   }
 
   Map<String, CommandRunner> invokeMethod = {

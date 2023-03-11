@@ -76,7 +76,7 @@ class _L1State extends State<L1> {
             alignment: Alignment.center,
             initPosition: const Offset(0, 0),
             child: Text(
-              '6',
+              '9',
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge

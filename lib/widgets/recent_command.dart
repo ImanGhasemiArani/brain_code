@@ -1,8 +1,8 @@
-import 'package:brain_code/routeing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../app_options.dart';
+import '../routeing.dart';
 
 class RecentCommand extends StatelessWidget {
   const RecentCommand({super.key});
@@ -79,6 +79,25 @@ class RecentCommand extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class RecentCommandPlaceHolder extends StatelessWidget {
+  const RecentCommandPlaceHolder({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: AppOptions().isRecentCommandOnNotifier,
+      builder: (context, value, child) => value
+          ? const Align(
+              alignment: Alignment.bottomRight,
+              child: RecentCommand(),
+            )
+          : const SizedBox.shrink(),
     );
   }
 }
