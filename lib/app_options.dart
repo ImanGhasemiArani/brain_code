@@ -18,6 +18,7 @@ class AppOptions {
         _isDarkMode = sp.getBool('isDarkMode') ?? false,
         _isRecentCommandsOn = sp.getBool('isRecentCommandsOn') ?? true,
         _level = sp.getInt('level') ?? 1,
+        // _level = 2,
         _recentCommands = sp.getStringList('recentCommands') ?? [],
         recentCommandNotifier = ValueNotifier<bool>(false),
         isRecentCommandOnNotifier =

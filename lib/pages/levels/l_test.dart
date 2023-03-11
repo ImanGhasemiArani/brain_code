@@ -99,6 +99,11 @@ class LTestObjController extends LevelObjController {
       currentObj.notifyListeners();
     }
   }
+
+  @override
+  bool isLevelPassed() {
+    throw UnimplementedError();
+  }
 }
 
 class LTest extends StatelessWidget {

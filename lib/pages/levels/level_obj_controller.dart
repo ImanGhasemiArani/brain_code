@@ -1,17 +1,40 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
+
+import 'level_controller.dart';
 
 abstract class LevelObjController {
   abstract final Map<String, ValueNotifier<ObjState>> objects;
 
   late ValueNotifier<ObjState> currentObj;
+  double rotation = 0;
+  Offset position = Offset.zero;
 
   ValueNotifier<ObjState> getObj(String label) => objects[label]!;
 
+  void runCommandRotate(BuildContext context, String str) {
+    final arg = double.parse(str.split(':').last);
+    rotation += arg;
+    currentObj.value.edit(nr: arg);
+
+    currentObj.notifyListeners();
+
+    isLevelPassed() ? passedLevel() : null;
+  }
+
+  void runCommandMove(BuildContext context, String str) {
+    final args =
+        str.split(':').last.split(',').map((e) => double.parse(e)).toList();
+    position += Offset(args[0], -args[1]);
+    currentObj.value.edit(np: Offset(args[0], -args[1]));
+
+    currentObj.notifyListeners();
+
+    isLevelPassed() ? passedLevel() : null;
+  }
+
   void runCommandText(BuildContext context, String str);
-
-  void runCommandRotate(BuildContext context, String str);
-
-  void runCommandMove(BuildContext context, String str);
 
   void runCommandAnim(BuildContext context, String str);
 
@@ -19,46 +42,75 @@ abstract class LevelObjController {
 
   void runCommandMenu(BuildContext context, String str) {
     print('runCommandMenu');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandTheme(BuildContext context, String str) {
     print('runCommandTheme');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandLevel(BuildContext context, String str) {
     print('runCommandLevel');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandInfo(BuildContext context, String str) {
     print('runCommandInfo');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandRestart(BuildContext context, String str) {
     print('runCommandRestart');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandScan(BuildContext context, String str) {
     print('runCommandScan');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandGenerate(BuildContext context, String str) {
     print('runCommandGenerate');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandMusic(BuildContext context, String str) {
     print('runCommandMusic');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandShop(BuildContext context, String str) {
     print('runCommandShop');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandHelp(BuildContext context, String str) {
     print('runCommandHelp');
+
+    isLevelPassed() ? passedLevel() : null;
   }
 
   void runCommandAbout(BuildContext context, String str) {
     print('runCommandAbout');
+
+    isLevelPassed() ? passedLevel() : null;
+  }
+
+  bool isLevelPassed();
+
+  void passedLevel() {
+    print('level Passed');
+    LevelController().nextLevel();
   }
 }
 

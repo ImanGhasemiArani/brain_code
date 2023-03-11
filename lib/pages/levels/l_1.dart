@@ -21,27 +21,15 @@ class L1ObjController extends LevelObjController {
   void runCommandAnim(BuildContext context, String str) {}
 
   @override
-  void runCommandMove(BuildContext context, String str) {
-    final args =
-        str.split(':').last.split(',').map((e) => double.parse(e)).toList();
-    currentObj.value.edit(np: Offset(args[0], -args[1]));
-
-    currentObj.notifyListeners();
-  }
-
-  @override
-  void runCommandRotate(BuildContext context, String str) {
-    final arg = double.parse(str.split(':').last);
-    currentObj.value.edit(nr: arg);
-
-    currentObj.notifyListeners();
-  }
-
-  @override
   void runCommandSelect(BuildContext context, String str) {}
 
   @override
   void runCommandText(BuildContext context, String str) {}
+
+  @override
+  bool isLevelPassed() {
+    return rotation % 360 == 180;
+  }
 }
 
 class L1 extends StatefulWidget {

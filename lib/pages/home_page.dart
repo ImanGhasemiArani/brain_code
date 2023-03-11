@@ -17,14 +17,16 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Scaffold(
-              key: scaffoldKey,
-              body: Stack(
-                children: const [
-                  LevelPlaceHolder(),
-                  ReactiveAnimPlaceHolder(),
-                  RecentCommandPlaceHolder(),
-                ],
+            child: ClipRRect(
+              child: Scaffold(
+                key: scaffoldKey,
+                body: Stack(
+                  children: const [
+                    LevelPlaceHolder(),
+                    ReactiveAnimPlaceHolder(),
+                    RecentCommandPlaceHolder(),
+                  ],
+                ),
               ),
             ),
           ),
