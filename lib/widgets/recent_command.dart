@@ -61,22 +61,22 @@ class RecentCommand extends StatelessWidget {
               itemCount: AppOptions().recentCommands.length,
             ),
           ),
-          IgnorePointer(
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.background,
-                    Theme.of(context).colorScheme.background.withOpacity(0),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
-          ),
+          //   IgnorePointer(
+          //     child: Container(
+          //       width: double.infinity,
+          //       height: 50,
+          //       decoration: BoxDecoration(
+          //         gradient: LinearGradient(
+          //           colors: [
+          //             Theme.of(context).colorScheme.background,
+          //             Theme.of(context).colorScheme.background.withOpacity(0),
+          //           ],
+          //           begin: Alignment.topCenter,
+          //           end: Alignment.bottomCenter,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
         ],
       ),
     );
