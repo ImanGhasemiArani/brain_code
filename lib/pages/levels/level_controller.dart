@@ -3,10 +3,8 @@
 import 'package:flutter/material.dart';
 
 import '../../app_options.dart';
-import 'l_1.dart';
-import 'l_2.dart';
-import 'l_3.dart';
 import 'level_obj_controller.dart';
+import 'levels.dart';
 
 typedef LevelBuilder = MapEntry<LevelObjController, Widget> Function();
 
@@ -72,6 +70,11 @@ final Map<int, LevelBuilder> levels = {
   3: () {
     final controller = L3ObjController();
     final level = L3(controller, key: UniqueKey());
+    return MapEntry(controller, level);
+  },
+  4: () {
+    final controller = L4ObjController();
+    final level = L4(controller, key: UniqueKey());
     return MapEntry(controller, level);
   }
 };

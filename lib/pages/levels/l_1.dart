@@ -41,7 +41,7 @@ class _L1State extends State<L1> {
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: const EdgeInsets.all(100),
+              padding: const EdgeInsets.only(top: 100),
               child: AnimatedTextFixed(
                 Text(
                   Strs.l1S1,

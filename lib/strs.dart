@@ -90,4 +90,6 @@ class Strs {
   static const String l3S1 = 'Level';
   static const String l3S2 = 'completed';
   static const String l3S3 = 'faild';
+  static const String l4S1 = 'به چی نگاه میکنی؟';
+  static const String l4S2 = '41.303921, -81.901693';
 }

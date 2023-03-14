@@ -50,6 +50,7 @@ class L2 extends StatefulWidget {
 
 class _L2State extends State<L2> {
   Color? cageColor;
+
   @override
   Widget build(BuildContext context) {
     cageColor ??= Theme.of(context).brightness == Brightness.light
@@ -61,7 +62,7 @@ class _L2State extends State<L2> {
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: const EdgeInsets.all(100),
+              padding: const EdgeInsets.only(top: 100),
               child: AnimatedTextFixed(
                 Text(
                   Strs.l2S1,
