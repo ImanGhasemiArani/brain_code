@@ -37,11 +37,23 @@ abstract class LevelObjController {
     isLevelPassed() ? passedLevel() : null;
   }
 
-  void runCommandText(BuildContext context, String str);
+  void runCommandText(BuildContext context, String str) {
+    print('runCommandText');
 
-  void runCommandAnim(BuildContext context, String str);
+    isLevelPassed() ? passedLevel() : null;
+  }
 
-  void runCommandSelect(BuildContext context, String str);
+  void runCommandAnim(BuildContext context, String str) {
+    print('runCommandAnim');
+
+    isLevelPassed() ? passedLevel() : null;
+  }
+
+  void runCommandSelect(BuildContext context, String str) {
+    print('runCommandSelect');
+
+    isLevelPassed() ? passedLevel() : null;
+  }
 
   void runCommandMenu(BuildContext context, String str) {
     print('runCommandMenu');

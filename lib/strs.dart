@@ -87,4 +87,7 @@ class Strs {
   // level 1 strings
   static const String l1S1 = 'از نه شیش بساز';
   static const String l2S1 = 'پرنده را نجات بده';
+  static const String l3S1 = 'Level';
+  static const String l3S2 = 'completed';
+  static const String l3S3 = 'faild';
 }

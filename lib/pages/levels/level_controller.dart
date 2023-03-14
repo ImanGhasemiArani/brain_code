@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../app_options.dart';
 import 'l_1.dart';
 import 'l_2.dart';
+import 'l_3.dart';
 import 'level_obj_controller.dart';
 
 typedef LevelBuilder = MapEntry<LevelObjController, Widget> Function();
@@ -68,6 +69,11 @@ final Map<int, LevelBuilder> levels = {
     final level = L2(controller, key: UniqueKey());
     return MapEntry(controller, level);
   },
+  3: () {
+    final controller = L3ObjController();
+    final level = L3(controller, key: UniqueKey());
+    return MapEntry(controller, level);
+  }
 };
 
 class LevelPlaceHolder extends StatelessWidget {

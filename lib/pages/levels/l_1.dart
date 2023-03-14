@@ -18,15 +18,6 @@ class L1ObjController extends LevelObjController {
   }
 
   @override
-  void runCommandAnim(BuildContext context, String str) {}
-
-  @override
-  void runCommandSelect(BuildContext context, String str) {}
-
-  @override
-  void runCommandText(BuildContext context, String str) {}
-
-  @override
   bool isLevelPassed() {
     return rotation % 360 == 180;
   }

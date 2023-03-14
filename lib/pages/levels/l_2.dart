@@ -23,15 +23,6 @@ class L2ObjController extends LevelObjController {
   bool isThemeChanged = false;
 
   @override
-  void runCommandAnim(BuildContext context, String str) {}
-
-  @override
-  void runCommandSelect(BuildContext context, String str) {}
-
-  @override
-  void runCommandText(BuildContext context, String str) {}
-
-  @override
   void runCommandTheme(BuildContext context, String str) {
     final arg =
         str.split(':').last == 'black' ? Brightness.dark : Brightness.light;
@@ -97,7 +88,7 @@ class _L2State extends State<L2> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.3,
                   child: CustomPaint(
-                    painter: CagePainter(
+                    painter: _CagePainter(
                       color:
                           cageColor! == Theme.of(context).colorScheme.background
                               ? Colors.transparent
@@ -114,12 +105,12 @@ class _L2State extends State<L2> {
   }
 }
 
-class CagePainter extends CustomPainter {
+class _CagePainter extends CustomPainter {
   final Paint _paint;
   final Color color;
   final double strokeWidth;
 
-  CagePainter({this.color = Colors.black, this.strokeWidth = 6})
+  _CagePainter({this.color = Colors.black, this.strokeWidth = 6})
       : _paint = Paint()
           ..color = color
           ..strokeWidth = strokeWidth
@@ -199,7 +190,7 @@ class CagePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CagePainter oldDelegate) {
+  bool shouldRepaint(_CagePainter oldDelegate) {
     return oldDelegate.color != color || oldDelegate.strokeWidth != strokeWidth;
   }
 }
