@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_options.dart';
 import 'app_theme_data.dart';
 import 'commands_controller.dart';
-import 'pages/home_page.dart';
 import 'pages/levels/level_controller.dart';
+import 'pages/splash_page.dart';
 import 'strs.dart';
 
 Future<void> main() async {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }
