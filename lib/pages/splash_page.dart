@@ -67,7 +67,7 @@ class _SplashPageState extends State<SplashPage> {
                             isP2Finished = true;
                             Future.delayed(const Duration(milliseconds: 3000),
                                 () {
-                              replacePage(context, const HomePage());
+                              replaceSplashPage(context, const HomePage());
                             });
                           });
                         },

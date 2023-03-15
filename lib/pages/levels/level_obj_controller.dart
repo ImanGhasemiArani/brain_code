@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../app_options.dart';
+import '../../routeing.dart';
+import '../shutter_page.dart';
 import 'level_controller.dart';
 
 abstract class LevelObjController {
@@ -23,7 +25,7 @@ abstract class LevelObjController {
 
     currentObj.notifyListeners();
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandMove(BuildContext context, String str) {
@@ -34,19 +36,19 @@ abstract class LevelObjController {
 
     currentObj.notifyListeners();
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandText(BuildContext context, String str) {
     print('runCommandText');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandAnim(BuildContext context, String str) {
     print('runCommandAnim');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandSelect(BuildContext context, String str) {
@@ -57,79 +59,81 @@ abstract class LevelObjController {
 
     objects.entries.forEach((element) => element.value.value.edit());
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandMenu(BuildContext context, String str) {
     print('runCommandMenu');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandTheme(BuildContext context, String str) {
     print('runCommandTheme');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandLevel(BuildContext context, String str) {
     print('runCommandLevel');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandInfo(BuildContext context, String str) {
     print('runCommandInfo');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandRestart(BuildContext context, String str) {
     print('runCommandRestart');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandScan(BuildContext context, String str) {
     print('runCommandScan');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandGenerate(BuildContext context, String str) {
     print('runCommandGenerate');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandMusic(BuildContext context, String str) {
     print('runCommandMusic');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandShop(BuildContext context, String str) {
     print('runCommandShop');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandHelp(BuildContext context, String str) {
     print('runCommandHelp');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandAbout(BuildContext context, String str) {
     print('runCommandAbout');
 
-    isLevelPassed() ? passedLevel() : null;
+    isLevelPassed() ? passedLevel(context) : null;
   }
 
   bool isLevelPassed();
 
-  void passedLevel() {
+  void passedLevel(BuildContext context) {
     print('level Passed');
+
+    replacePage(context, const ShutterPage());
 
     AppOptions().level = min(LevelController().currentLevel + 1, levels.length);
     LevelController().nextLevel();
