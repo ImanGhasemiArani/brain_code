@@ -86,10 +86,15 @@ class Strs {
 
   // level 1 strings
   static const String l1S1 = 'از نه شیش بساز';
+
   static const String l2S1 = 'پرنده را نجات بده';
+
   static const String l3S1 = 'Level';
   static const String l3S2 = 'completed';
   static const String l3S3 = 'faild';
-  static const String l4S1 = 'به چی نگاه میکنی؟';
-  static const String l4S2 = '41.303921, -81.901693';
+
+  static const String l4S1 = '÷ 2 × 1 ( 3 + 1 ) =';
+
+  static const String l5S1 = 'به چی نگاه میکنی؟';
+  static const String l5S2 = '41.303921, -81.901693';
 }

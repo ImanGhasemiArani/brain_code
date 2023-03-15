@@ -10,6 +10,7 @@ import '../strs.dart';
 import 'about_page.dart';
 import 'help_page.dart';
 import 'in_dev_page.dart';
+import 'levels/level_controller.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -154,7 +155,7 @@ class MenuPage extends StatelessWidget {
   }
 
   Widget _buildLevelItem(BuildContext context) {
-    int level = AppOptions().level;
+    int level = LevelController().currentLevel;
     return Row(
       children: [
         const SizedBox(width: 16),
@@ -168,7 +169,9 @@ class MenuPage extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () => setState(() {
-                    if (level < AppOptions().level) level++;
+                    if (level >= AppOptions().level) return;
+                    level++;
+                    LevelController().setCurrentLevel(level);
                   }),
                   icon: const Icon(Icons.chevron_left_rounded),
                 ),
@@ -180,7 +183,9 @@ class MenuPage extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () => setState(() {
-                    if (level > 1) level--;
+                    if (level <= 1) return;
+                    level--;
+                    LevelController().setCurrentLevel(level);
                   }),
                   icon: const Icon(Icons.chevron_right_rounded),
                 ),

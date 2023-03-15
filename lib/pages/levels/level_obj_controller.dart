@@ -50,7 +50,12 @@ abstract class LevelObjController {
   }
 
   void runCommandSelect(BuildContext context, String str) {
-    print('runCommandSelect');
+    final temp = objects[str.split(':').last];
+    if (temp == null) return;
+
+    currentObj = temp;
+
+    objects.entries.forEach((element) => element.value.value.edit());
 
     isLevelPassed() ? passedLevel() : null;
   }
