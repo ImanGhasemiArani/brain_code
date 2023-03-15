@@ -95,6 +95,9 @@ class Strs {
 
   static const String l4S1 = '÷ 2 × 1 ( 3 + 1 ) =';
 
-  static const String l5S1 = 'به چی نگاه میکنی؟';
+  static const String l5S1 = 'به چی نگاه میکنی؟👀🤔';
   static const String l5S2 = '41.303921, -81.901693';
+
+  static const String l6S1 = 'سوالات ریاضی دوس داری؟😉';
+  static const String l6S2 = '(x^{2}+y^{2}\ \ -\ a)^{3}=ax^{2}y^{3}';
 }

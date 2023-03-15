@@ -1,20 +1,20 @@
-// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member, import_of_legacy_library_into_null_safe
 
+import 'package:catex/catex.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils.dart';
-import '../../app_theme_data.dart';
 import '../../strs.dart';
 import '../../widgets/animated_text.dart';
 import 'level_obj_controller.dart';
 
-class L5ObjController extends LevelObjController {
+class L6ObjController extends LevelObjController {
   @override
   final Map<String, ValueNotifier<ObjState>> objects = {
     '': ValueNotifier(ObjState('')),
   };
 
-  L5ObjController() {
+  L6ObjController() {
     currentObj = objects['']!;
   }
 
@@ -34,23 +34,20 @@ class L5ObjController extends LevelObjController {
   }
 }
 
-class L5 extends StatefulWidget {
-  const L5(this.controller, {super.key});
+class L6 extends StatefulWidget {
+  const L6(this.controller, {super.key});
 
-  final L5ObjController controller;
+  final L6ObjController controller;
 
   @override
-  State<L5> createState() => _L5State();
+  State<L6> createState() => _L6State();
 }
 
-class _L5State extends State<L5> {
+class _L6State extends State<L6> {
   Color? staticColor;
 
   @override
   Widget build(BuildContext context) {
-    staticColor ??= Theme.of(context).brightness != Brightness.light
-        ? AppThemeData.darkColorScheme.background
-        : AppThemeData.lightColorScheme.background;
     return Scaffold(
       body: Stack(
         children: [
@@ -60,24 +57,16 @@ class _L5State extends State<L5> {
               padding: const EdgeInsets.only(top: 100),
               child: AnimatedTextFixed(
                 Text(
-                  Strs.l5S1,
+                  Strs.l6S1,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
             ),
           ),
           Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              textDirection: TextDirection.ltr,
-              children: [
-                Icon(Icons.location_on_rounded, color: staticColor),
-                Text(
-                  Strs.l5S2.toPersianNum(),
-                  textDirection: TextDirection.ltr,
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-              ],
+            child: DefaultTextStyle(
+              style: Theme.of(context).textTheme.headlineLarge!,
+              child: CaTeX(Strs.l6S2.toPersianNum()),
             ),
           ),
         ],

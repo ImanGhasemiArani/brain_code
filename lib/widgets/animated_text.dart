@@ -18,6 +18,7 @@ class _AnimatedTextFixedState extends State<AnimatedTextFixed> {
         ? AnimatedTextKit(
             animatedTexts: [
               TypewriterAnimatedText(
+                speed: const Duration(milliseconds: 100),
                 widget.text.data ?? '',
                 textStyle: widget.text.style,
                 cursor: '|',
