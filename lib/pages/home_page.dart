@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/command_palette.dart';
 import '../widgets/command_reactive_anim.dart';
+import '../widgets/hint_widget.dart';
 import '../widgets/recent_command.dart';
 import 'levels/level_controller.dart';
 
@@ -21,10 +22,23 @@ class HomePage extends StatelessWidget {
               child: Scaffold(
                 key: scaffoldKey,
                 body: Stack(
-                  children: const [
-                    LevelPlaceHolder(),
-                    ReactiveAnimPlaceHolder(),
-                    RecentCommandPlaceHolder(),
+                  children: [
+                    const LevelPlaceHolder(),
+                    const ReactiveAnimPlaceHolder(),
+                    const RecentCommandPlaceHolder(),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 40),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const HintWidget(
+                            size: 35,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
