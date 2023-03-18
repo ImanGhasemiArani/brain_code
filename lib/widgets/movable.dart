@@ -47,12 +47,14 @@ class _MovableObjectState extends State<MovableObject> {
 
             return AnimatedAlignPositioned(
               duration: const Duration(milliseconds: 300),
+              curve: Curves.decelerate,
               alignment: widget.alignment,
               dx: widget.initPosition.dx + currentState.position.dx,
               dy: widget.initPosition.dy + currentState.position.dy,
               child: AnimatedRotation(
                 duration: const Duration(milliseconds: 300),
                 turns: currentState.rotation / 360,
+                curve: Curves.decelerate,
                 child: StatefulBuilder(
                   builder: (context, setState2) {
                     return AnimatedScale(
