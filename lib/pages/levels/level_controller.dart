@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 
+import '../../utils.dart';
 import '../../app_options.dart';
+import '../../strs.dart';
 import 'level_obj_controller.dart';
 import 'levels.dart';
 
@@ -96,15 +98,111 @@ class LevelPlaceHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: LevelController().currentLevelNotifier,
-      builder: (context, value, child) {
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          child:
-              LevelController().currentLevelWidget ?? const SizedBox.expand(),
-        );
-      },
+    return LayoutBuilder(
+      builder: (context, constraints) => ValueListenableBuilder(
+        valueListenable: LevelController().currentLevelNotifier,
+        builder: (context, value, child) {
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 600),
+            child:
+                LevelController().currentLevelWidget ?? const SizedBox.expand(),
+            transitionBuilder: (child, animation) {
+              return CircleTransition(
+                constrainedBox: constraints,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class CircleTransition extends StatefulWidget {
+  const CircleTransition({
+    super.key,
+    required this.child,
+    required this.constrainedBox,
+  });
+
+  final Widget child;
+  final BoxConstraints constrainedBox;
+
+  @override
+  State<CircleTransition> createState() => _CircleTransitionState();
+}
+
+class _CircleTransitionState extends State<CircleTransition>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _sizeAnimation;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _sizeAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+    Future.delayed(
+        const Duration(milliseconds: 600), () => _controller.forward());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        widget.child,
+        Center(
+          child: IgnorePointer(
+            child: AnimatedBuilder(
+              animation: _sizeAnimation,
+              builder: (context, child) {
+                if (_sizeAnimation.value == 1) {
+                  return const SizedBox.shrink();
+                }
+                return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: _sizeAnimation.value <= 0.5
+                          ? BorderRadius.circular(_sizeAnimation.value * 1000)
+                          : null,
+                      shape: _sizeAnimation.value <= 0.5
+                          ? BoxShape.rectangle
+                          : BoxShape.circle,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                    width: (1 - _sizeAnimation.value) *
+                        widget.constrainedBox.maxWidth,
+                    height: (1 - _sizeAnimation.value) *
+                        widget.constrainedBox.maxHeight,
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${Strs.level} ${LevelController().currentLevel}'
+                          .toPersianNum(),
+                      maxLines: 1,
+                      style:
+                          Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                              ),
+                    ));
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
