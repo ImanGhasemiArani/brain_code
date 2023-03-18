@@ -133,7 +133,7 @@ abstract class LevelObjController {
   void passedLevel(BuildContext context) {
     print('level Passed');
 
-    replacePage(context, const ShutterPage());
+    replacePage(context, ShutterPage(LevelController().currentLevel));
 
     AppOptions().level = min(LevelController().currentLevel + 1, levels.length);
     LevelController().nextLevel();

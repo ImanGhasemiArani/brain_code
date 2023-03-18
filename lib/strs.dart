@@ -24,6 +24,9 @@ class Strs {
   static const String nameP1 = 'ایمان';
   static const String nameP2 = 'قاسمی آرانی';
 
+  static const String nextLevel = 'مرحله بعد';
+  static const String completed = 'تکمیل شد';
+
   static const String enterCommand = 'دستور را تایپ کنید';
 
   static const String inDev = 'در حال توسعه';
@@ -87,17 +90,25 @@ class Strs {
   // level 1 strings
   static const String l1S1 = 'از نه شیش بساز';
 
+  // level 2 strings
   static const String l2S1 = 'پرنده را نجات بده';
 
+  // level 3 strings
   static const String l3S1 = 'Level';
   static const String l3S2 = 'completed';
   static const String l3S3 = 'faild';
 
+  // level 4 strings
   static const String l4S1 = '÷ 2 × 1 ( 3 + 1 ) =';
 
+  // level 5 strings
   static const String l5S1 = 'به چی نگاه میکنی؟👀🤔';
   static const String l5S2 = '41.303921, -81.901693';
 
+  // level 6 strings
   static const String l6S1 = 'سوالات ریاضی دوس داری؟😉';
   static const String l6S2 = '(x^{2}+y^{2}\ \ -\ a)^{3}=ax^{2}y^{3}';
+
+  //urls
+  static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';
 }
