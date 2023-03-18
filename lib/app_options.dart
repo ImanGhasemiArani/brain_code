@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'sounds_controller.dart';
+
 late final SharedPreferences sp;
 
 class AppOptions {
@@ -50,6 +52,11 @@ class AppOptions {
   set isMute(bool value) {
     if (_isMute == value) return;
     _isMute = value;
+    if (_isMute) {
+      SoundsController().stop();
+    } else {
+      SoundsController().play();
+    }
     sp.setBool('isMute', _isMute);
 
     // print('save isMute = $_isMute');

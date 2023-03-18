@@ -7,6 +7,7 @@ import 'app_theme_data.dart';
 import 'commands_controller.dart';
 import 'pages/levels/level_controller.dart';
 import 'pages/splash_page.dart';
+import 'sounds_controller.dart';
 import 'strs.dart';
 
 Future<void> main() async {
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
 Future<void> initControllers() async {
   sp = await SharedPreferences.getInstance();
   AppOptions();
+  SoundsController();
   LevelController().setCurrentLevel(AppOptions().level);
   CommandsController();
 }
