@@ -18,7 +18,7 @@ class SoundsController {
     _assetsAudioPlayer.open(
       Audio(Strs.urlMusicFile),
       autoStart: !AppOptions().isMute,
-      showNotification: true,
+      showNotification: false,
       loopMode: LoopMode.single,
       playInBackground: PlayInBackground.disabledRestoreOnForeground,
     );

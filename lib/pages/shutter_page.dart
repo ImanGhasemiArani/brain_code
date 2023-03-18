@@ -7,6 +7,7 @@ import '../routeing.dart';
 import '../strs.dart';
 import '../widgets/hint_widget.dart';
 import 'home_page.dart';
+import 'levels/level_controller.dart';
 
 class ShutterPage extends StatelessWidget {
   const ShutterPage(this.levelNum, {super.key});
@@ -42,23 +43,36 @@ class ShutterPage extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {
-                      replacePage(context, const HomePage(),
-                          b: const Offset(-1, 0));
-                    },
-                    child: Text(
-                      Strs.nextLevel,
-                      style:
-                          Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  child: levelNum != levelCounter
+                      ? TextButton(
+                          style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          onPressed: () {
+                            replacePage(context, const HomePage(),
+                                b: const Offset(-1, 0));
+                          },
+                          child: Text(
+                            Strs.nextLevel,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge
+                                ?.copyWith(
+                                  fontSize: 25,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                          ),
+                        )
+                      : Text(
+                          Strs.endLevels,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(
                                 fontSize: 25,
                                 color: Theme.of(context).colorScheme.primary,
                               ),
-                    ),
-                  ),
+                        ),
                 ),
               ),
             ],

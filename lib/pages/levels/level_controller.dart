@@ -8,6 +8,8 @@ import '../../strs.dart';
 import 'level_obj_controller.dart';
 import 'levels.dart';
 
+const levelCounter = 7;
+
 typedef LevelBuilder = MapEntry<LevelObjController, Widget> Function();
 
 class LevelController {

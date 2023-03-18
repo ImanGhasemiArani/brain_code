@@ -125,7 +125,7 @@ class _L7State extends State<L7> {
               ValueListenableBuilder(
                 valueListenable: widget.controller.isCorrectLocation,
                 builder: (context, value, child) => AnimatedPositioned(
-                  duration: const Duration(milliseconds: 5000),
+                  duration: const Duration(milliseconds: 7000),
                   top: value
                       ? constraints.maxHeight * 0.5 + 100 - 35 / 2 - r
                       : constraints.maxHeight * 0.5 + 100 - 35 / 2,
@@ -141,7 +141,7 @@ class _L7State extends State<L7> {
                           widget.controller.passedLevel(context);
                         }
                       },
-                      duration: const Duration(milliseconds: 5000),
+                      duration: const Duration(milliseconds: 7000),
                       height: value ? r * 2 : 35,
                       width: value ? r * 2 : 35,
                       decoration: BoxDecoration(

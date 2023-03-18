@@ -26,6 +26,7 @@ class Strs {
 
   static const String nextLevel = 'مرحله بعد';
   static const String completed = 'تکمیل شد';
+  static const String endLevels = 'آفرین👏، تمام مراحلو رد کردی😉';
 
   static const String enterCommand = 'دستور را تایپ کنید';
 
