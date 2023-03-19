@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../utils.dart';
 import '../../strs.dart';
 import 'level_obj_controller.dart';
+import 'level_widget.dart';
 
 class L4ObjController extends LevelObjController {
   @override
@@ -54,34 +55,37 @@ class _L4State extends State<L4> {
   @override
   Widget build(BuildContext context) {
     const r = 100.0;
-    return Scaffold(
-      body: Stack(
-        children: [
-          AlignPositioned(
-            alignment: Alignment.centerLeft,
-            dx: -r,
-            child: _CirclePart(
-              r,
-              const ['6', '10', '5', '2', '15', '0', '-6', '-7'],
-              widget.controller.getObj('c1'),
-              widget.controller,
+    return LevelView(
+      lve: widget.controller.levelViewEnum,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            AlignPositioned(
+              alignment: Alignment.centerLeft,
+              dx: -r,
+              child: _CirclePart(
+                r,
+                const ['6', '10', '5', '2', '15', '0', '-6', '-7'],
+                widget.controller.getObj('c1'),
+                widget.controller,
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: _MidWidget(MediaQuery.of(context).size.width - 2 * r),
-          ),
-          AlignPositioned(
-            alignment: Alignment.centerRight,
-            dx: r,
-            child: _CirclePart(
-              r,
-              const ['1', '2', '3', '5', '7', '9', '-12', '15'],
-              widget.controller.getObj('c2'),
-              widget.controller,
+            Align(
+              alignment: Alignment.center,
+              child: _MidWidget(MediaQuery.of(context).size.width - 2 * r),
             ),
-          ),
-        ],
+            AlignPositioned(
+              alignment: Alignment.centerRight,
+              dx: r,
+              child: _CirclePart(
+                r,
+                const ['1', '2', '3', '5', '7', '9', '-12', '15'],
+                widget.controller.getObj('c2'),
+                widget.controller,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

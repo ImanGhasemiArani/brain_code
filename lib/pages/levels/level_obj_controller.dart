@@ -8,13 +8,17 @@ import '../../app_options.dart';
 import '../../routeing.dart';
 import '../shutter_page.dart';
 import 'level_controller.dart';
+import 'level_widget.dart';
 
 abstract class LevelObjController {
   abstract final Map<String, ValueNotifier<ObjState>> objects;
 
   late ValueNotifier<ObjState> currentObj;
+  final ValueNotifier<LevelViewEnum> levelViewEnum =
+      ValueNotifier(LevelViewEnum.none);
   double rotation = 0;
   Offset position = Offset.zero;
+  String? scanResult;
 
   ValueNotifier<ObjState> getObj(String label) => objects[label]!;
 
@@ -95,11 +99,15 @@ abstract class LevelObjController {
   void runCommandScan(BuildContext context, String str) {
     print('runCommandScan');
 
+    levelViewEnum.value = LevelViewEnum.scanner;
+
     isLevelPassed() ? passedLevel(context) : null;
   }
 
   void runCommandGenerate(BuildContext context, String str) {
     print('runCommandGenerate');
+
+    levelViewEnum.value = LevelViewEnum.qrCode;
 
     isLevelPassed() ? passedLevel(context) : null;
   }

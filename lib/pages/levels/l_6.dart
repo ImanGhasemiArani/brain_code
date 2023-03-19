@@ -7,6 +7,7 @@ import '../../utils.dart';
 import '../../strs.dart';
 import '../../widgets/animated_text.dart';
 import 'level_obj_controller.dart';
+import 'level_widget.dart';
 
 class L6ObjController extends LevelObjController {
   @override
@@ -48,28 +49,31 @@ class _L6State extends State<L6> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 100),
-              child: AnimatedTextFixed(
-                Text(
-                  Strs.l6S1,
-                  style: Theme.of(context).textTheme.headlineMedium,
+    return LevelView(
+      lve: widget.controller.levelViewEnum,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: AnimatedTextFixed(
+                  Text(
+                    Strs.l6S1,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ),
               ),
             ),
-          ),
-          Center(
-            child: DefaultTextStyle(
-              style: Theme.of(context).textTheme.headlineLarge!,
-              child: CaTeX(Strs.l6S2.toPersianNum()),
+            Center(
+              child: DefaultTextStyle(
+                style: Theme.of(context).textTheme.headlineLarge!,
+                child: CaTeX(Strs.l6S2.toPersianNum()),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

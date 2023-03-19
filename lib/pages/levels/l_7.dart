@@ -9,6 +9,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 
 import '../../widgets/movable.dart';
 import 'level_obj_controller.dart';
+import 'level_widget.dart';
 
 class L7ObjController extends LevelObjController {
   @override
@@ -55,7 +56,7 @@ class L7ObjController extends LevelObjController {
 
       final distance = sqrt(
           pow((staticPos.dx - pos.dx), 2) + pow((staticPos.dy - pos.dy), 2));
-          
+
       isCorrectLocation.value = distance <= 5;
     } catch (e) {}
   }
@@ -114,83 +115,86 @@ class L7 extends StatefulWidget {
 class _L7State extends State<L7> {
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final r = sqrt(pow(constraints.maxHeight * 0.5 + 100, 2) +
-                pow(constraints.maxWidth * 0.5 + 100, 2)) +
-            100;
-        return Scaffold(
-          body: Stack(
-            children: [
-              ValueListenableBuilder(
-                valueListenable: widget.controller.isCorrectLocation,
-                builder: (context, value, child) => AnimatedPositioned(
-                  duration: const Duration(milliseconds: 7000),
-                  top: value
-                      ? constraints.maxHeight * 0.5 + 100 - 35 / 2 - r
-                      : constraints.maxHeight * 0.5 + 100 - 35 / 2,
-                  right: value
-                      ? constraints.maxHeight * 0.5 + 100 - 35 / 2 - r
-                      : constraints.maxWidth * 0.5 + 100 - 35 / 2,
-                  child: Center(
-                    child: AnimatedContainer(
-                      onEnd: () {
-                        if (value) {
-                          widget.controller
-                              .runCommandAnim(context, '/anim:stop');
-                          widget.controller.passedLevel(context);
-                        }
-                      },
-                      duration: const Duration(milliseconds: 7000),
-                      height: value ? r * 2 : 35,
-                      width: value ? r * 2 : 35,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        shape: BoxShape.circle,
+    return LevelView(
+      lve: widget.controller.levelViewEnum,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final r = sqrt(pow(constraints.maxHeight * 0.5 + 100, 2) +
+                  pow(constraints.maxWidth * 0.5 + 100, 2)) +
+              100;
+          return Scaffold(
+            body: Stack(
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: widget.controller.isCorrectLocation,
+                  builder: (context, value, child) => AnimatedPositioned(
+                    duration: const Duration(milliseconds: 7000),
+                    top: value
+                        ? constraints.maxHeight * 0.5 + 100 - 35 / 2 - r
+                        : constraints.maxHeight * 0.5 + 100 - 35 / 2,
+                    right: value
+                        ? constraints.maxHeight * 0.5 + 100 - 35 / 2 - r
+                        : constraints.maxWidth * 0.5 + 100 - 35 / 2,
+                    child: Center(
+                      child: AnimatedContainer(
+                        onEnd: () {
+                          if (value) {
+                            widget.controller
+                                .runCommandAnim(context, '/anim:stop');
+                            widget.controller.passedLevel(context);
+                          }
+                        },
+                        duration: const Duration(milliseconds: 7000),
+                        height: value ? r * 2 : 35,
+                        width: value ? r * 2 : 35,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          shape: BoxShape.circle,
+                        ),
+                        child: child,
                       ),
-                      child: child,
+                    ),
+                  ),
+                ),
+                AlignPositioned(
+                  dx: -100,
+                  dy: 100,
+                  child: Container(
+                    key: widget.controller.staticKey,
+                    height: 35,
+                    width: 35,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      border: Border.fromBorderSide(
+                        BorderSide(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          width: 3,
+                          strokeAlign: 1,
+                        ),
+                      ),
+                      shape: BoxShape.circle,
                     ),
                   ),
                 ),
-              ),
-              AlignPositioned(
-                dx: -100,
-                dy: 100,
-                child: Container(
-                  key: widget.controller.staticKey,
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
-                    border: Border.fromBorderSide(
-                      BorderSide(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        width: 3,
-                        strokeAlign: 1,
-                      ),
+                MovableObject(
+                  state: widget.controller.getObj(''),
+                  alignment: Alignment.center,
+                  initPosition: const Offset(-100, 100),
+                  child: Container(
+                    key: widget.controller.key,
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      shape: BoxShape.circle,
                     ),
-                    shape: BoxShape.circle,
                   ),
                 ),
-              ),
-              MovableObject(
-                state: widget.controller.getObj(''),
-                alignment: Alignment.center,
-                initPosition: const Offset(-100, 100),
-                child: Container(
-                  key: widget.controller.key,
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onBackground,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

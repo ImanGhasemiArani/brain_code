@@ -112,7 +112,9 @@ class _L3AnimState extends State<_L3Anim> with SingleTickerProviderStateMixin {
                 LevelController().currentLevelObjController?.isLevelPassed() ??
                     false;
             t
-                ? LevelController().currentLevelObjController?.passedLevel(context)
+                ? LevelController()
+                    .currentLevelObjController
+                    ?.passedLevel(context)
                 : null;
           } catch (e) {}
         }
