@@ -192,9 +192,7 @@ class _CirclePartState extends State<_CirclePart>
         widget.controller.degreeC2 = _controller.value * 360;
       }
 
-      widget.controller.isLevelPassed()
-          ? widget.controller.passedLevel(context)
-          : null;
+      widget.controller.checkLevelStatus();
     }
   }
 

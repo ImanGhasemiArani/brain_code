@@ -96,10 +96,10 @@ class L7ObjController extends LevelObjController {
   }
 
   @override
-  void passedLevel(BuildContext context) {
+  void passedLevel() {
     sub?.cancel();
     sub = null;
-    super.passedLevel(context);
+    super.passedLevel();
   }
 }
 
@@ -141,7 +141,7 @@ class _L7State extends State<L7> {
                           if (value) {
                             widget.controller
                                 .runCommandAnim(context, '/anim:stop');
-                            widget.controller.passedLevel(context);
+                            widget.controller.passedLevel();
                           }
                         },
                         duration: const Duration(milliseconds: 7000),

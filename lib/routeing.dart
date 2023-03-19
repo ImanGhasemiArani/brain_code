@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'main.dart';
+
 TextEditingController? paletteController;
 
-void openPage(BuildContext context, Widget page) {
-  Navigator.of(context).push(
+void openPage(Widget page) {
+  navKey.currentState?.push(
     PageRouteBuilder(
       reverseTransitionDuration: const Duration(milliseconds: 500),
       transitionDuration: const Duration(milliseconds: 500),
@@ -31,10 +33,9 @@ void openPage(BuildContext context, Widget page) {
 }
 
 void replaceSplashPage(
-  BuildContext context,
   Widget page,
 ) {
-  Navigator.of(context).pushReplacement(
+  navKey.currentState?.pushReplacement(
     PageRouteBuilder(
       reverseTransitionDuration: const Duration(milliseconds: 800),
       transitionDuration: const Duration(milliseconds: 800),
@@ -61,9 +62,9 @@ void replaceSplashPage(
   );
 }
 
-void replacePage(BuildContext context, Widget page,
+void replacePage(Widget page,
     {Offset b = const Offset(0, 1), Offset e = Offset.zero}) {
-  Navigator.of(context).pushReplacement(
+  navKey.currentState?.pushReplacement(
     PageRouteBuilder(
       reverseTransitionDuration: const Duration(milliseconds: 800),
       transitionDuration: const Duration(milliseconds: 800),

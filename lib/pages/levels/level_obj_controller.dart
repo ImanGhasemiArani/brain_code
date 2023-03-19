@@ -29,7 +29,7 @@ abstract class LevelObjController {
 
     currentObj.notifyListeners();
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandMove(BuildContext context, String str) {
@@ -40,19 +40,19 @@ abstract class LevelObjController {
 
     currentObj.notifyListeners();
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandText(BuildContext context, String str) {
     print('runCommandText');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandAnim(BuildContext context, String str) {
     print('runCommandAnim');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandSelect(BuildContext context, String str) {
@@ -63,37 +63,37 @@ abstract class LevelObjController {
 
     objects.entries.forEach((element) => element.value.value.edit());
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandMenu(BuildContext context, String str) {
     print('runCommandMenu');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandTheme(BuildContext context, String str) {
     print('runCommandTheme');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandLevel(BuildContext context, String str) {
     print('runCommandLevel');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandInfo(BuildContext context, String str) {
     print('runCommandInfo');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandRestart(BuildContext context, String str) {
     print('runCommandRestart');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandScan(BuildContext context, String str) {
@@ -101,7 +101,7 @@ abstract class LevelObjController {
 
     levelViewEnum.value = LevelViewEnum.scanner;
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandGenerate(BuildContext context, String str) {
@@ -109,45 +109,49 @@ abstract class LevelObjController {
 
     levelViewEnum.value = LevelViewEnum.qrCode;
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandMusic(BuildContext context, String str) {
     print('runCommandMusic');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandShop(BuildContext context, String str) {
     print('runCommandShop');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandHelp(BuildContext context, String str) {
     print('runCommandHelp');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   void runCommandAbout(BuildContext context, String str) {
     print('runCommandAbout');
 
-    isLevelPassed() ? passedLevel(context) : null;
+    checkLevelStatus();
   }
 
   bool isLevelPassed();
 
-  void passedLevel(BuildContext context) {
+  void passedLevel() {
     print('level Passed');
 
     Future.delayed(const Duration(milliseconds: 1500), () {
-      replacePage(context, ShutterPage(LevelController().currentLevel));
+      replacePage(ShutterPage(LevelController().currentLevel));
 
       AppOptions().level =
           min(LevelController().currentLevel + 1, levels.length);
       LevelController().nextLevel();
     });
+  }
+
+  void checkLevelStatus() {
+    isLevelPassed() ? passedLevel() : null;
   }
 }
 

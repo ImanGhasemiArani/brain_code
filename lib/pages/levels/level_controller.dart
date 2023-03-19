@@ -8,7 +8,7 @@ import '../../strs.dart';
 import 'level_obj_controller.dart';
 import 'levels.dart';
 
-const levelCounter = 7;
+final levelCounter = levels.length;
 
 typedef LevelBuilder = MapEntry<LevelObjController, Widget> Function();
 
@@ -94,6 +94,11 @@ final Map<int, LevelBuilder> levels = {
   7: () {
     final controller = L7ObjController();
     final level = L7(controller, key: UniqueKey());
+    return MapEntry(controller, level);
+  },
+  8: () {
+    final controller = L8ObjController();
+    final level = L8(controller, key: UniqueKey());
     return MapEntry(controller, level);
   }
 };

@@ -10,6 +10,8 @@ import 'pages/splash_page.dart';
 import 'sounds_controller.dart';
 import 'strs.dart';
 
+final navKey = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
         );
       },
       home: const SplashPage(),
+      navigatorKey: navKey,
     );
   }
 }

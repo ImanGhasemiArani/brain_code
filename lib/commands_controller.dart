@@ -76,8 +76,7 @@ class CommandsController {
         Strs.commandMenuDesc,
         Strs.commandMenuEx,
         Strs.commandMenuTip,
-        run: (BuildContext context, String str) =>
-            openPage(context, const MenuPage()),
+        run: (BuildContext context, String str) => openPage(const MenuPage()),
       ),
       Command(
         'theme',
@@ -176,8 +175,7 @@ class CommandsController {
         Strs.commandShopDesc,
         Strs.commandShopEx,
         Strs.commandShopTip,
-        run: (BuildContext context, String str) =>
-            openPage(context, const InDevPage()),
+        run: (BuildContext context, String str) => openPage(const InDevPage()),
       ),
       Command(
         'help',
@@ -185,8 +183,7 @@ class CommandsController {
         Strs.commandHelpDesc,
         Strs.commandHelpEx,
         Strs.commandHelpTip,
-        run: (BuildContext context, String str) =>
-            openPage(context, const HelpPage()),
+        run: (BuildContext context, String str) => openPage(const HelpPage()),
       ),
       Command(
         'about',
@@ -194,8 +191,7 @@ class CommandsController {
         Strs.commandAboutDesc,
         Strs.commandAboutEx,
         Strs.commandAboutTip,
-        run: (BuildContext context, String str) =>
-            openPage(context, const AboutPage()),
+        run: (BuildContext context, String str) => openPage(const AboutPage()),
       ),
     ];
   }

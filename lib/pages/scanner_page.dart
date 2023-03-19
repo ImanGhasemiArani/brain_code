@@ -32,7 +32,11 @@ class _ScannerPageState extends State<ScannerPage> {
             onDetect: (capture) {
               final List<Barcode> barcodes = capture.barcodes;
               if (barcodes.isEmpty) return;
-              LevelController().currentLevelObjController?.scanResult = barcodes.first.rawValue;
+              LevelController().currentLevelObjController?.scanResult =
+                  barcodes.first.rawValue;
+              LevelController()
+                  .currentLevelObjController
+                  ?.checkLevelStatus();
               LevelController().currentLevelObjController?.levelViewEnum.value =
                   LevelViewEnum.none;
             },

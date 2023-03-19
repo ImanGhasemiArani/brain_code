@@ -49,7 +49,7 @@ class ShutterPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10))),
                           onPressed: () {
-                            replacePage(context, const HomePage(),
+                            replacePage( const HomePage(),
                                 b: const Offset(-1, 0));
                           },
                           child: Text(
