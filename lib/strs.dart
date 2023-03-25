@@ -110,6 +110,12 @@ class Strs {
   static const String l6S1 = 'سوالات ریاضی دوس داری؟😉';
   static const String l6S2 = '(x^{2}+y^{2}\ \ -\ a)^{3}=ax^{2}y^{3}';
 
+  // leel 9 strings
+  static const String l9S1 = 'گوشی را به صورت عمودی بالا نگه دار🙄';
+  static const String l9S2 = 'گوشی را مقابل صورتت قفل کن😏';
+  static const String l9S3 = 'چشم چپت را ببند😉';
+  static const String l9S4 = 'حالا لبخند بزن🙃';
+
   //urls
   static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';
   static const String urlMusicFile = 'assets/sounds/Time-HansZimmer.mp3';

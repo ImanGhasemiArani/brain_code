@@ -50,6 +50,9 @@ dependencies:
   assets_audio_player: ^3.0.6
   qr_flutter: ^4.0.0
   mobile_scanner: ^3.1.0
+  camerawesome: ^1.2.1
+  google_mlkit_face_detection: ^0.5.0
+  liquid_progress_indicator: ^0.4.0
 
 dev_dependencies:
   flutter_test:

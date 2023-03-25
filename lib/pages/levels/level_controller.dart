@@ -100,6 +100,11 @@ final Map<int, LevelBuilder> levels = {
     final controller = L8ObjController();
     final level = L8(controller, key: UniqueKey());
     return MapEntry(controller, level);
+  },
+  9: () {
+    final controller = L9ObjController();
+    final level = L9(controller, key: UniqueKey());
+    return MapEntry(controller, level);
   }
 };
 

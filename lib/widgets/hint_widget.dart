@@ -38,3 +38,17 @@ class HintWidget extends StatelessWidget {
     );
   }
 }
+
+class HintButton extends StatelessWidget {
+  const HintButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {},
+      icon: const HintWidget(
+        size: 35,
+      ),
+    );
+  }
+}

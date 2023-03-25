@@ -22,21 +22,16 @@ class HomePage extends StatelessWidget {
               child: Scaffold(
                 key: scaffoldKey,
                 body: Stack(
-                  children: [
-                    const LevelPlaceHolder(),
-                    const ReactiveAnimPlaceHolder(),
-                    const RecentCommandPlaceHolder(),
+                  children: const [
+                    LevelPlaceHolder(),
+                    ReactiveAnimPlaceHolder(),
+                    RecentCommandPlaceHolder(),
                     Align(
                       alignment: Alignment.topRight,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20, vertical: 40),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const HintWidget(
-                            size: 35,
-                          ),
-                        ),
+                        child: HintButton(),
                       ),
                     ),
                   ],
