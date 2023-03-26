@@ -55,7 +55,7 @@ class L9ObjController extends LevelObjController {
     if (sub == null) return;
 
     // print("${event.x}" ' ' "${event.y}" ' ' '${event.z}');
-    if (event.y >= 9 && event.y < 10) {
+    if (event.y >= 8.5 && event.y < 10.5) {
       isVertically.value = true;
     } else {
       isVertically.value = false;
@@ -177,7 +177,7 @@ class _L9State2 extends State<_L9> {
                       child: ValueListenableBuilder(
                         valueListenable: widget.controller.isRunningTime,
                         builder: (context, value2, child) {
-                          const totalD = Duration(minutes: 2);
+                          const totalD = Duration(seconds: 30);
                           const t = 0.001;
                           final partD = totalD * t;
                           double value = 0.0;
