@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -41,6 +43,14 @@ class CommandsController {
         Strs.commandTextDesc,
         Strs.commandTextEx,
         Strs.commandTextTip,
+        run: (context, commandStr) {
+          final text = commandStr.split(':').last;
+          if (text == 'casper') {
+            AppOptions().level =
+                min(LevelController().currentLevel + 1, levels.length);
+            LevelController().nextLevel();
+          }
+        },
       ),
       Command(
         'rotate',

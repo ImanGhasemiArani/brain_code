@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'api_controller.dart';
 import 'app_options.dart';
 import 'app_theme_data.dart';
 import 'commands_controller.dart';
@@ -50,7 +51,11 @@ class MyApp extends StatelessWidget {
 }
 
 Future<void> initControllers() async {
-  sp = await SharedPreferences.getInstance();
+  final fs = await Future.wait([
+    SharedPreferences.getInstance(),
+    APIController().init(),
+  ]);
+  sp = fs[0] as SharedPreferences;
   AppOptions();
   SoundsController();
   LevelController().setCurrentLevel(AppOptions().level);

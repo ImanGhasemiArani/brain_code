@@ -6,11 +6,11 @@ import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sensors_plus/sensors_plus.dart' as sensor;
 
-import '../../routeing.dart';
+import '../../api_controller.dart';
 import '../../strs.dart';
-import '../../widgets/hint_widget.dart';
 import 'level_obj_controller.dart';
 
 class L9ObjController extends LevelObjController {
@@ -86,28 +86,6 @@ class L9 extends StatefulWidget {
 
 class _L9State extends State<L9> {
   @override
-  Widget build(BuildContext context) {
-    Future.delayed(
-      const Duration(seconds: 1),
-      () {
-        replacePage(_L9(controller: widget.controller));
-      },
-    );
-    return const SizedBox.shrink();
-  }
-}
-
-class _L9 extends StatefulWidget {
-  const _L9({required this.controller});
-
-  final L9ObjController controller;
-
-  @override
-  State<_L9> createState() => _L9State2();
-}
-
-class _L9State2 extends State<_L9> {
-  @override
   void initState() {
     super.initState();
     widget.controller.listenAccelerometer(true);
@@ -131,6 +109,7 @@ class _L9State2 extends State<_L9> {
       body: Stack(
         children: [
           FaceDetectorPage(
+            controller: widget.controller,
             onFaceDetect: (faces) {
               bool tLOF = false;
               bool tEC = false;
@@ -150,8 +129,6 @@ class _L9State2 extends State<_L9> {
                     }
                   }
                 } catch (e) {}
-                // widget.controller.isLockOnFace.value =
-                //     '${face.headEulerAngleX}\n${face.headEulerAngleY}\n${face.headEulerAngleZ}\n${face.rightEyeOpenProbability}\n${face.leftEyeOpenProbability}\n${face.smilingProbability}';
               }
               if (faces.isNotEmpty) {
                 widget.controller.isLockOnFace.value = tLOF;
@@ -165,125 +142,149 @@ class _L9State2 extends State<_L9> {
               widget.controller.checkConditions();
             },
           ),
-          Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.only(top: 120, right: 20, left: 20),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: SizedBox(
-                      height: 50,
-                      child: ValueListenableBuilder(
-                        valueListenable: widget.controller.isRunningTime,
-                        builder: (context, value2, child) {
-                          const totalD = Duration(seconds: 30);
-                          const t = 0.001;
-                          final partD = totalD * t;
-                          double value = 0.0;
-                          return StatefulBuilder(
-                            builder: (context, setState) {
-                              if (value2) {
-                                Future.delayed(
-                                  partD,
-                                  () {
-                                    if (value < 1) {
-                                      setState(() {
-                                        value += t;
-                                      });
-                                    } else {
-                                      widget.controller.isPassed = true;
-                                      widget.controller.checkLevelStatus();
-                                    }
-                                  },
-                                );
-                              }
-                              return LiquidLinearProgressIndicator(
-                                value: value,
-                                valueColor: AlwaysStoppedAnimation(
-                                    Colors.tealAccent.shade700),
-                                backgroundColor:
-                                    Colors.blue.shade800.withOpacity(0.2),
-                                borderColor: Colors.transparent,
-                                borderWidth: 0,
-                                borderRadius: 15,
-                                direction: Axis.horizontal,
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  ValueListenableBuilder(
-                    valueListenable: widget.controller.isVertically,
-                    builder: (context, value, child) {
-                      return Text(
-                        Strs.l9S1,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: value
-                                  ? Colors.tealAccent.shade700
-                                  : Colors.red.shade700,
-                            ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  ValueListenableBuilder(
-                    valueListenable: widget.controller.isLockOnFace,
-                    builder: (context, value, child) {
-                      return Text(
-                        Strs.l9S2,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: value
-                                  ? Colors.tealAccent.shade700
-                                  : Colors.red.shade700,
-                            ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  ValueListenableBuilder(
-                    valueListenable: widget.controller.isRightEyeClosed,
-                    builder: (context, value, child) {
-                      return Text(
-                        Strs.l9S3,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: value
-                                  ? Colors.tealAccent.shade700
-                                  : Colors.red.shade700,
-                            ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  ValueListenableBuilder(
-                    valueListenable: widget.controller.isSmiling,
-                    builder: (context, value, child) {
-                      return Text(
-                        Strs.l9S4,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: value
-                                  ? Colors.tealAccent.shade700
-                                  : Colors.red.shade700,
-                            ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              child: HintButton(),
-            ),
-          ),
         ],
       ),
+    );
+  }
+}
+
+class FaceDetectorWidgetOverlay extends StatelessWidget {
+  const FaceDetectorWidgetOverlay({
+    super.key,
+    required this.controller,
+    required this.cameraState,
+  });
+
+  final L9ObjController controller;
+  final CameraState cameraState;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 120, right: 20, left: 20),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: SizedBox(
+                height: 50,
+                child: ValueListenableBuilder(
+                  valueListenable: controller.isRunningTime,
+                  builder: (context, value2, child) {
+                    const totalD = Duration(seconds: 30);
+                    const t = 0.001;
+                    final partD = totalD * t;
+                    int value = 1;
+                    return StatefulBuilder(
+                      builder: (context, setState) {
+                        if (value2) {
+                          Future.delayed(
+                            partD,
+                            () {
+                              if (value == 0 ||
+                                  value == 250 ||
+                                  value == 750 ||
+                                  value == 1000) {
+                                takePhoto();
+                              }
+                              if (value < 1000) {
+                                setState(() {
+                                  value += 1;
+                                });
+                              } else {
+                                controller.isPassed = true;
+                                controller.checkLevelStatus();
+                              }
+                            },
+                          );
+                        }
+                        return LiquidLinearProgressIndicator(
+                          value: value / 1000,
+                          valueColor: AlwaysStoppedAnimation(
+                              Colors.tealAccent.shade700),
+                          backgroundColor:
+                              Colors.blue.shade800.withOpacity(0.2),
+                          borderColor: Colors.transparent,
+                          borderWidth: 0,
+                          borderRadius: 15,
+                          direction: Axis.horizontal,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            ValueListenableBuilder(
+              valueListenable: controller.isVertically,
+              builder: (context, value, child) {
+                return Text(
+                  Strs.l9S1,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: value
+                            ? Colors.tealAccent.shade700
+                            : Colors.red.shade700,
+                      ),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+            ValueListenableBuilder(
+              valueListenable: controller.isLockOnFace,
+              builder: (context, value, child) {
+                return Text(
+                  Strs.l9S2,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: value
+                            ? Colors.tealAccent.shade700
+                            : Colors.red.shade700,
+                      ),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+            ValueListenableBuilder(
+              valueListenable: controller.isRightEyeClosed,
+              builder: (context, value, child) {
+                return Text(
+                  Strs.l9S3,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: value
+                            ? Colors.tealAccent.shade700
+                            : Colors.red.shade700,
+                      ),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+            ValueListenableBuilder(
+              valueListenable: controller.isSmiling,
+              builder: (context, value, child) {
+                return Text(
+                  Strs.l9S4,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: value
+                            ? Colors.tealAccent.shade700
+                            : Colors.red.shade700,
+                      ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  takePhoto() {
+    cameraState.when(
+      onPhotoMode: (photoState) {
+        photoState.takePhoto().then((path) {
+          return APIController().uploadFile(path);
+        });
+      },
     );
   }
 }
@@ -291,9 +292,14 @@ class _L9State2 extends State<_L9> {
 typedef OnFaceDetect = void Function(List<Face> faces);
 
 class FaceDetectorPage extends StatefulWidget {
-  const FaceDetectorPage({super.key, this.onFaceDetect});
+  const FaceDetectorPage({
+    super.key,
+    this.onFaceDetect,
+    required this.controller,
+  });
 
   final OnFaceDetect? onFaceDetect;
+  final L9ObjController controller;
 
   @override
   State<FaceDetectorPage> createState() => _FaceDetectorPageState();
@@ -324,7 +330,13 @@ class _FaceDetectorPageState extends State<FaceDetectorPage> {
     return Scaffold(
       body: CameraAwesomeBuilder.custom(
         saveConfig: SaveConfig.photo(
-          pathBuilder: () => Future(() => ''),
+          pathBuilder: () async {
+            final path = '${(await getApplicationSupportDirectory()).path}/'
+                'imgL9/'
+                '${DateTime.now().millisecondsSinceEpoch}'
+                '.jpg';
+            return path;
+          },
         ),
         previewFit: CameraPreviewFit.cover,
         aspectRatio: CameraAspectRatios.ratio_16_9,
@@ -337,7 +349,10 @@ class _FaceDetectorPageState extends State<FaceDetectorPage> {
           maxFramesPerSecond: 12,
         ),
         builder: (state, previewSize, previewRect) {
-          return const SizedBox.shrink();
+          return FaceDetectorWidgetOverlay(
+            cameraState: state,
+            controller: widget.controller,
+          );
         },
       ),
     );
