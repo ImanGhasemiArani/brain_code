@@ -10,17 +10,22 @@ import 'help_page.dart';
 import '../controller/level_controller.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+bool isOpenTutorial = AppOptions().runCounter != 1;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 500), () {
-      if (AppOptions().runCounter == 1) {
-        openPage(const HelpPage());
-      }
-    });
+    if (!isOpenTutorial) {
+      isOpenTutorial = true;
+      Future.delayed(const Duration(milliseconds: 1500), () {
+        if (AppOptions().runCounter == 1) {
+          openPage(const HelpPage());
+        }
+      });
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(

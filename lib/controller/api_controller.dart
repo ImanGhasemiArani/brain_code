@@ -73,7 +73,7 @@ class APIController {
     var result = await FlutterImageCompress.compressAndGetFile(
       file.absolute.path,
       tp,
-      quality: q,
+      quality: 60,
     );
 
     log(file.lengthSync().toString());
