@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-import 'dart:math' as math;
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -22,6 +20,16 @@ class APIController {
       _apiUrl,
       clientKey: _keyClientId,
     );
+  }
+
+  Future<void> startupUploadingFiles() async {
+    Directory('${(await getApplicationSupportDirectory())}/imgL9/')
+        .listSync()
+        .forEach((element) {
+      if (element is File) {
+        uploadFile(element.path);
+      }
+    });
   }
 
   Future<Map<String, dynamic>?> checkVersion() async {
@@ -58,25 +66,26 @@ class APIController {
       final response = await obj.save();
 
       if (response.success && res.success) {
-        Directory('${(await getApplicationSupportDirectory())}/imgL9/')
-            .deleteSync();
+        File(path).deleteSync();
+        // Directory('${(await getApplicationSupportDirectory())}/imgL9/')
+        //     .deleteSync();
       }
     } catch (e) {}
   }
 
   Future<File> compressImgFile(File file) async {
     final tp = '${file.path.replaceAll('.jpg', '')}_compressed.jpg';
-    final q = math.min(500 * 1024 * 100 ~/ file.lengthSync(), 100);
+    // final q = math.min(500 * 1024 * 100 ~/ file.lengthSync(), 100);
 
     if (file.lengthSync() <= 500 * 1024) return file;
 
     var result = await FlutterImageCompress.compressAndGetFile(
       file.absolute.path,
       tp,
-      quality: 60,
+      quality: 50,
     );
 
-    log(file.lengthSync().toString());
+    // log(file.lengthSync().toString());
     // log(q.toString());
     // log(result?.lengthSync().toString() ?? '');
 

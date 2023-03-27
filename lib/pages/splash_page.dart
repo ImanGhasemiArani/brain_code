@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
+import '../app_options.dart';
 import '../controller/api_controller.dart';
 import '../routeing.dart';
 import '../strs.dart';
@@ -17,7 +18,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     APIController().checkVersion().then((value) {
-      if (value == null) return;
+      if (value == null) {
+        if (AppOptions().isHaveForceUpdate) {
+          showDialogUpdatePlease();
+        }
+        return;
+      }
       showUpdateDialog(value);
     });
     super.initState();

@@ -28,6 +28,8 @@ class Strs {
   static const String remindMeLater = 'بعدا یادآوری کن';
   static const String update = 'بروزرسانی';
   static const String updateForcible = 'بروزرسانی اجباری است';
+  static const String updatePlease =
+      'لطفا برنامه را بروزرسانی کنید. برنامه را ببندید، اینترنت خود را روشن کنید و دوباره برنامه را اجرا کنید';
 
   static const String nextLevel = 'مرحله بعد';
   static const String completed = 'تکمیل شد';

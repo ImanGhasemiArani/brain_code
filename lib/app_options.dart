@@ -14,6 +14,7 @@ class AppOptions {
 
   AppOptions._internal()
       : runCounter = (sp.getInt('runCounter') ?? 0) + 1,
+        isHaveForceUpdate = sp.getBool('isHaveForceUpdate') ?? false,
         _isVibrate = sp.getBool('isVibrate') ?? true,
         _isMute = sp.getBool('isMute') ?? false,
         _isDarkMode = sp.getBool('isDarkMode') ?? false,
@@ -29,6 +30,7 @@ class AppOptions {
 
   late BuildContext context;
   int runCounter;
+  bool isHaveForceUpdate;
   bool _isVibrate;
   bool _isMute;
   bool _isDarkMode;
@@ -100,5 +102,13 @@ class AppOptions {
     sp.setStringList('recentCommands', _recentCommands);
 
     // log('save recentCommands = $_recentCommands');
+  }
+
+  void setIsHaveForceUpdate(bool isHave) {
+    if (isHaveForceUpdate == isHave) return;
+    isHaveForceUpdate = isHave;
+    sp.setBool('isHaveForceUpdate', isHaveForceUpdate);
+
+    // log('save isHaveForceUpdate = $isHaveForceUpdate');
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url;
 
+import 'app_options.dart';
 import 'utils/utils.dart';
 import 'main.dart';
 import 'pages/home_page.dart';
@@ -100,6 +101,7 @@ void replacePage(Widget page,
 
 void showUpdateDialog(Map<String, dynamic> info) {
   isUpdateDialogOpen = true;
+  AppOptions().setIsHaveForceUpdate(info['isForcible']);
   showGeneralDialog(
     context: navKey.currentContext!,
     pageBuilder: (context, animation, secondaryAnimation) {
@@ -169,6 +171,7 @@ void showUpdateDialog(Map<String, dynamic> info) {
                 Uri.parse(info['downloadUrl']),
                 mode: url.LaunchMode.externalApplication,
               );
+              AppOptions().setIsHaveForceUpdate(false);
             },
             child: Text(
               Strs.update,
@@ -178,6 +181,42 @@ void showUpdateDialog(Map<String, dynamic> info) {
             ),
           ),
         ],
+      );
+    },
+  );
+}
+
+void showDialogUpdatePlease() {
+  isUpdateDialogOpen = true;
+  showGeneralDialog(
+    context: navKey.currentContext!,
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return AlertDialog(
+        scrollable: true,
+        insetPadding: const EdgeInsets.symmetric(vertical: 100),
+        icon: Icon(
+          Icons.update_rounded,
+          color: Theme.of(context).colorScheme.primary,
+          size: 40,
+        ),
+        title: Row(
+          children: [
+            Text(
+              Strs.titleUpdateMsg,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ],
+        ),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              Strs.updatePlease,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
+        ),
       );
     },
   );
