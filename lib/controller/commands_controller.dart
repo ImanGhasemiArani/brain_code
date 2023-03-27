@@ -240,26 +240,26 @@ class CommandsController {
     return result;
   }
 
-  bool isCommandFormat(String str) {
+  Command? isCommandFormat(String str) {
     for (final command in _commands) {
-      if (command.regExp.hasMatch(str)) return true;
+      if (command.regExp.hasMatch(str)) return command;
     }
-    return false;
+    return null;
   }
 
   Future<void> runCommand(BuildContext context, String commandStr) async {
-    for (final command in _commands) {
-      if (command.regExp.hasMatch(commandStr)) {
-        showReactiveAnim(true);
-        await Future.delayed(const Duration(milliseconds: 200));
-        command.run?.call(context, commandStr);
-        invokeMethod[command.name]?.call(context, commandStr);
-
-        AppOptions().addRecentCommand = '/${command.name}';
-        return;
-      }
+    final command = isCommandFormat(commandStr);
+    if (command == null) {
+      showReactiveAnim(false);
+      return;
     }
-    showReactiveAnim(false);
+
+    showReactiveAnim(true);
+    await Future.delayed(const Duration(milliseconds: 200));
+    command.run?.call(context, commandStr);
+    invokeMethod[command.name]?.call(context, commandStr);
+
+    AppOptions().addRecentCommand = '/${command.name}';
   }
 
   void showReactiveAnim(bool? value) {

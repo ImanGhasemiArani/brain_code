@@ -75,13 +75,13 @@ class _SplashPageState extends State<SplashPage> {
                         onFinished: () {
                           setState(() {
                             isP2Finished = true;
-                            if (!isUpdateDialogOpen) {
-                              Future.delayed(
-                                  const Duration(milliseconds: 3000),
-                                  () => !isUpdateDialogOpen
-                                      ? replaceSplashPage(const HomePage())
-                                      : null);
-                            }
+                            Future.delayed(const Duration(milliseconds: 3000),
+                                () {
+                              if (!isUpdateDialogOpen) {
+                                isCloseSplashScreen = true;
+                                replaceSplashPage(const HomePage());
+                              }
+                            });
                           });
                         },
                       )

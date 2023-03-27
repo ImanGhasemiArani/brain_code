@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +19,7 @@ class AppOptions {
         _isDarkMode = sp.getBool('isDarkMode') ?? false,
         _isRecentCommandsOn = sp.getBool('isRecentCommandsOn') ?? true,
         _level = sp.getInt('level') ?? 1,
-        // _level = 2,
+        // _level = 1,
         _recentCommands = sp.getStringList('recentCommands') ?? [],
         recentCommandNotifier = ValueNotifier<bool>(false),
         isRecentCommandOnNotifier =

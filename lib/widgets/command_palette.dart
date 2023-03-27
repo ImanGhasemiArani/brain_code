@@ -10,6 +10,8 @@ import '../routeing.dart';
 import '../strs.dart';
 import '../pages/home_page.dart';
 
+final ValueNotifier<bool> isStyleRunBtn = ValueNotifier<bool>(false);
+
 class CommandPalette extends StatefulWidget {
   const CommandPalette({super.key});
 
@@ -44,8 +46,16 @@ class _CommandPaletteState extends State<CommandPalette> {
     _controller.addListener(() {
       if (_controller.text.trim().isEmpty) {
         _bottomSheetController?.close();
+        isStyleRunBtn.value = false;
         return;
       }
+      final c = CommandsController().isCommandFormat(_controller.text.trim());
+      if (c != null) {
+        isStyleRunBtn.value = true;
+      } else {
+        isStyleRunBtn.value = false;
+      }
+
       final list = CommandsController().suggestCommands(_controller.text);
       _bottomSheetController = scaffoldKey.currentState?.showBottomSheet(
         (context) {
@@ -114,6 +124,7 @@ class _CommandPaletteState extends State<CommandPalette> {
 
   @override
   void dispose() {
+    isStyleRunBtn.value = false;
     paletteController = null;
     _controller.dispose();
     super.dispose();
@@ -177,6 +188,7 @@ class Keyboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    isStyleRunBtn.value = false;
     final style = TextButton.styleFrom(
       backgroundColor: Theme.of(context).colorScheme.onSecondary,
       foregroundColor: Theme.of(context).colorScheme.secondary,
@@ -184,6 +196,16 @@ class Keyboard extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       animationDuration: Duration.zero,
+    ).copyWith(
+      side: MaterialStateProperty.resolveWith<BorderSide?>(
+        (states) {
+          if (states.contains(MaterialState.pressed)) {
+            return BorderSide(
+                color: Theme.of(context).colorScheme.secondary, width: 1);
+          }
+          return null;
+        },
+      ),
     );
     final tStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontFamily: 'Inconsolata',
@@ -226,30 +248,40 @@ class Keyboard extends StatelessWidget {
             onPressed = () => onPressedKey(context, keyText);
             break;
         }
-        rowKeys.add(
-          Expanded(
-            flex: flex,
+        Widget btn = TextButton(
+            style: style,
+            onPressed: () => onPressed(),
+            onLongPress: onLongPress,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: TextButton(
-                  style: style.copyWith(
-                    side: MaterialStateProperty.resolveWith<BorderSide?>(
-                      (states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return BorderSide(
-                              color: Theme.of(context).colorScheme.secondary,
-                              width: 1);
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
+              padding: const EdgeInsets.all(4),
+              child: child,
+            ));
+        if (keyText == 'run!') {
+          btn = ValueListenableBuilder(
+            valueListenable: isStyleRunBtn,
+            child: child,
+            builder: (context, value, child) {
+              return TextButton(
+                  style: value
+                      ? TextButton.styleFrom(
+                          backgroundColor: Colors.teal,
+                        ).merge(style)
+                      : style,
                   onPressed: () => onPressed(),
                   onLongPress: onLongPress,
                   child: Padding(
                     padding: const EdgeInsets.all(4),
                     child: child,
-                  )),
+                  ));
+            },
+          );
+        }
+        rowKeys.add(
+          Expanded(
+            flex: flex,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: btn,
             ),
           ),
         );

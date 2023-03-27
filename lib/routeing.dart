@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url;
 
@@ -11,6 +9,7 @@ import 'strs.dart';
 TextEditingController? paletteController;
 
 bool isUpdateDialogOpen = false;
+bool isCloseSplashScreen = false;
 
 void openPage(Widget page) {
   navKey.currentState?.push(
@@ -150,8 +149,11 @@ void showUpdateDialog(Map<String, dynamic> info) {
               onPressed: () {
                 isUpdateDialogOpen = false;
                 Navigator.of(context).pop();
-                Future.delayed(const Duration(milliseconds: 500),
-                    () => replaceSplashPage(const HomePage()));
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  if (!isCloseSplashScreen) {
+                    replaceSplashPage(const HomePage());
+                  }
+                });
               },
               child: Text(
                 Strs.remindMeLater,
