@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../app_options.dart';
+import '../routeing.dart';
 import '../widgets/command_palette.dart';
 import '../widgets/command_reactive_anim.dart';
 import '../widgets/hint_widget.dart';
 import '../widgets/recent_command.dart';
+import 'help_page.dart';
 import 'levels/level_controller.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -13,6 +16,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (AppOptions().runCounter == 1) {
+        openPage(const HelpPage());
+      }
+    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -29,8 +37,8 @@ class HomePage extends StatelessWidget {
                     Align(
                       alignment: Alignment.topRight,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 40),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                         child: HintButton(),
                       ),
                     ),

@@ -13,7 +13,8 @@ class AppOptions {
   factory AppOptions() => _instance;
 
   AppOptions._internal()
-      : _isVibrate = sp.getBool('isVibrate') ?? true,
+      : runCounter = (sp.getInt('runCounter') ?? 0) + 1,
+        _isVibrate = sp.getBool('isVibrate') ?? true,
         _isMute = sp.getBool('isMute') ?? false,
         _isDarkMode = sp.getBool('isDarkMode') ?? false,
         _isRecentCommandsOn = sp.getBool('isRecentCommandsOn') ?? true,
@@ -22,9 +23,12 @@ class AppOptions {
         _recentCommands = sp.getStringList('recentCommands') ?? [],
         recentCommandNotifier = ValueNotifier<bool>(false),
         isRecentCommandOnNotifier =
-            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true);
+            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true) {
+    sp.setInt('runCounter', runCounter);
+  }
 
   late BuildContext context;
+  int runCounter;
   bool _isVibrate;
   bool _isMute;
   bool _isDarkMode;
