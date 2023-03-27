@@ -164,7 +164,10 @@ void showUpdateDialog(Map<String, dynamic> info) {
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
             onPressed: () {
-              url.launchUrl(Uri.parse(info['downloadUrl']));
+              url.launchUrl(
+                Uri.parse(info['downloadUrl']),
+                mode: url.LaunchMode.externalApplication,
+              );
             },
             child: Text(
               Strs.update,

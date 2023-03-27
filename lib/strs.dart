@@ -123,5 +123,5 @@ class Strs {
 
   //urls
   static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';
-  static const String urlMusicFile = 'assets/sounds/Time-HansZimmer.mp3';
+  static const String urlMusicFile = 'assets/sounds/Yiruma-RiverFlowsInYou.mp3';
 }
