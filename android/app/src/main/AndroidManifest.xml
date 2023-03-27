@@ -25,7 +25,7 @@
 
    <application
         android:label="brain_code"
-        android:name="${applicationName}"
+        android:name="هوش:کد"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
