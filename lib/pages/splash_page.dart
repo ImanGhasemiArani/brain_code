@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
+import '../api_controller.dart';
 import '../routeing.dart';
 import '../strs.dart';
 import 'home_page.dart';
@@ -13,6 +14,15 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    APIController().checkVersion().then((value) {
+      if (value == null) return;
+      showUpdateDialog(value);
+    });
+    super.initState();
+  }
+
   bool isP1Finished = false;
   bool isP2Finished = false;
 
@@ -65,10 +75,12 @@ class _SplashPageState extends State<SplashPage> {
                         onFinished: () {
                           setState(() {
                             isP2Finished = true;
-                            Future.delayed(const Duration(milliseconds: 3000),
-                                () {
-                              replaceSplashPage(const HomePage());
-                            });
+                            if (!isUpdateDialogOpen) {
+                              Future.delayed(const Duration(milliseconds: 3000),
+                                  () {
+                                replaceSplashPage(const HomePage());
+                              });
+                            }
                           });
                         },
                       )

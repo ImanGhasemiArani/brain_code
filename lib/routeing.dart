@@ -1,8 +1,16 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart' as url;
+
+import 'utils.dart';
 import 'main.dart';
+import 'pages/home_page.dart';
+import 'strs.dart';
 
 TextEditingController? paletteController;
+
+bool isUpdateDialogOpen = false;
 
 void openPage(Widget page) {
   navKey.currentState?.push(
@@ -88,5 +96,85 @@ void replacePage(Widget page,
       ),
       pageBuilder: (context, anim1, anim2) => page,
     ),
+  );
+}
+
+void showUpdateDialog(Map<String, dynamic> info) {
+  isUpdateDialogOpen = true;
+  log(info.toString());
+  showGeneralDialog(
+    context: navKey.currentContext!,
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return AlertDialog(
+        scrollable: true,
+        insetPadding: const EdgeInsets.symmetric(vertical: 100),
+        icon: Icon(
+          Icons.update_rounded,
+          color: Theme.of(context).colorScheme.primary,
+          size: 40,
+        ),
+        title: Row(
+          children: [
+            Text(
+              Strs.titleUpdateMsg,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ],
+        ),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '${Strs.version} ${info['version']}'.toPersianNum(),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            if (info['isForcible']) const SizedBox(height: 5),
+            if (info['isForcible'])
+              Text(
+                Strs.updateForcible,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Colors.red.shade700,
+                    ),
+              ),
+            if (info['description'] != null) const SizedBox(height: 10),
+            if (info['description'] != null)
+              Text(
+                info['description'].toString().toPersianNum(),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+          ],
+        ),
+        actions: [
+          if (!info['isForcible'])
+            TextButton(
+              onPressed: () {
+                isUpdateDialogOpen = false;
+                Navigator.of(context).pop();
+                Future.delayed(const Duration(milliseconds: 500),
+                    () => replaceSplashPage(const HomePage()));
+              },
+              child: Text(
+                Strs.remindMeLater,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
+            onPressed: () {
+              url.launchUrl(Uri.parse(info['downloadUrl']));
+            },
+            child: Text(
+              Strs.update,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+            ),
+          ),
+        ],
+      );
+    },
   );
 }

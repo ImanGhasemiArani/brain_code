@@ -24,6 +24,11 @@ class Strs {
   static const String nameP1 = 'ایمان';
   static const String nameP2 = 'قاسمی آرانی';
 
+  static const String titleUpdateMsg = 'نسخه جدیدی از برنامه در دسترس است';
+  static const String remindMeLater = 'بعدا یادآوری کن';
+  static const String update = 'بروزرسانی';
+  static const String updateForcible = 'بروزرسانی اجباری است';
+
   static const String nextLevel = 'مرحله بعد';
   static const String completed = 'تکمیل شد';
   static const String endLevels = 'آفرین👏، تمام مراحلو رد کردی😉';

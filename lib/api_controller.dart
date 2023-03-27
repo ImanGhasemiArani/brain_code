@@ -24,7 +24,7 @@ class APIController {
     );
   }
 
-  Future<String?> checkVersion() async {
+  Future<Map<String, dynamic>?> checkVersion() async {
     try {
       final appInfo = await PackageInfo.fromPlatform();
       final queryBuilder = QueryBuilder(ParseObject('Version'))
@@ -33,9 +33,13 @@ class APIController {
         ..first();
       final response = await queryBuilder.query();
       if (response.success) {
-        final url = (response.results?.first as ParseObject).get('downloadUrl')
-            as String;
-        return url;
+        final obj = (response.results?.first as ParseObject);
+        return {
+          'version': obj.get('version'),
+          'isForcible': obj.get('isForcible'),
+          'downloadUrl': obj.get('downloadUrl'),
+          'description': obj.get('description'),
+        };
       } else {
         throw Exception('Error');
       }
