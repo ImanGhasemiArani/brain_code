@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/qr_code_widget.dart';
-import 'levels/level_controller.dart';
+import '../controller/level_controller.dart';
 import 'levels/level_widget.dart';
 
 class QRCodePage extends StatelessWidget {

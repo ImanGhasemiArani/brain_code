@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-import '../../utils.dart';
+import '../utils/utils.dart';
 import '../routeing.dart';
 import '../strs.dart';
 import '../widgets/hint_widget.dart';
 import 'home_page.dart';
-import 'levels/level_controller.dart';
+import '../controller/level_controller.dart';
 
 class ShutterPage extends StatelessWidget {
   const ShutterPage(this.levelNum, {super.key});

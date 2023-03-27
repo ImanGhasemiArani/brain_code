@@ -3,7 +3,7 @@
 import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils.dart';
+import '../../utils/utils.dart';
 import '../../strs.dart';
 import 'level_obj_controller.dart';
 import 'level_widget.dart';

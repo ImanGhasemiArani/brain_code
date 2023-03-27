@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url;
 
-import 'utils.dart';
+import 'utils/utils.dart';
 import 'main.dart';
 import 'pages/home_page.dart';
 import 'strs.dart';
@@ -101,7 +101,6 @@ void replacePage(Widget page,
 
 void showUpdateDialog(Map<String, dynamic> info) {
   isUpdateDialogOpen = true;
-  log(info.toString());
   showGeneralDialog(
     context: navKey.currentContext!,
     pageBuilder: (context, animation, secondaryAnimation) {

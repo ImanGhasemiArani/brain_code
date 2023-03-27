@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import 'app_options.dart';
-import 'pages/in_dev_page.dart';
-import 'utils.dart';
-import 'app_theme_data.dart';
-import 'models/command.dart';
-import 'pages/about_page.dart';
-import 'pages/help_page.dart';
-import 'pages/levels/level_controller.dart';
-import 'pages/menu_page.dart';
-import 'routeing.dart';
-import 'strs.dart';
+import '../app_options.dart';
+import '../pages/in_dev_page.dart';
+import '../utils/utils.dart';
+import '../app_theme_data.dart';
+import '../models/command.dart';
+import '../pages/about_page.dart';
+import '../pages/help_page.dart';
+import 'level_controller.dart';
+import '../pages/menu_page.dart';
+import '../routeing.dart';
+import '../strs.dart';
 
 typedef CommandRunner = void Function(BuildContext context, String str);
 

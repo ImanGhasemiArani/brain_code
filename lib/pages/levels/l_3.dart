@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../strs.dart';
-import 'level_controller.dart';
+import '../../controller/level_controller.dart';
 import 'level_obj_controller.dart';
 
 class L3ObjController extends LevelObjController {

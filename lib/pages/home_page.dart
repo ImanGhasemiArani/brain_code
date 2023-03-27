@@ -7,7 +7,7 @@ import '../widgets/command_reactive_anim.dart';
 import '../widgets/hint_widget.dart';
 import '../widgets/recent_command.dart';
 import 'help_page.dart';
-import 'levels/level_controller.dart';
+import '../controller/level_controller.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 

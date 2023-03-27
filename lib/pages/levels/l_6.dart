@@ -3,7 +3,7 @@
 import 'package:catex/catex.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils.dart';
+import '../../utils/utils.dart';
 import '../../strs.dart';
 import '../../widgets/animated_text.dart';
 import 'level_obj_controller.dart';

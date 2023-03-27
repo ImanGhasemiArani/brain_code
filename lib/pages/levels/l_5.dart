@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../utils.dart';
+import '../../utils/utils.dart';
 import '../../app_theme_data.dart';
 import '../../strs.dart';
 import '../../widgets/animated_text.dart';

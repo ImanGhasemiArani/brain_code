@@ -4,7 +4,7 @@ import 'package:rich_text_controller/rich_text_controller.dart';
 import 'package:vibration/vibration.dart';
 
 import '../app_options.dart';
-import '../commands_controller.dart';
+import '../controller/commands_controller.dart';
 import '../models/command.dart';
 import '../routeing.dart';
 import '../strs.dart';

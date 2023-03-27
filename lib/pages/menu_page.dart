@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../routeing.dart';
-import '../utils.dart';
+import '../utils/utils.dart';
 import '../app_options.dart';
 import '../app_theme_data.dart';
 import '../strs.dart';
 import 'about_page.dart';
 import 'help_page.dart';
 import 'in_dev_page.dart';
-import 'levels/level_controller.dart';
+import '../controller/level_controller.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});

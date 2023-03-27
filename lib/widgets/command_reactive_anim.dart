@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../commands_controller.dart';
+import '../controller/commands_controller.dart';
 
 const _objSize = Size.square(15);
 const _h = 100.0;

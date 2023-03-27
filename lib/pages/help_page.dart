@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-import '../commands_controller.dart';
+import '../controller/commands_controller.dart';
 import '../widgets/command_text.dart';
 import 'levels/l_test.dart';
 

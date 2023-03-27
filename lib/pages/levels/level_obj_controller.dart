@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../app_options.dart';
 import '../../routeing.dart';
 import '../shutter_page.dart';
-import 'level_controller.dart';
+import '../../controller/level_controller.dart';
 import 'level_widget.dart';
 
 abstract class LevelObjController {
@@ -44,13 +44,13 @@ abstract class LevelObjController {
   }
 
   void runCommandText(BuildContext context, String str) {
-    print('runCommandText');
+    // log('runCommandText');
 
     checkLevelStatus();
   }
 
   void runCommandAnim(BuildContext context, String str) {
-    print('runCommandAnim');
+    // log('runCommandAnim');
 
     checkLevelStatus();
   }
@@ -67,37 +67,37 @@ abstract class LevelObjController {
   }
 
   void runCommandMenu(BuildContext context, String str) {
-    print('runCommandMenu');
+    // log('runCommandMenu');
 
     checkLevelStatus();
   }
 
   void runCommandTheme(BuildContext context, String str) {
-    print('runCommandTheme');
+    // log('runCommandTheme');
 
     checkLevelStatus();
   }
 
   void runCommandLevel(BuildContext context, String str) {
-    print('runCommandLevel');
+    // log('runCommandLevel');
 
     checkLevelStatus();
   }
 
   void runCommandInfo(BuildContext context, String str) {
-    print('runCommandInfo');
+    // log('runCommandInfo');
 
     checkLevelStatus();
   }
 
   void runCommandRestart(BuildContext context, String str) {
-    print('runCommandRestart');
+    // log('runCommandRestart');
 
     checkLevelStatus();
   }
 
   void runCommandScan(BuildContext context, String str) {
-    print('runCommandScan');
+    // log('runCommandScan');
 
     levelViewEnum.value = LevelViewEnum.scanner;
 
@@ -105,7 +105,7 @@ abstract class LevelObjController {
   }
 
   void runCommandGenerate(BuildContext context, String str) {
-    print('runCommandGenerate');
+    // log('runCommandGenerate');
 
     levelViewEnum.value = LevelViewEnum.qrCode;
 
@@ -113,25 +113,25 @@ abstract class LevelObjController {
   }
 
   void runCommandMusic(BuildContext context, String str) {
-    print('runCommandMusic');
+    // log('runCommandMusic');
 
     checkLevelStatus();
   }
 
   void runCommandShop(BuildContext context, String str) {
-    print('runCommandShop');
+    // log('runCommandShop');
 
     checkLevelStatus();
   }
 
   void runCommandHelp(BuildContext context, String str) {
-    print('runCommandHelp');
+    // log('runCommandHelp');
 
     checkLevelStatus();
   }
 
   void runCommandAbout(BuildContext context, String str) {
-    print('runCommandAbout');
+    // log('runCommandAbout');
 
     checkLevelStatus();
   }
@@ -139,7 +139,7 @@ abstract class LevelObjController {
   bool isLevelPassed();
 
   void passedLevel() {
-    print('level Passed');
+    // log('level Passed');
 
     Future.delayed(const Duration(milliseconds: 1500), () {
       replacePage(ShutterPage(LevelController().currentLevel));

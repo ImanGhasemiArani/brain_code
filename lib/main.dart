@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'api_controller.dart';
+import 'controller/api_controller.dart';
 import 'app_options.dart';
 import 'app_theme_data.dart';
-import 'commands_controller.dart';
-import 'pages/levels/level_controller.dart';
+import 'controller/commands_controller.dart';
+import 'controller/level_controller.dart';
 import 'pages/splash_page.dart';
-import 'sounds_controller.dart';
+import 'controller/sounds_controller.dart';
 import 'strs.dart';
 
 final navKey = GlobalKey<NavigatorState>();

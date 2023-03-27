@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import 'levels/level_controller.dart';
+import '../controller/level_controller.dart';
 import 'levels/level_widget.dart';
 
 class ScannerPage extends StatefulWidget {

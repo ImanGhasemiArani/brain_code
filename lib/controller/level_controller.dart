@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 
-import '../../utils.dart';
-import '../../app_options.dart';
-import '../../strs.dart';
-import 'level_obj_controller.dart';
-import 'levels.dart';
+import '../utils/utils.dart';
+import '../app_options.dart';
+import '../strs.dart';
+import '../pages/levels/level_obj_controller.dart';
+import '../pages/levels/levels.dart';
 
 final levelCounter = levels.length;
 

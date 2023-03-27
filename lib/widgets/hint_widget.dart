@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../utils.dart';
+import '../utils/utils.dart';
 import '../strs.dart';
 
 class HintWidget extends StatelessWidget {

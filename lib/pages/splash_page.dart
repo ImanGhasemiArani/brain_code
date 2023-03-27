@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../api_controller.dart';
+import '../controller/api_controller.dart';
 import '../routeing.dart';
 import '../strs.dart';
 import 'home_page.dart';

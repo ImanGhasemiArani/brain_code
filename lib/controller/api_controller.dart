@@ -77,8 +77,8 @@ class APIController {
     );
 
     log(file.lengthSync().toString());
-    log(q.toString());
-    log(result?.lengthSync().toString() ?? '');
+    // log(q.toString());
+    // log(result?.lengthSync().toString() ?? '');
 
     return result!;
   }

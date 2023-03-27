@@ -1,7 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 
-import 'app_options.dart';
-import 'strs.dart';
+import '../app_options.dart';
+import '../strs.dart';
 
 class SoundsController {
   static final SoundsController _instance = SoundsController._internal();

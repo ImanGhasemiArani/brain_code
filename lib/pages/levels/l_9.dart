@@ -9,7 +9,7 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sensors_plus/sensors_plus.dart' as sensor;
 
-import '../../api_controller.dart';
+import '../../controller/api_controller.dart';
 import '../../strs.dart';
 import 'level_obj_controller.dart';
 
@@ -54,7 +54,7 @@ class L9ObjController extends LevelObjController {
   void _accelerometerListener(sensor.AccelerometerEvent event) {
     if (sub == null) return;
 
-    // print("${event.x}" ' ' "${event.y}" ' ' '${event.z}');
+    // log("${event.x}" ' ' "${event.y}" ' ' '${event.z}');
     if (event.y >= 8.5 && event.y < 10.5) {
       isVertically.value = true;
     } else {

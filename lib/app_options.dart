@@ -1,9 +1,11 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'sounds_controller.dart';
+import 'controller/sounds_controller.dart';
 
 late final SharedPreferences sp;
 
@@ -50,7 +52,7 @@ class AppOptions {
     _isVibrate = value;
     sp.setBool('isVibrate', _isVibrate);
 
-    // print('save isVibrate = $_isVibrate');
+    // log('save isVibrate = $_isVibrate');
   }
 
   set isMute(bool value) {
@@ -63,7 +65,7 @@ class AppOptions {
     }
     sp.setBool('isMute', _isMute);
 
-    // print('save isMute = $_isMute');
+    // log('save isMute = $_isMute');
   }
 
   set isDarkMode(bool value) {
@@ -71,7 +73,7 @@ class AppOptions {
     _isDarkMode = value;
     sp.setBool('isDarkMode', _isDarkMode);
 
-    // print('save isDarkMode = $_isDarkMode');
+    // log('save isDarkMode = $_isDarkMode');
   }
 
   set isRecentCommandsOn(bool value) {
@@ -80,7 +82,7 @@ class AppOptions {
     isRecentCommandOnNotifier.value = _isRecentCommandsOn;
     sp.setBool('isRecentCommandsOn', _isRecentCommandsOn);
 
-    // print('save isRecentCommandsOn = $_isRecentCommandsOn');
+    // log('save isRecentCommandsOn = $_isRecentCommandsOn');
   }
 
   set level(int value) {
@@ -88,7 +90,7 @@ class AppOptions {
     _level = value;
     sp.setInt('level', _level);
 
-    // print('save level = $_level');
+    // log('save level = $_level');
   }
 
   set addRecentCommand(String value) {
@@ -99,6 +101,6 @@ class AppOptions {
     recentCommandNotifier.notifyListeners();
     sp.setStringList('recentCommands', _recentCommands);
 
-    // print('save recentCommands = $_recentCommands');
+    // log('save recentCommands = $_recentCommands');
   }
 }
