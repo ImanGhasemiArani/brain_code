@@ -38,6 +38,9 @@ class L2ObjController extends LevelObjController {
   bool isLevelPassed() {
     return isThemeChanged;
   }
+
+  @override
+  final List<String> hints = [Strs.l2Tip1, Strs.l2Tip2, Strs.l2Tip3];
 }
 
 class L2 extends StatefulWidget {
@@ -93,10 +96,10 @@ class _L2State extends State<L2> {
                     width: MediaQuery.of(context).size.width * 0.3,
                     child: CustomPaint(
                       painter: _CagePainter(
-                        color:
-                            cageColor! == Theme.of(context).colorScheme.background
-                                ? Colors.transparent
-                                : cageColor!,
+                        color: cageColor! ==
+                                Theme.of(context).colorScheme.background
+                            ? Colors.transparent
+                            : cageColor!,
                       ),
                     ),
                   ),

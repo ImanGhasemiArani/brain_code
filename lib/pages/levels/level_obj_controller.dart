@@ -153,6 +153,17 @@ abstract class LevelObjController {
   void checkLevelStatus() {
     isLevelPassed() ? passedLevel() : null;
   }
+
+  int _currentHint = 0;
+  set incHintNum(int inc) {
+    _currentHint += inc;
+    if (_currentHint < 0) _currentHint = 0;
+    if (_currentHint >= hints.length) _currentHint = hints.length;
+  }
+
+  int get hint => _currentHint;
+
+  abstract final List<String> hints;
 }
 
 class ObjState {

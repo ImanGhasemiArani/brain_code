@@ -22,6 +22,9 @@ class L1ObjController extends LevelObjController {
   bool isLevelPassed() {
     return rotation % 360 == 180;
   }
+
+  @override
+  final List<String> hints = [Strs.l1Tip1, Strs.l1Tip2];
 }
 
 class L1 extends StatefulWidget {

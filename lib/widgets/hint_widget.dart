@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../routeing.dart';
 import '../utils/utils.dart';
 import '../strs.dart';
 
@@ -45,7 +46,9 @@ class HintButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: () {
+        openHintPage();
+      },
       icon: const HintWidget(
         size: 35,
       ),

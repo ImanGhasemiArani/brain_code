@@ -73,6 +73,9 @@ class L9ObjController extends LevelObjController {
   bool isLevelPassed() {
     return isPassed;
   }
+
+  @override
+  final List<String> hints = [Strs.l9Tip1, Strs.l9Tip2];
 }
 
 class L9 extends StatefulWidget {
@@ -105,6 +108,7 @@ class _L9State extends State<L9> {
 
   @override
   Widget build(BuildContext context) {
+    return const SizedBox();
     return Scaffold(
       body: Stack(
         children: [
@@ -217,6 +221,11 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
+            // Text(
+            //   Strs.l9S5,
+            //   style: Theme.of(context).textTheme.bodyLarge,
+            // ),
+            // const SizedBox(height: 30),
             ValueListenableBuilder(
               valueListenable: controller.isVertically,
               builder: (context, value, child) {

@@ -196,6 +196,7 @@ class Keyboard extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       animationDuration: Duration.zero,
+      splashFactory: NoSplash.splashFactory,
     ).copyWith(
       side: MaterialStateProperty.resolveWith<BorderSide?>(
         (states) {

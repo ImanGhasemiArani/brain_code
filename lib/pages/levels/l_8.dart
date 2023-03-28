@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app_theme_data.dart';
+import '../../strs.dart';
 import '../../widgets/movable.dart';
 import '../../widgets/qr_code_widget.dart';
 import 'level_obj_controller.dart';
@@ -24,6 +25,15 @@ class L8ObjController extends LevelObjController {
   bool isLevelPassed() {
     return scanResult == qrCode;
   }
+
+  @override
+  final List<String> hints = [
+    Strs.l8Tip1,
+    Strs.l8Tip2,
+    Strs.l8Tip3,
+    Strs.l8Tip4,
+    Strs.l8Tip5
+  ];
 }
 
 class L8 extends StatefulWidget {

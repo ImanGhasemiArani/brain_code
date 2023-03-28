@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url;
 
 import 'app_options.dart';
+import 'pages/hint_page.dart';
 import 'utils/utils.dart';
 import 'main.dart';
 import 'pages/home_page.dart';
@@ -218,6 +219,19 @@ void showDialogUpdatePlease() {
           ],
         ),
       );
+    },
+  );
+}
+
+void openHintPage() {
+  showModalBottomSheet(
+    context: navKey.currentContext!,
+    barrierColor: Colors.transparent,
+    isDismissible: false,
+    // enableDrag: true,
+    isScrollControlled: true,
+    builder: (context) {
+      return HintPage();
     },
   );
 }

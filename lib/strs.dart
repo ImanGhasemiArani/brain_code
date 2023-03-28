@@ -39,6 +39,11 @@ class Strs {
 
   static const String inDev = 'در حال توسعه';
 
+  static const String smallTip = 'راهنمایی کوچک';
+  static const String bigTip = 'راهنمایی بزرگ';
+  static const String skipLevel = 'رد کردن مرحله';
+  static const String tip = 'راهنمایی';
+
   static const String commandTextDesc =
       'با دستور text می توانید متنی را به برنامه ارسال کنید';
   static const String commandTextEx = '/text:Hi\n/text:Help';
@@ -97,31 +102,75 @@ class Strs {
 
   // level 1 strings
   static const String l1S1 = 'از نه شیش بساز';
+  static const String l1Tip1 =
+      'عدد شیش اینگلیسی همان عدد نه اینگلیسی دوران یافته است';
+  static const String l1Tip2 = 'عدد نه را ۱۸۰ درجه دوران دهید';
 
   // level 2 strings
   static const String l2S1 = 'پرنده را نجات بده';
+  static const String l2Tip1 = 'رنگ قفس پرنده ثابت است';
+  static const String l2Tip2 = 'سعی کن پوسته برنامه را تغییر بدی';
+  static const String l2Tip3 =
+      'پوسته برنامه را به رنگ همسان با رنگ قفس تغییر بده';
 
   // level 3 strings
   static const String l3S1 = 'Level';
   static const String l3S2 = 'completed';
   static const String l3S3 = 'faild';
+  static const String l3Tip1 = 'سعی کن انیمیشن را متوقف کنی';
+  static const String l3Tip2 = 'انیمیشن را روی completed متوقف کن';
 
   // level 4 strings
   static const String l4S1 = '÷ 2 × 1 ( 3 + 1 ) =';
+  static const String l4Tip1 = 'سعی کن مسئله ریاضی را حل کنی. ۲ تا مجهول داره';
+  static const String l4Tip2 = 'مجهول چپ را ۶ قرار بده';
+  static const String l4Tip3 = 'مجهول راست را ۹ قرار بده';
+  static const String l4Tip4 = 'سعی کن دایره ها را متوقف کنی';
+  static const String l4Tip5 =
+      'ابتدا دایره را انتخاب کن و بعد انیمیشن را متوقف کن';
 
   // level 5 strings
   static const String l5S1 = 'به چی نگاه میکنی؟👀🤔';
   static const String l5S2 = '41.303921, -81.901693';
+  static const String l5Tip1 = 'یه چیزی پنهان شده است';
+  static const String l5Tip2 = 'سعی کن پوسته برنامه را تغییر دهی';
+  static const String l5Tip3 = 'به نظر میاد که یک مختصات جغرافیایی است';
+  static const String l5Tip4 = 'سعی کن مکان جغرافیایی را پیدا کنی';
+  static const String l5Tip5 =
+      'مکان جغرافیایی را در google map یا google earth پیدا کن';
+  static const String l5Tip6 = 'شکل مکان جغرافیایی را به برنامه بده';
 
   // level 6 strings
   static const String l6S1 = 'سوالات ریاضی دوس داری؟😉';
   static const String l6S2 = '(x^{2}+y^{2}\ \ -\ a)^{3}=ax^{2}y^{3}';
+  static const String l6Tip1 = 'یک معادله ریاضی است';
+  static const String l6Tip2 = 'معادله یک نمودار است و a یک عدد دلخواه است';
+  static const String l6Tip3 = 'نمودار را در سایت های ریاضی بکش';
+  static const String l6Tip4 = 'شکل نمودار را به برنامه بده';
+
+  // level 7 strings
+  static const String l7Tip1 = 'سعی کن انیمشین را شروع کنی';
+  static const String l7Tip2 = 'با تکان دادن گوشی دایره را تکان بده';
+  static const String l7Tip3 = 'دایره را در دایره توخالی دیگر ثابت نگه دار';
+  static const String l7Tip4 = 'دایره را در داخل دایره دیگر ۷ ثانیه نگه دار';
+
+  // level 8 strings
+  static const String l8Tip1 = 'یه چیزی پنهان شده است';
+  static const String l8Tip2 = 'سعی کن پوسته برنامه را تغییر دهی';
+  static const String l8Tip3 = 'آن را با اسکنر برنامه اسکن کن';
+  static const String l8Tip4 = 'ابتدا از qr با گوشی دیگر عکس بگیر';
+  static const String l8Tip5 = 'با اسکنر برنامه عکس را اسکن کن';
 
   // leel 9 strings
   static const String l9S1 = 'گوشی را به صورت عمودی بالا نگه دار🙄';
   static const String l9S2 = 'گوشی را مقابل صورتت قفل کن😏';
   static const String l9S3 = 'چشم چپت را ببند😉';
   static const String l9S4 = 'حالا لبخند بزن🙃';
+  static const String l9S5 =
+      'اگر برنامه اجازه دسترسی خواست، تایید کنید. این مرحله به آن ها نیاز دارد';
+  static const String l9Tip1 =
+      'شرایط نوشته شده را برقرار کن. باید رنگ همه آن ها به سبز تغییر کند';
+  static const String l9Tip2 = 'شرایط را به مدت ۳۰ ثانیه نگه دار';
 
   //urls
   static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';

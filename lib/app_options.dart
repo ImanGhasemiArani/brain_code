@@ -15,6 +15,7 @@ class AppOptions {
   AppOptions._internal()
       : runCounter = (sp.getInt('runCounter') ?? 0) + 1,
         isHaveForceUpdate = sp.getBool('isHaveForceUpdate') ?? false,
+        _hintCounter = sp.getInt('hintCounter') ?? 20,
         _isVibrate = sp.getBool('isVibrate') ?? true,
         _isMute = sp.getBool('isMute') ?? false,
         _isDarkMode = sp.getBool('isDarkMode') ?? false,
@@ -31,6 +32,7 @@ class AppOptions {
   late BuildContext context;
   int runCounter;
   bool isHaveForceUpdate;
+  int _hintCounter;
   bool _isVibrate;
   bool _isMute;
   bool _isDarkMode;
@@ -40,12 +42,20 @@ class AppOptions {
   final ValueNotifier<bool> recentCommandNotifier;
   final ValueNotifier<bool> isRecentCommandOnNotifier;
 
+  int get hintCounter => _hintCounter;
   bool get isVibrate => _isVibrate;
   bool get isMute => _isMute;
   bool get isDarkMode => _isDarkMode;
   bool get isRecentCommandsOn => _isRecentCommandsOn;
   int get level => _level;
   List<String> get recentCommands => _recentCommands;
+
+  set hintCounter(int value) {
+    _hintCounter = value;
+    sp.setInt('hintCounter', _hintCounter);
+
+    // log('save hintCounter = $_hintCounter');
+  }
 
   set isVibrate(bool value) {
     if (_isVibrate == value) return;

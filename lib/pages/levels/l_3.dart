@@ -32,6 +32,9 @@ class L3ObjController extends LevelObjController {
   bool isLevelPassed() {
     return isComplete;
   }
+
+  @override
+  final List<String> hints = [Strs.l3Tip1, Strs.l3Tip2];
 }
 
 class L3 extends StatefulWidget {
@@ -108,9 +111,7 @@ class _L3AnimState extends State<_L3Anim> with SingleTickerProviderStateMixin {
           try {
             (LevelController().currentLevelObjController as L3ObjController)
                 .isComplete = true;
-            LevelController()
-                .currentLevelObjController
-                ?.checkLevelStatus();
+            LevelController().currentLevelObjController?.checkLevelStatus();
           } catch (e) {}
         }
       });

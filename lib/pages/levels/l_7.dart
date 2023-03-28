@@ -7,6 +7,7 @@ import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
+import '../../strs.dart';
 import '../../widgets/movable.dart';
 import 'level_obj_controller.dart';
 import 'level_widget.dart';
@@ -101,6 +102,14 @@ class L7ObjController extends LevelObjController {
     sub = null;
     super.passedLevel();
   }
+
+  @override
+  final List<String> hints = [
+    Strs.l7Tip1,
+    Strs.l7Tip2,
+    Strs.l7Tip3,
+    Strs.l7Tip4
+  ];
 }
 
 class L7 extends StatefulWidget {

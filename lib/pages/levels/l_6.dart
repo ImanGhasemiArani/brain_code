@@ -33,6 +33,14 @@ class L6ObjController extends LevelObjController {
   bool isLevelPassed() {
     return text == 'heart';
   }
+
+  @override
+  final List<String> hints = [
+    Strs.l6Tip1,
+    Strs.l6Tip2,
+    Strs.l6Tip3,
+    Strs.l6Tip4
+  ];
 }
 
 class L6 extends StatefulWidget {

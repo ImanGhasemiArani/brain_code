@@ -40,6 +40,15 @@ class L4ObjController extends LevelObjController {
         22.5 <= degreeC2 &&
         degreeC2 <= 67.5;
   }
+
+  @override
+  final List<String> hints = [
+    Strs.l4Tip1,
+    Strs.l4Tip2,
+    Strs.l4Tip3,
+    Strs.l4Tip4,
+    Strs.l4Tip5
+  ];
 }
 
 class L4 extends StatefulWidget {

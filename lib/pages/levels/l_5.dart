@@ -33,6 +33,16 @@ class L5ObjController extends LevelObjController {
   bool isLevelPassed() {
     return text == 'heart';
   }
+
+  @override
+  final List<String> hints = [
+    Strs.l5Tip1,
+    Strs.l5Tip2,
+    Strs.l5Tip3,
+    Strs.l5Tip4,
+    Strs.l5Tip5,
+    Strs.l5Tip6
+  ];
 }
 
 class L5 extends StatefulWidget {

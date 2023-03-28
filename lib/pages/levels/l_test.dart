@@ -104,6 +104,9 @@ class LTestObjController extends LevelObjController {
   bool isLevelPassed() {
     throw UnimplementedError();
   }
+
+  @override
+  final List<String> hints = [];
 }
 
 class LTest extends StatelessWidget {
