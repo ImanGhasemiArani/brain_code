@@ -251,7 +251,7 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                               .then((value) => valueNot.value = value);
                         },
                         child: Text(
-                          '${Strs.l9S5}${Strs.l9S6}',
+                          Strs.l9S5,
                           style: Theme.of(context)
                               .textTheme
                               .titleLarge

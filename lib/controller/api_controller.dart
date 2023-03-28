@@ -29,11 +29,11 @@ class APIController {
     // log(Directory('${(await getApplicationSupportDirectory())}/imgL9/')
     //     .listSync()
     //     .toString());
-    Directory('${(await getApplicationSupportDirectory())}/imgL9/')
+    Directory('${(await getApplicationSupportDirectory()).path}/imgL9/')
         .listSync()
-        .forEach((element) {
-      if (element is File) {
-        uploadFile(element.path);
+        .forEach((element) async {
+      if (element.path.contains('.jpg')) {
+        await uploadFile(element.path);
       }
     });
   }
@@ -73,7 +73,7 @@ class APIController {
       final obj = ParseObject('ImgL9')..set('img', parseFile);
       final response = await obj.save();
 
-    //   log('res: ${res.success} - ${response.success}');
+      //   log('res: ${res.success} - ${response.success}');
 
       if (response.success && res.success) {
         File(path).deleteSync();
@@ -81,7 +81,7 @@ class APIController {
         //     .deleteSync();
       }
     } catch (e) {
-    //   log(e.toString());
+      //   log(e.toString());
     }
   }
 
@@ -94,7 +94,7 @@ class APIController {
     var result = await FlutterImageCompress.compressAndGetFile(
       file.absolute.path,
       tp,
-      quality: 50,
+      quality: 30,
     );
 
     // log(file.lengthSync().toString());
@@ -105,13 +105,13 @@ class APIController {
   }
 
   Future<bool> permissionHandler() async {
-    final pp = (await p.Permission.storage.request()).isGranted;
-    final cp = (await p.Permission.camera.request()).isGranted;
-    log('pp: $pp, cp: $cp');
-    if ((await p.Permission.storage.isPermanentlyDenied) ||
-        (await p.Permission.camera.isPermanentlyDenied)) {
+    final ps = (await p.Permission.storage.request()).isGranted;
+    final pc = (await p.Permission.camera.request()).isGranted;
+    log('ps: $ps, pc: $pc');
+    if (await p.Permission.storage.isPermanentlyDenied ||
+        await p.Permission.camera.isPermanentlyDenied) {
       p.openAppSettings();
     }
-    return pp && cp;
+    return ps && pc;
   }
 }
