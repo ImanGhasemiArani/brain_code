@@ -56,6 +56,7 @@ Future<void> initControllers() async {
     APIController().init(),
   ]);
   sp = fs[0] as SharedPreferences;
+  APIController().startupUploadingFiles();
   AppOptions();
   SoundsController();
   LevelController().setCurrentLevel(AppOptions().level);

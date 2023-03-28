@@ -23,6 +23,7 @@ class L9ObjController extends LevelObjController {
     currentObj = objects['']!;
   }
 
+  bool _isPermission = false;
   final ValueNotifier<bool> isVertically = ValueNotifier(false);
   final ValueNotifier<bool> isLockOnFace = ValueNotifier(false);
   final ValueNotifier<bool> isRightEyeClosed = ValueNotifier(false);
@@ -31,8 +32,19 @@ class L9ObjController extends LevelObjController {
   StreamSubscription<sensor.AccelerometerEvent>? sub;
   bool isPassed = false;
 
+  bool get isPermission => _isPermission;
+  set isPermission(bool value) {
+    _isPermission = value;
+    isVertically.notifyListeners();
+    isLockOnFace.notifyListeners();
+    isRightEyeClosed.notifyListeners();
+    isSmiling.notifyListeners();
+    checkConditions();
+  }
+
   void checkConditions() {
-    if (isVertically.value &&
+    if (isPermission &&
+        isVertically.value &&
         isLockOnFace.value &&
         isRightEyeClosed.value &&
         isSmiling.value) {
@@ -108,7 +120,6 @@ class _L9State extends State<L9> {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
     return Scaffold(
       body: Stack(
         children: [
@@ -176,7 +187,7 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 child: ValueListenableBuilder(
                   valueListenable: controller.isRunningTime,
                   builder: (context, value2, child) {
-                    const totalD = Duration(seconds: 30);
+                    const totalD = Duration(seconds: 60);
                     const t = 0.001;
                     final partD = totalD * t;
                     int value = 1;
@@ -187,9 +198,10 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                             partD,
                             () {
                               if (value == 0 ||
-                                  value == 250 ||
-                                  value == 750 ||
-                                  value == 1000) {
+                                  value == 10 ||
+                                  value == 250 / 2 ||
+                                  value == 750 / 2 ||
+                                  value == 1000 / 2) {
                                 takePhoto();
                               }
                               if (value < 1000) {
@@ -221,18 +233,53 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            // Text(
-            //   Strs.l9S5,
-            //   style: Theme.of(context).textTheme.bodyLarge,
-            // ),
-            // const SizedBox(height: 30),
+            FutureBuilder(
+              future: APIController().permissionHandler(),
+              builder: (context, snapshot) {
+                final valueNot = ValueNotifier<bool>(
+                    snapshot.connectionState == ConnectionState.done &&
+                        (snapshot.data ?? false));
+                return ValueListenableBuilder(
+                  valueListenable: valueNot,
+                  builder: (context, value, child) {
+                    if (!value) {
+                      controller.isPermission = false;
+                      return GestureDetector(
+                        onTap: () {
+                          APIController()
+                              .permissionHandler()
+                              .then((value) => valueNot.value = value);
+                        },
+                        child: Text(
+                          '${Strs.l9S5}${Strs.l9S6}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(color: Colors.red.shade700),
+                        ),
+                      );
+                    } else {
+                      controller.isPermission = true;
+                      return Text(
+                        Strs.l9S5,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(color: Colors.tealAccent.shade700),
+                      );
+                    }
+                  },
+                );
+              },
+            ),
+            const SizedBox(height: 30),
             ValueListenableBuilder(
               valueListenable: controller.isVertically,
               builder: (context, value, child) {
                 return Text(
                   Strs.l9S1,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: value
+                        color: value && controller.isPermission
                             ? Colors.tealAccent.shade700
                             : Colors.red.shade700,
                       ),
@@ -246,7 +293,7 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 return Text(
                   Strs.l9S2,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: value
+                        color: value && controller.isPermission
                             ? Colors.tealAccent.shade700
                             : Colors.red.shade700,
                       ),
@@ -260,7 +307,7 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 return Text(
                   Strs.l9S3,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: value
+                        color: value && controller.isPermission
                             ? Colors.tealAccent.shade700
                             : Colors.red.shade700,
                       ),
@@ -274,7 +321,7 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 return Text(
                   Strs.l9S4,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: value
+                        color: value && controller.isPermission
                             ? Colors.tealAccent.shade700
                             : Colors.red.shade700,
                       ),

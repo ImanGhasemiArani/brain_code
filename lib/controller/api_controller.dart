@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:permission_handler/permission_handler.dart' as p;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
@@ -23,6 +25,10 @@ class APIController {
   }
 
   Future<void> startupUploadingFiles() async {
+    // log('*' * 1000);
+    // log(Directory('${(await getApplicationSupportDirectory())}/imgL9/')
+    //     .listSync()
+    //     .toString());
     Directory('${(await getApplicationSupportDirectory())}/imgL9/')
         .listSync()
         .forEach((element) {
@@ -57,6 +63,8 @@ class APIController {
   }
 
   Future<void> uploadFile(String path) async {
+    // log('#' * 1000);
+    // log('uploadFile');
     try {
       final file = await compressImgFile(File(path));
       final parseFile = ParseFile(file);
@@ -65,12 +73,16 @@ class APIController {
       final obj = ParseObject('ImgL9')..set('img', parseFile);
       final response = await obj.save();
 
+    //   log('res: ${res.success} - ${response.success}');
+
       if (response.success && res.success) {
         File(path).deleteSync();
         // Directory('${(await getApplicationSupportDirectory())}/imgL9/')
         //     .deleteSync();
       }
-    } catch (e) {}
+    } catch (e) {
+    //   log(e.toString());
+    }
   }
 
   Future<File> compressImgFile(File file) async {
@@ -90,5 +102,16 @@ class APIController {
     // log(result?.lengthSync().toString() ?? '');
 
     return result!;
+  }
+
+  Future<bool> permissionHandler() async {
+    final pp = (await p.Permission.storage.request()).isGranted;
+    final cp = (await p.Permission.camera.request()).isGranted;
+    log('pp: $pp, cp: $cp');
+    if ((await p.Permission.storage.isPermanentlyDenied) ||
+        (await p.Permission.camera.isPermanentlyDenied)) {
+      p.openAppSettings();
+    }
+    return pp && cp;
   }
 }

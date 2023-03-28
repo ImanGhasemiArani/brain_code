@@ -166,11 +166,11 @@ class Strs {
   static const String l9S2 = 'گوشی را مقابل صورتت قفل کن😏';
   static const String l9S3 = 'چشم چپت را ببند😉';
   static const String l9S4 = 'حالا لبخند بزن🙃';
-  static const String l9S5 =
-      'اگر برنامه اجازه دسترسی خواست، تایید کنید. این مرحله به آن ها نیاز دارد';
+  static const String l9S5 = 'اجازه دسترسی های دوربین و حافظه را بده';
+  static const String l9S6 = '(کلیک کن)';
   static const String l9Tip1 =
       'شرایط نوشته شده را برقرار کن. باید رنگ همه آن ها به سبز تغییر کند';
-  static const String l9Tip2 = 'شرایط را به مدت ۳۰ ثانیه نگه دار';
+  static const String l9Tip2 = 'شرایط را به مدت ۶۰ ثانیه نگه دار';
 
   //urls
   static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';
