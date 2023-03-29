@@ -22,11 +22,15 @@ class AppOptions {
         _isRecentCommandsOn = sp.getBool('isRecentCommandsOn') ?? true,
         _level = sp.getInt('level') ?? 1,
         // _level = 1,
+        _allowedDailyPrize = sp.getInt('allowedDailyPrize') ?? 1,
+        _awardedDailyPrize = sp.getInt('awardedDailyPrize') ?? 0,
+        _lastDateOpen = sp.getString('lastDateOpen'),
         _recentCommands = sp.getStringList('recentCommands') ?? [],
         recentCommandNotifier = ValueNotifier<bool>(false),
         isRecentCommandOnNotifier =
             ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true) {
     sp.setInt('runCounter', runCounter);
+    lastDateOpen = DateTime.now();
   }
 
   late BuildContext context;
@@ -38,6 +42,9 @@ class AppOptions {
   bool _isDarkMode;
   bool _isRecentCommandsOn;
   int _level;
+  int _allowedDailyPrize;
+  int _awardedDailyPrize;
+  String? _lastDateOpen;
   final List<String> _recentCommands;
   final ValueNotifier<bool> recentCommandNotifier;
   final ValueNotifier<bool> isRecentCommandOnNotifier;
@@ -49,6 +56,14 @@ class AppOptions {
   bool get isRecentCommandsOn => _isRecentCommandsOn;
   int get level => _level;
   List<String> get recentCommands => _recentCommands;
+  int get allowedDailyPrize => _allowedDailyPrize;
+  int get awardedDailyPrize => _awardedDailyPrize;
+  DateTime? get lastDateOpen => _lastDateOpen != null
+      ? DateTime(
+          int.parse(_lastDateOpen!.split(',')[0]),
+          int.parse(_lastDateOpen!.split(',')[1]),
+          int.parse(_lastDateOpen!.split(',')[2]))
+      : null;
 
   set hintCounter(int value) {
     _hintCounter = value;
@@ -101,6 +116,50 @@ class AppOptions {
     sp.setInt('level', _level);
 
     // log('save level = $_level');
+  }
+
+  set allowedDailyPrize(int value) {
+    _allowedDailyPrize = value;
+
+    sp.setInt('allowedDailyPrize', _allowedDailyPrize);
+
+    // log('save allowedDailyPrize = $_allowedDailyPrize');
+  }
+
+  set awardedDailyPrize(int value) {
+    if (value > allowedDailyPrize) return;
+    _awardedDailyPrize = value;
+
+    sp.setInt('awardedDailyPrize', _awardedDailyPrize);
+
+    // log('save awardedDailyPrize = $_awardedDailyPrize');
+  }
+
+  set lastDateOpen(DateTime? value) {
+    if (value == null) return;
+    if (lastDateOpen == null) {
+      _lastDateOpen = '${value.year},${value.month},${value.day}';
+      sp.setString('lastDateOpen', _lastDateOpen!);
+      return;
+    }
+    if (value.day == lastDateOpen!.day &&
+        value.month == lastDateOpen!.month &&
+        value.year == lastDateOpen!.year) return;
+    final temp = lastDateOpen!.add(const Duration(days: 1));
+    if (value.day == temp.day &&
+        value.month == temp.month &&
+        value.year == temp.year) {
+      allowedDailyPrize = (allowedDailyPrize + 1) % 9;
+      allowedDailyPrize = allowedDailyPrize == 0 ? 1 : allowedDailyPrize;
+    } else {
+      allowedDailyPrize = 1;
+      awardedDailyPrize = 0;
+    }
+    _lastDateOpen = '${value.year},${value.month},${value.day}';
+
+    sp.setString('lastDateOpen', _lastDateOpen!);
+
+    // log('save lastDateOpen = $_lastDateOpen');
   }
 
   set addRecentCommand(String value) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../strs.dart';
+import '../widgets/close_button.dart';
 
 class InDevPage extends StatelessWidget {
   const InDevPage({super.key});
@@ -10,13 +11,7 @@ class InDevPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(
-            Icons.close_rounded,
-            size: 35,
-          ),
-        ),
+        leading: const CloseBtn(),
       ),
       body: Center(
         child: Text(

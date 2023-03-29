@@ -4,6 +4,7 @@ import '../app_options.dart';
 import '../controller/level_controller.dart';
 import '../utils/utils.dart';
 import '../strs.dart';
+import '../widgets/close_button.dart';
 import '../widgets/hint_widget.dart';
 
 class HintPage extends StatelessWidget {
@@ -25,13 +26,7 @@ class HintPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const Icon(
-                    Icons.close_rounded,
-                    size: 35,
-                  ),
-                ),
+                const CloseBtn(),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

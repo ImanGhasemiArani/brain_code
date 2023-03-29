@@ -23,6 +23,7 @@ class Strs {
   static const String name = 'ایمان قاسمی آرانی';
   static const String nameP1 = 'ایمان';
   static const String nameP2 = 'قاسمی آرانی';
+  static const String day = 'روز';
 
   static const String titleUpdateMsg = 'نسخه جدیدی از برنامه در دسترس است';
   static const String remindMeLater = 'بعدا یادآوری کن';

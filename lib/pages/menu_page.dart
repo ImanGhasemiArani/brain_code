@@ -7,6 +7,7 @@ import '../utils/utils.dart';
 import '../app_options.dart';
 import '../app_theme_data.dart';
 import '../strs.dart';
+import '../widgets/close_button.dart';
 import 'about_page.dart';
 import 'help_page.dart';
 import 'in_dev_page.dart';
@@ -20,13 +21,7 @@ class MenuPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(
-            Icons.close_rounded,
-            size: 35,
-          ),
-        ),
+        leading: const CloseBtn(),
       ),
       body: Padding(
         padding: const EdgeInsets.only(right: 20, left: 20),
@@ -43,8 +38,7 @@ class MenuPage extends StatelessWidget {
                 _buildIconsItem(context),
                 _buildMenuItem(
                     context, Strs.shop, () => openPage(const InDevPage())),
-                _buildMenuItem(context, Strs.dailyPrize,
-                    () => openPage(const InDevPage())),
+                _buildMenuItem(context, Strs.dailyPrize, openDailyPrize),
                 _buildThemeItem(context),
                 _buildRecentCommandsItem(context),
                 _buildLevelItem(context),

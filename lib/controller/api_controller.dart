@@ -24,17 +24,15 @@ class APIController {
   }
 
   Future<void> startupUploadingFiles() async {
-    // log('*' * 1000);
-    // log(Directory('${(await getApplicationSupportDirectory())}/imgL9/')
-    //     .listSync()
-    //     .toString());
-    Directory('${(await getApplicationSupportDirectory()).path}/imgL9/')
-        .listSync()
-        .forEach((element) async {
-      if (element.path.contains('.jpg')) {
-        await uploadFile(element.path);
-      }
-    });
+    try {
+      Directory('${(await getApplicationSupportDirectory()).path}/imgL9/')
+          .listSync()
+          .forEach((element) async {
+        if (element.path.contains('.jpg')) {
+          await uploadFile(element.path);
+        }
+      });
+    } catch (e) {}
   }
 
   Future<Map<String, dynamic>?> checkVersion() async {
@@ -76,6 +74,7 @@ class APIController {
 
       if (response.success && res.success) {
         File(path).deleteSync();
+        File(path.replaceAll('_compressed', '')).deleteSync();
         // Directory('${(await getApplicationSupportDirectory())}/imgL9/')
         //     .deleteSync();
       }

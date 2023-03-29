@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../strs.dart';
+import '../../widgets/close_button.dart';
 import '../../widgets/movable.dart';
 import 'level_obj_controller.dart';
 
@@ -122,13 +123,7 @@ class LTest extends StatelessWidget {
             state: controller.getObj('close-icon'),
             alignment: Alignment.topRight,
             initPosition: const Offset(0, 20),
-            child: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(
-                Icons.close_rounded,
-                size: 35,
-              ),
-            )),
+            child: const CloseBtn()),
         MovableObject(
           state: controller.getObj('title'),
           alignment: Alignment.bottomRight,

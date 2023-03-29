@@ -11,6 +11,8 @@ import '../controller/level_controller.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 bool isOpenTutorial = AppOptions().runCounter != 1;
+bool isOpenedDailyPrize =
+    AppOptions().allowedDailyPrize == AppOptions().awardedDailyPrize;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,6 +24,14 @@ class HomePage extends StatelessWidget {
       Future.delayed(const Duration(milliseconds: 1500), () {
         if (AppOptions().runCounter == 1) {
           openPage(const HelpPage());
+        }
+      });
+    }
+    if (!isOpenedDailyPrize) {
+      isOpenedDailyPrize = true;
+      Future.delayed(const Duration(milliseconds: 1500), () {
+        if (AppOptions().allowedDailyPrize != AppOptions().awardedDailyPrize) {
+          openDailyPrize();
         }
       });
     }

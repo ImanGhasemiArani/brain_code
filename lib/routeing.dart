@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url;
 
 import 'app_options.dart';
+import 'pages/daily_prize_page.dart';
 import 'pages/hint_page.dart';
 import 'utils/utils.dart';
 import 'main.dart';
@@ -232,6 +233,19 @@ void openHintPage() {
     isScrollControlled: true,
     builder: (context) {
       return HintPage();
+    },
+  );
+}
+
+void openDailyPrize() {
+    showModalBottomSheet(
+    context: navKey.currentContext!,
+    barrierColor: Colors.transparent,
+    isDismissible: false,
+    // enableDrag: true,
+    isScrollControlled: true,
+    builder: (context) {
+      return const DailyPrizePage();
     },
   );
 }
