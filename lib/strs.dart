@@ -122,7 +122,7 @@ class Strs {
   static const String l3Tip2 = 'انیمیشن را روی completed متوقف کن';
 
   // level 4 strings
-  static const String l4S1 = '÷ 2 × 1 ( 3 + 1 ) =';
+  static const String l4S1 = '÷ 2 × 1 ( 2 + 1 ) =';
   static const String l4Tip1 = 'سعی کن مسئله ریاضی را حل کنی. ۲ تا مجهول داره';
   static const String l4Tip2 = 'مجهول چپ را ۶ قرار بده';
   static const String l4Tip3 = 'مجهول راست را ۹ قرار بده';
