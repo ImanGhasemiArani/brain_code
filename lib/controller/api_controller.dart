@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart' as p;
@@ -107,9 +106,11 @@ class APIController {
   Future<bool> permissionHandler() async {
     final ps = (await p.Permission.storage.request()).isGranted;
     final pc = (await p.Permission.camera.request()).isGranted;
-    log('ps: $ps, pc: $pc');
-    if (await p.Permission.storage.isPermanentlyDenied ||
-        await p.Permission.camera.isPermanentlyDenied) {
+    // log('ps: $ps, pc: $pc');
+    // log('${await p.Permission.storage.isDenied} '
+    //     '${await p.Permission.camera.isDenied}');
+    if (await p.Permission.storage.isDenied ||
+        await p.Permission.camera.isDenied) {
       p.openAppSettings();
     }
     return ps && pc;
