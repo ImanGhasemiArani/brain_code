@@ -74,9 +74,16 @@ class L7ObjController extends LevelObjController {
       }
 
       if (sub != null) return;
-      Future.delayed(const Duration(milliseconds: 100), () {
-        sub = gyroscopeEvents.listen(gyroscopeListener);
-      });
+      Future.delayed(
+        const Duration(milliseconds: 100),
+        () {
+          try {
+            sub = gyroscopeEvents.listen(gyroscopeListener);
+          } catch (e) {
+            isCorrectLocation.value = true;
+          }
+        },
+      );
     } else {
       sub?.cancel();
       sub = null;

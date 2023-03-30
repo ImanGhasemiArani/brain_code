@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as url;
 
+import '../utils/utils.dart';
 import '../strs.dart';
 
 class AboutPage extends StatelessWidget {
@@ -133,10 +135,22 @@ class AboutPage extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              '${Strs.version} ۱.۰.۰',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            FutureBuilder(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Text(
+                      '${Strs.version} ${snapshot.data!.version}'
+                          .toPersianNum(),
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    );
+                  } else {
+                    return Text(
+                      Strs.version,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    );
+                  }
+                }),
             const SizedBox(height: 20),
           ],
         ),

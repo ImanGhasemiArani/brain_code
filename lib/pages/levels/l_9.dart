@@ -55,11 +55,16 @@ class L9ObjController extends LevelObjController {
   }
 
   void listenAccelerometer(bool isListen) {
-    if (isListen) {
-      sub = sensor.accelerometerEvents.listen(_accelerometerListener);
-    } else {
-      sub?.cancel();
-      sub = null;
+    try {
+      if (isListen) {
+        sub = sensor.accelerometerEvents.listen(_accelerometerListener);
+      } else {
+        sub?.cancel();
+        sub = null;
+      }
+    } catch (e) {
+      isVertically.value = true;
+      checkConditions();
     }
   }
 
