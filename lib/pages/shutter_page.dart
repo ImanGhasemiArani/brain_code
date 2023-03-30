@@ -3,21 +3,61 @@
 import 'package:flutter/material.dart';
 
 import '../app_options.dart';
+import '../controller/ad_controller.dart';
 import '../utils/utils.dart';
 import '../routeing.dart';
 import '../strs.dart';
 import '../widgets/hint_widget.dart';
+import '../widgets/reward_ad_button.dart';
 import 'home_page.dart';
 import '../controller/level_controller.dart';
 
-class ShutterPage extends StatelessWidget {
+class ShutterPage extends StatefulWidget {
   const ShutterPage(this.levelNum, {super.key});
 
   final int levelNum;
 
   @override
+  State<ShutterPage> createState() => _ShutterPageState();
+}
+
+class _ShutterPageState extends State<ShutterPage> {
+  String? _bannerAdResId;
+  @override
+  void initState() {
+    AdController().getBannerAd().then((resId) => _bannerAdResId = resId);
+    super.initState();
+  }
+
+  @override
+  void activate() {
+    _bannerAdResId == null
+        ? AdController().getBannerAd().then((resId) => _bannerAdResId = resId)
+        : null;
+    super.activate();
+  }
+
+  @override
+  void deactivate() {
+    _bannerAdResId != null
+        ? AdController().destroyBannerAd(_bannerAdResId!)
+        : null;
+    _bannerAdResId = null;
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _bannerAdResId != null
+        ? AdController().destroyBannerAd(_bannerAdResId!)
+        : null;
+    _bannerAdResId = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (levelNum >= AppOptions().level - 1) {
+    if (widget.levelNum >= AppOptions().level - 1) {
       AppOptions().hintCounter += 1;
     }
     return Scaffold(
@@ -31,44 +71,32 @@ class ShutterPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Text(
-                    '${Strs.level} $levelNum ${Strs.completed}'.toPersianNum(),
+                    '${Strs.level} ${widget.levelNum} ${Strs.completed}'
+                        .toPersianNum(),
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
                 ),
               ),
-              if (levelNum >= AppOptions().level - 1)
+              if (widget.levelNum >= AppOptions().level - 1)
                 Align(
                   alignment: Alignment.center,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const HintWidget(
+                      HintWidget(
                         counter: 1,
                         size: 50,
                       ),
-                      const SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.3),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              ),
-                              onPressed: null,
-                              child: Row(
-                                children: const [
-                                  HintWidget(counter: 3, size: 50),
-                                  Icon(Icons.drag_handle_rounded),
-                                  Icon(Icons.movie_creation_rounded, size: 50),
-                                ],
-                              )),
-                        ],
+                      SizedBox(height: 30),
+                      RewardAdButton(
+                        reward: 3,
+                        size: 50,
+                        infinityUse: false,
+                        onRewarded: () {
+                          if (widget.levelNum >= AppOptions().level - 1) {
+                            AppOptions().hintCounter += 3 - 1;
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -81,7 +109,7 @@ class ShutterPage extends StatelessWidget {
                     future: Future.delayed(const Duration(seconds: 2)),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
-                        return levelNum != levelCounter
+                        return widget.levelNum != levelCounter
                             ? TextButton(
                                 style: TextButton.styleFrom(
                                     shape: RoundedRectangleBorder(

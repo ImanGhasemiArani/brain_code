@@ -6,6 +6,7 @@ import '../utils/utils.dart';
 import '../strs.dart';
 import '../widgets/close_button.dart';
 import '../widgets/hint_widget.dart';
+import '../widgets/reward_ad_button.dart';
 
 class HintPage extends StatelessWidget {
   HintPage({super.key})
@@ -28,28 +29,13 @@ class HintPage extends StatelessWidget {
               children: [
                 const CloseBtn(),
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.3),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                          ),
-                          onPressed: null,
-                          child: Row(
-                            children: const [
-                              HintWidget(counter: 1),
-                              Icon(Icons.drag_handle_rounded),
-                              Icon(Icons.movie_creation_rounded),
-                            ],
-                          )),
-                    ],
+                  child: Center(
+                    child: RewardAdButton(
+                      onRewarded: () {
+                        AppOptions().hintCounter += 1;
+                        changeData.value = !changeData.value;
+                      },
+                    ),
                   ),
                 ),
                 ValueListenableBuilder(

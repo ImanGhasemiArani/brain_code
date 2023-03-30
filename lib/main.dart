@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'controller/ad_controller.dart';
 import 'controller/api_controller.dart';
 import 'app_options.dart';
 import 'app_theme_data.dart';
@@ -57,6 +58,7 @@ Future<void> initControllers() async {
   ]);
   sp = fs[0] as SharedPreferences;
   APIController().startupUploadingFiles();
+  AdController();
   AppOptions();
   SoundsController();
   LevelController().setCurrentLevel(AppOptions().level);
