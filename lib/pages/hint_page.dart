@@ -29,13 +29,11 @@ class HintPage extends StatelessWidget {
               children: [
                 const CloseBtn(),
                 Expanded(
-                  child: Center(
-                    child: RewardAdButton(
-                      onRewarded: () {
-                        AppOptions().hintCounter += 1;
-                        changeData.value = !changeData.value;
-                      },
-                    ),
+                  child: RewardAdButton(
+                    onRewarded: () {
+                      AppOptions().hintCounter += 1;
+                      changeData.value = !changeData.value;
+                    },
                   ),
                 ),
                 ValueListenableBuilder(

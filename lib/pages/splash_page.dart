@@ -42,7 +42,7 @@ class _SplashPageState extends State<SplashPage> {
             AnimatedTextKit(
               animatedTexts: [
                 TypewriterAnimatedText(
-                  speed: const Duration(milliseconds: 250),
+                  speed: const Duration(milliseconds: 200),
                   Strs.appName.split(':').first,
                   textStyle:
                       Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -66,7 +66,7 @@ class _SplashPageState extends State<SplashPage> {
                     ? AnimatedTextKit(
                         animatedTexts: [
                           TypewriterAnimatedText(
-                            speed: const Duration(milliseconds: 250),
+                            speed: const Duration(milliseconds: 200),
                             ' : ${Strs.appName.split(':').last}',
                             textStyle: Theme.of(context)
                                 .textTheme

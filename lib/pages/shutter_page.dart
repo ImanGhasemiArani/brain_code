@@ -7,6 +7,7 @@ import '../controller/ad_controller.dart';
 import '../utils/utils.dart';
 import '../routeing.dart';
 import '../strs.dart';
+import '../widgets/animated_text.dart';
 import '../widgets/hint_widget.dart';
 import '../widgets/reward_ad_button.dart';
 import 'home_page.dart';
@@ -23,27 +24,16 @@ class ShutterPage extends StatefulWidget {
 
 class _ShutterPageState extends State<ShutterPage> {
   String? _bannerAdResId;
+
   @override
   void initState() {
-    AdController().getBannerAd().then((resId) => _bannerAdResId = resId);
+    AdController().getBannerAd().then((resId) {
+      _bannerAdResId = resId;
+      _bannerAdResId != null
+          ? AdController().showBannerAd(_bannerAdResId!)
+          : null;
+    });
     super.initState();
-  }
-
-  @override
-  void activate() {
-    _bannerAdResId == null
-        ? AdController().getBannerAd().then((resId) => _bannerAdResId = resId)
-        : null;
-    super.activate();
-  }
-
-  @override
-  void deactivate() {
-    _bannerAdResId != null
-        ? AdController().destroyBannerAd(_bannerAdResId!)
-        : null;
-    _bannerAdResId = null;
-    super.deactivate();
   }
 
   @override
@@ -70,10 +60,12 @@ class _ShutterPageState extends State<ShutterPage> {
                 alignment: Alignment.topRight,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Text(
-                    '${Strs.level} ${widget.levelNum} ${Strs.completed}'
-                        .toPersianNum(),
-                    style: Theme.of(context).textTheme.headlineLarge,
+                  child: AnimatedTextFixed(
+                    Text(
+                      '${Strs.level} ${widget.levelNum} ${Strs.completed}'
+                          .toPersianNum(),
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
                   ),
                 ),
               ),
@@ -106,7 +98,7 @@ class _ShutterPageState extends State<ShutterPage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: FutureBuilder(
-                    future: Future.delayed(const Duration(seconds: 2)),
+                    future: Future.delayed(const Duration(seconds: 5)),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         return widget.levelNum != levelCounter

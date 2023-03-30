@@ -55,6 +55,7 @@ class AdController {
 
   Future<bool> destroyBannerAd(String resId) async {
     try {
+      await TapsellPlus.instance.hideStandardBanner();
       return await TapsellPlus.instance.destroyStandardBanner(resId);
     } catch (e) {
       return false;
