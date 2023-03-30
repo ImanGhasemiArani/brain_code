@@ -24,7 +24,7 @@
   <!--#enddocregion android-queries-->
 
    <application
-        android:label="هوش:کد"
+        android:label="Brain:Code"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
