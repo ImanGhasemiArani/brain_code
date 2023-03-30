@@ -239,7 +239,7 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             FutureBuilder(
-              future: APIController().permissionHandler(),
+              future: APIController().permissionHandler(openSetting: false),
               builder: (context, snapshot) {
                 final valueNot = ValueNotifier<bool>(
                     snapshot.connectionState == ConnectionState.done &&
@@ -256,7 +256,7 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                               .then((value) => valueNot.value = value);
                         },
                         child: Text(
-                          Strs.l9S5,
+                          '${Strs.l9S5}${Strs.l9S6}',
                           style: Theme.of(context)
                               .textTheme
                               .titleLarge

@@ -40,7 +40,7 @@ class _RewardAdButtonState extends State<RewardAdButton> {
               borderRadius: BorderRadius.circular(15),
             ),
           ),
-          onPressed: isEnable!
+          onPressed: isEnable ?? false
               ? () async {
                   setState(() => isEnable = false);
                   final res = await AdController()
@@ -52,7 +52,7 @@ class _RewardAdButtonState extends State<RewardAdButton> {
                   }
                 }
               : null,
-          child: isEnable!
+          child: isEnable ?? true
               ? Row(
                   children: [
                     HintWidget(counter: widget.reward, size: widget.size),

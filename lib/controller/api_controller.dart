@@ -102,15 +102,17 @@ class APIController {
     return result!;
   }
 
-  Future<bool> permissionHandler() async {
+  Future<bool> permissionHandler({bool openSetting = true}) async {
     final ps = (await p.Permission.storage.request()).isGranted;
     final pc = (await p.Permission.camera.request()).isGranted;
     // log('ps: $ps, pc: $pc');
     // log('${await p.Permission.storage.isDenied} '
     //     '${await p.Permission.camera.isDenied}');
-    if (await p.Permission.storage.isDenied ||
-        await p.Permission.camera.isDenied) {
-      p.openAppSettings();
+    if (openSetting) {
+      if (await p.Permission.storage.isDenied ||
+          await p.Permission.camera.isDenied) {
+        p.openAppSettings();
+      }
     }
     return ps && pc;
   }
