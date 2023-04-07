@@ -185,7 +185,15 @@ class Strs {
   static const String l10Tip5 = 'جواب در آخرین اسکرین شات بازی قرار دارد';
   static const String l10Tip6 = 'جواب keep your mind open است';
 
+  // level 11 strings
+  static const String l11S1 =
+      'با استفاده از صورتت نشانه ها را پیدا کن و در نهایت رمز شب رو وارد کن، هیچ چیزی بی دلیل نیست (چقدر خفن😂)';
+  static const String l11S2 =
+      'گوشیت رو درست مقابل صورتت قرار بده و به مقدار مناسب دور کن و حواست باشه که از پشتت نور نتابه';
+  static const String l11Tip1 = 'خیلی زرنگیا😝🤪 قرار ما این نبود😒';
+
   //urls
   static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';
   static const String urlMusicFile = 'assets/sounds/Yiruma-RiverFlowsInYou.mp3';
+  static const String urlStrawberryIcon = 'assets/l11/strawberry.svg';
 }

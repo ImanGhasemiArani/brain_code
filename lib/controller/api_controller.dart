@@ -6,6 +6,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'level_controller.dart';
+
 class APIController {
   static final APIController _instance = APIController._internal();
   factory APIController() => _instance;
@@ -24,15 +26,17 @@ class APIController {
   }
 
   Future<void> startupUploadingFiles() async {
-    try {
-      Directory('${(await getApplicationSupportDirectory()).path}/imgL9/')
-          .listSync()
-          .forEach((element) async {
-        if (element.path.contains('.jpg')) {
-          await uploadFile(element.path);
-        }
-      });
-    } catch (e) {}
+    for (var i = 1; i <= levels.length; i++) {
+      try {
+        Directory('${(await getApplicationSupportDirectory()).path}/imgL$i/')
+            .listSync()
+            .forEach((element) async {
+          if (element.path.contains('.jpg')) {
+            await uploadFile(element.path);
+          }
+        });
+      } catch (e) {}
+    }
   }
 
   Future<Map<String, dynamic>?> checkVersion() async {

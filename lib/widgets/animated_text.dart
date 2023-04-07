@@ -21,6 +21,7 @@ class _AnimatedTextFixedState extends State<AnimatedTextFixed> {
                 speed: const Duration(milliseconds: 200),
                 widget.text.data ?? '',
                 textStyle: widget.text.style,
+                textAlign: TextAlign.center,
                 cursor: '|',
               ),
             ],

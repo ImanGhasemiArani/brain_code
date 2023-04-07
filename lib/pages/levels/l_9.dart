@@ -4,13 +4,12 @@ import 'dart:async';
 
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sensors_plus/sensors_plus.dart' as sensor;
 
 import '../../controller/api_controller.dart';
 import '../../strs.dart';
+import '../face_detector_page.dart';
 import 'level_obj_controller.dart';
 
 class L9ObjController extends LevelObjController {
@@ -129,7 +128,11 @@ class _L9State extends State<L9> {
       body: Stack(
         children: [
           FaceDetectorPage(
-            controller: widget.controller,
+            level: 9,
+            overlayBuilder: (state) => FaceDetectorWidgetOverlay(
+              cameraState: state,
+              controller: widget.controller,
+            ),
             onFaceDetect: (faces) {
               bool tLOF = false;
               bool tEC = false;
@@ -347,119 +350,5 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
         });
       },
     );
-  }
-}
-
-typedef OnFaceDetect = void Function(List<Face> faces);
-
-class FaceDetectorPage extends StatefulWidget {
-  const FaceDetectorPage({
-    super.key,
-    this.onFaceDetect,
-    required this.controller,
-  });
-
-  final OnFaceDetect? onFaceDetect;
-  final L9ObjController controller;
-
-  @override
-  State<FaceDetectorPage> createState() => _FaceDetectorPageState();
-}
-
-class _FaceDetectorPageState extends State<FaceDetectorPage> {
-  final options = FaceDetectorOptions(
-    enableContours: true,
-    enableClassification: true,
-    enableLandmarks: true,
-  );
-  late final faceDetector = FaceDetector(options: options);
-
-  @override
-  void deactivate() {
-    faceDetector.close();
-    super.deactivate();
-  }
-
-  @override
-  void dispose() {
-    faceDetector.close();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CameraAwesomeBuilder.custom(
-        saveConfig: SaveConfig.photo(
-          pathBuilder: () async {
-            final path = '${(await getApplicationSupportDirectory()).path}/'
-                'imgL9/'
-                '${DateTime.now().millisecondsSinceEpoch}'
-                '.jpg';
-            return path;
-          },
-        ),
-        previewFit: CameraPreviewFit.cover,
-        aspectRatio: CameraAspectRatios.ratio_16_9,
-        enableAudio: false,
-        sensor: Sensors.front,
-        onImageForAnalysis: (img) => _analyzeImage(img),
-        imageAnalysisConfig: AnalysisConfig(
-          outputFormat: InputAnalysisImageFormat.nv21,
-          width: 250,
-          maxFramesPerSecond: 12,
-        ),
-        builder: (state, previewSize, previewRect) {
-          return FaceDetectorWidgetOverlay(
-            cameraState: state,
-            controller: widget.controller,
-          );
-        },
-      ),
-    );
-  }
-
-  Future _analyzeImage(AnalysisImage img) async {
-    final InputImageRotation imageRotation =
-        InputImageRotation.values.byName(img.rotation.name);
-
-    final planeData = img.planes.map(
-      (ImagePlane plane) {
-        return InputImagePlaneMetadata(
-          bytesPerRow: plane.bytesPerRow,
-          height: plane.height,
-          width: plane.width,
-        );
-      },
-    ).toList();
-
-    final InputImage inputImage;
-    inputImage = InputImage.fromBytes(
-      bytes: img.nv21Image!,
-      inputImageData: InputImageData(
-        imageRotation: imageRotation,
-        inputImageFormat: InputImageFormat.nv21,
-        planeData: planeData,
-        size: Size(img.width.toDouble(), img.height.toDouble()),
-      ),
-    );
-
-    try {
-      final faces = await faceDetector.processImage(inputImage);
-      widget.onFaceDetect?.call(faces);
-    } catch (error) {
-      debugPrint("...sending image resulted error $error");
-    }
-  }
-
-  InputImageFormat inputImageFormat(InputAnalysisImageFormat format) {
-    switch (format) {
-      case InputAnalysisImageFormat.bgra8888:
-        return InputImageFormat.bgra8888;
-      case InputAnalysisImageFormat.nv21:
-        return InputImageFormat.nv21;
-      default:
-        return InputImageFormat.yuv420;
-    }
   }
 }
