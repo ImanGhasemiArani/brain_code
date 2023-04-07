@@ -173,6 +173,18 @@ class Strs {
       'شرایط نوشته شده را برقرار کن. باید رنگ همه آن ها به سبز تغییر کند';
   static const String l9Tip2 = 'شرایط را به مدت ۶۰ ثانیه نگه دار';
 
+  // level 10 strings
+  static const String l10S1 = 'جواب این مرحله رو توی وب سایت من پیدا کن😘😜✌️';
+  static const String l10Tip1 =
+      'وارد وبسایت من شو، آدرسشو میتونی توی قسمت درباره ما پیدا کنی';
+  static const String l10Tip2 = 'در صفحه works دنبال جواب بگرد';
+  static const String l10Tip3 =
+      'در قسمت projects دنبال بازی بگرد و در توضیحات و تصاویر آن جواب را پیدا کن';
+  static const String l10Tip4 =
+      'جواب را در بین عکس ها پیداکن. برای مشاهده تمام عکس های موجود روی یکی از عکس ها کلیک کن و عکس های قبل و بعد را ببین';
+  static const String l10Tip5 = 'جواب در آخرین اسکرین شات بازی قرار دارد';
+  static const String l10Tip6 = 'جواب keep your mind open است';
+
   //urls
   static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';
   static const String urlMusicFile = 'assets/sounds/Yiruma-RiverFlowsInYou.mp3';

@@ -19,16 +19,6 @@ class L6ObjController extends LevelObjController {
     currentObj = objects['']!;
   }
 
-  String text = '';
-
-  @override
-  void runCommandText(BuildContext context, String str) {
-    final arg = str.split(':').last;
-    text = arg;
-
-    super.runCommandText(context, str);
-  }
-
   @override
   bool isLevelPassed() {
     return text == 'heart';

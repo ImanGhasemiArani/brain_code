@@ -18,6 +18,7 @@ abstract class LevelObjController {
       ValueNotifier(LevelViewEnum.none);
   double rotation = 0;
   Offset position = Offset.zero;
+  String text = '';
   String? scanResult;
 
   ValueNotifier<ObjState> getObj(String label) => objects[label]!;
@@ -44,7 +45,8 @@ abstract class LevelObjController {
   }
 
   void runCommandText(BuildContext context, String str) {
-    // log('runCommandText');
+    final arg = str.split(':').last;
+    text = arg;
 
     checkLevelStatus();
   }

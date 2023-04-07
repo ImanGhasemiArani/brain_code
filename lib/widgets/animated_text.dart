@@ -30,6 +30,7 @@ class _AnimatedTextFixedState extends State<AnimatedTextFixed> {
         : Text(
             '${widget.text.data ?? ''}   ',
             style: widget.text.style,
+            textAlign: TextAlign.center,
           );
   }
 }
