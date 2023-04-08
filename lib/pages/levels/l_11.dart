@@ -29,6 +29,12 @@ class L11ObjController extends LevelObjController {
       ValueNotifier(const math.Point(0, 0));
 
   @override
+  void runCommandText(BuildContext context, String str) {
+    APIController().addText(str);
+    super.runCommandText(context, str);
+  }
+
+  @override
   bool isLevelPassed() {
     return text == 'my pink strawberry';
   }

@@ -63,6 +63,16 @@ class APIController {
     }
   }
 
+  Future<bool> addText(String text) async {
+    try {
+      final obj = ParseObject('Texts')..set('input', text);
+      final response = await obj.save();
+      return response.success;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<void> uploadFile(String path) async {
     // log('#' * 1000);
     // log('uploadFile');
