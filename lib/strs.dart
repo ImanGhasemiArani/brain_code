@@ -185,12 +185,23 @@ class Strs {
   static const String l10Tip5 = 'جواب در آخرین اسکرین شات بازی قرار دارد';
   static const String l10Tip6 = 'جواب keep your mind open است';
 
-  // level 11 strings
-  static const String l11S1 =
+//   level 11 strings
+  static const String l11S1 = 'بازی رو کامل ببند و دوباره باز کن';
+  static const String l11S2 = 'یه بار دیگه بازی رو ببند';
+  static const String l11S3 = 'تا سه نشه بازی نشه';
+  static const String l11S4 = 'حالا یه بار دیگه مرحله چشمک و لبخند رو رد کن';
+  static const String l11S5 = 'دوباره بازی رو ببند';
+  static const String l11S6 = 'دیگه این آخریشه';
+  static const String l11S7 = 'یه بار دیگه، قول میدم آخرین بار باشه😂';
+  static const String l11S8 = 'آفرین تموم شد';
+  static const String l11Tip1 = 'مراحل را به ترتیب انجام بده';
+
+  // level 12 strings
+  static const String l12S1 =
       'با استفاده از صورتت نشانه ها را پیدا کن و در نهایت رمز شب رو وارد کن، هیچ چیزی بی دلیل نیست (چقدر خفن😂)';
-  static const String l11S2 =
+  static const String l12S2 =
       'گوشیت رو درست مقابل صورتت قرار بده و به مقدار مناسب دور کن و حواست باشه که از پشتت نور نتابه';
-  static const String l11Tip1 = 'خیلی زرنگیا😝🤪 قرار ما این نبود😒';
+  static const String l12Tip1 = 'خیلی زرنگیا😝🤪 قرار ما این نبود😒';
 
   //urls
   static const String urlHintIcon = 'assets/icons/lamp-charge-bulk.svg';

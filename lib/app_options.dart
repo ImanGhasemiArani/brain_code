@@ -13,7 +13,7 @@ class AppOptions {
   factory AppOptions() => _instance;
 
   AppOptions._internal()
-      : runCounter = (sp.getInt('runCounter') ?? 0) + 1,
+      : _runCounter = (sp.getInt('runCounter') ?? 0) + 1,
         isHaveForceUpdate = sp.getBool('isHaveForceUpdate') ?? false,
         _hintCounter = sp.getInt('hintCounter') ?? 20,
         _isVibrate = sp.getBool('isVibrate') ?? true,
@@ -28,13 +28,14 @@ class AppOptions {
         _recentCommands = sp.getStringList('recentCommands') ?? [],
         recentCommandNotifier = ValueNotifier<bool>(false),
         isRecentCommandOnNotifier =
-            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true) {
-    sp.setInt('runCounter', runCounter);
+            ValueNotifier<bool>(sp.getBool('isRecentCommandsOn') ?? true),
+        _l11Step = sp.getString('l11Step') ?? 'null' {
+    runCounter = _runCounter;
     lastDateOpen = DateTime.now();
   }
 
   late BuildContext context;
-  int runCounter;
+  int _runCounter;
   bool isHaveForceUpdate;
   int _hintCounter;
   bool _isVibrate;
@@ -48,7 +49,9 @@ class AppOptions {
   final List<String> _recentCommands;
   final ValueNotifier<bool> recentCommandNotifier;
   final ValueNotifier<bool> isRecentCommandOnNotifier;
+  String _l11Step;
 
+  int get runCounter => _runCounter;
   int get hintCounter => _hintCounter;
   bool get isVibrate => _isVibrate;
   bool get isMute => _isMute;
@@ -64,6 +67,14 @@ class AppOptions {
           int.parse(_lastDateOpen!.split(',')[1]),
           int.parse(_lastDateOpen!.split(',')[2]))
       : null;
+  String get l11Step => _l11Step;
+
+  set runCounter(int value) {
+    _runCounter = value;
+    sp.setInt('runCounter', _runCounter);
+
+    // log('save runCounter = $_runCounter');
+  }
 
   set hintCounter(int value) {
     _hintCounter = value;
@@ -179,5 +190,13 @@ class AppOptions {
     sp.setBool('isHaveForceUpdate', isHaveForceUpdate);
 
     // log('save isHaveForceUpdate = $isHaveForceUpdate');
+  }
+
+  set l11Step(String value) {
+    if (_l11Step == value) return;
+    _l11Step = value;
+    sp.setString('l11Step', _l11Step);
+
+    // log('save l11Step = $_l11Step');
   }
 }

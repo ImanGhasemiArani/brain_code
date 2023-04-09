@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:sensors_plus/sensors_plus.dart' as sensor;
 
+import '../../app_options.dart';
 import '../../controller/api_controller.dart';
 import '../../strs.dart';
 import '../face_detector_page.dart';
@@ -83,6 +84,14 @@ class L9ObjController extends LevelObjController {
   void runCommandRestart(BuildContext context, String str) {
     listenAccelerometer(false);
     super.runCommandRestart(context, str);
+  }
+
+  @override
+  void passedLevel() {
+    if (AppOptions().l11Step == 'co3') {
+      AppOptions().l11Step = 'p9';
+    }
+    super.passedLevel();
   }
 
   @override
