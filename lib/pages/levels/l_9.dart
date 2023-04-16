@@ -194,8 +194,10 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 120, right: 20, left: 20),
+        padding:
+            const EdgeInsets.only(top: kToolbarHeight, right: 20, left: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -249,7 +251,6 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
             FutureBuilder(
               future: APIController().permissionHandler(openSetting: false),
               builder: (context, snapshot) {
@@ -289,7 +290,6 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 30),
             ValueListenableBuilder(
               valueListenable: controller.isVertically,
               builder: (context, value, child) {
@@ -303,7 +303,6 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 30),
             ValueListenableBuilder(
               valueListenable: controller.isLockOnFace,
               builder: (context, value, child) {
@@ -317,7 +316,6 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 30),
             ValueListenableBuilder(
               valueListenable: controller.isRightEyeClosed,
               builder: (context, value, child) {
@@ -331,7 +329,6 @@ class FaceDetectorWidgetOverlay extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 30),
             ValueListenableBuilder(
               valueListenable: controller.isSmiling,
               builder: (context, value, child) {
